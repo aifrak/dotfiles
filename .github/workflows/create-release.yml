@@ -1,0 +1,39 @@
+name: Create release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag-version:
+        description: "Version (format: x.y.z)"
+        required: true
+
+jobs:
+  create-release:
+    name: Create release
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Built tag
+        id: build-tag
+        run: |
+          TAG_VERSION="${{ github.event.inputs.tag-version }}"
+          BUILT_TAG="v${TAG_VERSION}"
+          echo "::set-output name=tag::${BUILT_TAG}"
+
+      - name: Create tag
+        uses: tvdias/github-tagger@v0.0.2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.build-tag.outputs.tag }}
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.build-tag.outputs.tag }}
+          draft: true
+          prerelease: false
