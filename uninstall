@@ -1,0 +1,248 @@
+#!/bin/sh
+
+set -e
+
+# ---------------------------------------------- #
+#
+# "install.sh --help" for more information.
+#
+# ---------------------------------------------- #
+
+# ---------------------------------------------- #
+#                   shell-utils                  #
+# ---------------------------------------------- #
+
+# Colors
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+NORMAL="\e[0m"
+
+# Print an error and die.
+#
+# Input:  $1 -> error:string Error to print
+alert_die() {
+  error="$1"
+
+  print_new_line
+  alert "Error: $error"
+  die
+}
+
+# Wrapper for "echo".
+print() {
+  echo "$*"
+}
+
+# Prints an error to STDERR.
+#
+# Input: $* -> string Message to print
+print_error() {
+  print >&2 "$*"
+}
+
+# Prints a new line.
+print_new_line() {
+  print ""
+}
+
+# Prints a green success message.
+#
+# Input:  $* -> string Message to print
+success() {
+  print "${GREEN}$*${NORMAL}"
+}
+
+# Prints a yellow warning message.
+#
+# Input:  $* -> string Message to print
+warning() {
+  print "${YELLOW}$*${NORMAL}"
+}
+
+# Prints a red error message.
+#
+# Input:  $* -> string Message to print
+alert() {
+  print_error "${RED}$*${NORMAL}"
+}
+
+# Wrapper for "exit" when error.
+die() {
+  exit 1
+}
+
+# Wrapper for "exit" without error.
+close() {
+  exit 0
+}
+
+# Return true, if the user is root.
+is_root() {
+  [ "$(id -u)" -eq 0 ]
+}
+
+# Remove directory and its files.
+#
+# Input:  $1 -> string Path of files to remove
+remove() {
+  print "Remove $1"
+  rm -rf "$1"
+}
+
+# Remove files in a directory from a pattern.
+#
+# Input:  $1 -> string Path of directory
+#         $2 -> string Glob pattern of files to remove
+remove_files() {
+  TARGET_DIR=$1
+  TARGET_FILES=$2
+
+  if [ ! -d "$TARGET_DIR" ]; then
+    warning "$TARGET_DIR already removed: skipped"
+    return 0
+  fi
+
+  print "Remove $TARGET_FILES in $TARGET_DIR"
+  find "$TARGET_DIR" -name "$TARGET_FILES" -delete
+}
+
+# ---------------------------------------------- #
+#                      Main                      #
+# ---------------------------------------------- #
+
+help() {
+  cat <<EOF
+
+Uninstall packages, oh-my-zsh, theme, plugins and fonts.
+
+Syntax: $0 [username]
+
+Options:
+  -h, --help:     Show this message"
+
+EOF
+}
+
+for opt in "$@"; do
+  case $opt in
+  -h | --help)
+    help
+    close
+    ;;
+  --* | -*)
+    alert "Error: Unknown option $opt"
+    help
+    die
+    ;;
+  esac
+done
+
+if ! is_root; then
+  alert_die "Superuser privilege is required"
+fi
+
+if [ -n "$1" ]; then
+  USER=$1
+elif is_root && [ -z "$1" ]; then
+  # User current user from environment variables
+  USER=$USER
+else
+  alert_die "User name is required"
+fi
+
+HOME=/home/$USER
+
+[ ! -d "$HOME" ] && alert_die "Home directory does not exist"
+
+BIN=/usr/local/bin
+
+uninstall_packages() {
+  apt-get purge --yes -qq \
+    zsh=5.7.1-*
+  apt autoremove --yes -qq
+
+  success "✓ Dependencies uninstalled"
+}
+
+uninstall_lsdeluxe() {
+  dpkg --purge lsd
+
+  success "✓ LSDeluxe uninstalled"
+}
+
+uninstall_oh_my_zsh() {
+  ZSH=$HOME/.oh-my-zsh
+
+  if [ ! -d "$ZSH" ]; then
+    warning "Oh-my-zsh already uninstalled: skipped"
+    return 0
+  fi
+
+  chmod +x "$ZSH/tools/uninstall.sh"
+
+  print "y" | sh -c "$ZSH/tools/uninstall.sh"
+
+  remove "$HOME"/.z
+  remove_files "$HOME" .zcompdump*
+  remove "$HOME"/.cache/p10k*
+  remove_files "$HOME"/.cache p10k*
+  remove "$HOME"/.p10k.zsh
+  remove_files "$HOME" .zsh*
+  remove "$HOME"/.config/znt
+
+  success "✓ Oh-my-zsh uninstalled"
+}
+
+uninstall_gitstatus() {
+  GITSTATUS_DIR=$HOME/.cache/gitstatus
+
+  remove "$GITSTATUS_DIR"
+
+  success "✓ gitstatus uninstalled"
+}
+
+uninstall_fzf() {
+  FZF=$HOME/.fzf
+
+  if [ ! -d "$FZF" ]; then
+    warning "FZF already uninstalled: skipped"
+    return 0
+  fi
+
+  prefix=$FZF prefix_expand=$FZF "$FZF/uninstall"
+  remove "$FZF"
+
+  success "✓ FZF uninstalled"
+}
+
+uninstall_fonts() {
+  FONTS_DIR=$HOME/.local/share/fonts
+
+  remove_files "$FONTS_DIR" Fura*Code*.ttf
+
+  success "✓ Fonts uninstalled"
+}
+
+uninstall_binaries() {
+  remove "$BIN/hadolint"
+  remove "$BIN/shellcheck"
+  remove "$BIN/shfmt"
+
+  success "✓ Binaries uninstalled"
+}
+
+# Input:  $@ -> options
+main() {
+  uninstall_fonts
+  uninstall_lsdeluxe
+  uninstall_fzf
+  uninstall_gitstatus
+  uninstall_oh_my_zsh
+  uninstall_binaries
+  uninstall_packages
+
+  success "✓ Uninstall done"
+}
+
+main "$@"

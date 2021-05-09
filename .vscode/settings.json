@@ -1,0 +1,77 @@
+{
+  // Editor:
+  "editor.rulers": [80],
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+
+  // Files:
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // Override languages:
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Spelling:
+  "cSpell.enableFiletypes": ["shellscript"],
+  "cSpell.ignorePaths": [".history", "config"],
+  "cSpell.words": [
+    "autoload",
+    "autoremove",
+    "chmod",
+    "compinit",
+    "copydir",
+    "deps",
+    "dotfiles",
+    "dpkg",
+    "eval",
+    "gnupg",
+    "hadolint",
+    "mkdir",
+    "ohmyzsh",
+    "pytest",
+    "shfmt"
+  ],
+  "cSpell.ignoreWords": [
+    "Fira",
+    "Fura",
+    "aflags",
+    "aifrak",
+    "copyfile",
+    "dirhistory",
+    "distro",
+    "distros",
+    "editorconfig",
+    "erl",
+    "esbenp",
+    "fkirc",
+    "github",
+    "gitstatus",
+    "gitstatusd",
+    "globalias",
+    "lsdeluxe",
+    "ludeeus",
+    "markdownlint",
+    "powerlevel",
+    "shellcheck",
+    "shellformat",
+    "softprops",
+    "tagger",
+    "tvdias",
+    "zcompdump",
+    "zxvf"
+  ],
+
+  // Shellformat (Binary version: v3.2.4):
+  "shellformat.effectLanguages": ["shellscript"],
+  "shellformat.useEditorConfig": true,
+
+  // Markdownlint:
+  "markdownlint.config": {
+    "MD013": true
+  },
+
+  // Comment Divider:
+  "comment-divider.length": 50
+}

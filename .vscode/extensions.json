@@ -1,0 +1,34 @@
+{
+  "recommendations": [
+    // EditorConfig:
+    "editorconfig.editorconfig",
+
+    // Docker:
+    "ms-azuretools.vscode-docker",
+
+    // Dockerfile:
+    "exiasr.hadolint", // Binary version: v2.1.0
+
+    // Github Actions:
+    "cschleiden.vscode-github-actions",
+
+    // Shell:
+    "foxundermoon.shell-format",
+
+    // YAML
+    "redhat.vscode-yaml",
+
+    // Markdown:
+    "davidanson.vscode-markdownlint",
+    "shd101wyy.markdown-preview-enhanced",
+    "yzhang.markdown-all-in-one",
+
+    // Formatters:
+    "esbenp.prettier-vscode", // YAML, Markdown
+
+    // Comments:
+    "stackbreak.comment-divider"
+  ],
+
+  "unwantedRecommendations": []
+}
