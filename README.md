@@ -2,11 +2,13 @@
 
 Installation script of development environment (Debian).
 
+[![Last release](https://img.shields.io/github/v/release/aifrak/dev-env?label=Last%20release&style=plastic)](https://github.com/aifrak/dev-env/releases)
+[![License](https://img.shields.io/github/license/aifrak/dev-env?color=blue)](https://github.com/aifrak/dev-env/blob/master/LICENSE)
+
 [![Tests](https://github.com/aifrak/dev-env/actions/workflows/tests.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/tests.yml)
 [![Shell lint](https://github.com/aifrak/dev-env/actions/workflows/shell-lint.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/shell-lint.yml)
 [![Dockerfile lint](https://github.com/aifrak/dev-env/actions/workflows/dockerfile-lint.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/dockerfile-lint.yml)
 [![Markdown lint](https://github.com/aifrak/dev-env/actions/workflows/markdown-lint.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/markdown-lint.yml)
-[![GitHub](https://img.shields.io/github/license/aifrak/dev-env?color=blue)](https://github.com/aifrak/dev-env/blob/master/LICENSE)
 
 ## Warning ⚠️
 
