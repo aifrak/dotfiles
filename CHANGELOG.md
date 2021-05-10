@@ -8,6 +8,17 @@
 
 # Changelog
 
+## [v0.1.1](https://github.com/aifrak/dev-env/releases/tag/v0.1.1)
+
+### Bug fix
+
+- Fix current directory to be relative
+- Improve the install procedure in README.md
+
+### BREAKING CHANGE
+
+- Add "ca-certificates" package as requirements
+
 ## [v0.1.0](https://github.com/aifrak/dev-env/releases/tag/v0.1.0)
 
 ### New
