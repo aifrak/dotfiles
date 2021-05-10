@@ -1,10 +1,10 @@
-# oh-my-zsh install
+# Development environment
 
-Installation script of a customized oh-my-zsh (Debian).
+Installation script of development environment (Debian).
 
-[![Shell lint](https://github.com/aifrak/oh-my-zsh-install/actions/workflows/shell-lint.yml/badge.svg)](https://github.com/aifrak/oh-my-zsh-install/actions/workflows/shell-lint.yml)
-[![Markdown lint](https://github.com/aifrak/oh-my-zsh-install/actions/workflows/markdown-lint.yml/badge.svg)](https://github.com/aifrak/oh-my-zsh-install/actions/workflows/markdown-lint.yml)
-[![GitHub](https://img.shields.io/github/license/aifrak/oh-my-zsh-install?color=blue)](https://github.com/aifrak/oh-my-zsh-install/blob/master/LICENSE)
+[![Shell lint](https://github.com/aifrak/dev-env/actions/workflows/shell-lint.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/shell-lint.yml)
+[![Markdown lint](https://github.com/aifrak/dev-env/actions/workflows/markdown-lint.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/markdown-lint.yml)
+[![GitHub](https://img.shields.io/github/license/aifrak/dev-env?color=blue)](https://github.com/aifrak/dev-env/blob/master/LICENSE)
 
 ## Warning ⚠️
 
@@ -64,9 +64,9 @@ Ubuntu for example.
 ## How to install 💡
 
 ```shell
-git clone --single-branch --branch "0.0.1" --depth 1 git@github.com:aifrak/oh-my-zsh-install.git
-&& ./oh-my-zsh-install/install.sh [YOUR_USER_NAME] [options..]
-&& rm -r ./oh-my-zsh-install
+git clone --single-branch --branch "0.0.1" --depth 1 git@github.com:aifrak/dev-env.git
+&& ./dev-env/install.sh [YOUR_USER_NAME] [options..]
+&& rm -r ./dev-env
 ```
 
 `oh-my-zsh` will be installed into the given user `$HOME` directory.
@@ -95,7 +95,7 @@ Options:
 
 - **Docker image equivalent**: <https://hub.docker.com/r/aifrak/oh-my-zsh>
 - **Github of Docker image**: <https://github.com/aifrak/oh-my-zsh-docker>
-- **Changelog**: <https://github.com/aifrak/oh-my-zsh-install/blob/master/CHANGELOG.md>
+- **Changelog**: <https://github.com/aifrak/dev-env/blob/master/CHANGELOG.md>
 
 ## Theme
 
@@ -134,4 +134,4 @@ Options:
 
 ## License
 
-[MIT License](https://github.com/aifrak/oh-my-zsh-install/blob/main/LICENSE)
+[MIT License](https://github.com/aifrak/dev-env/blob/main/LICENSE)

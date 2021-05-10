@@ -8,7 +8,7 @@
 
 # Changelog
 
-## [v0.1.0](https://github.com/aifrak/oh-my-zsh-install/releases/tag/v0.1.0)
+## [v0.1.0](https://github.com/aifrak/dev-env/releases/tag/v0.1.0)
 
 ### New
 
