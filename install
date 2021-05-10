@@ -116,11 +116,11 @@ Options:
 EOF
 }
 
-has_git() {
+validate_installed_git() {
   command -v git >/dev/null 2>&1 || alert_die "Git is not installed."
 }
 
-has_git
+validate_installed_git
 
 # Install options
 OPT_DEPENDENCIES=0
@@ -169,11 +169,12 @@ else
   alert_die "User name is required"
 fi
 
+CURRENT_DIR="$(dirname "$(readlink -f "$0")")"
 HOME=/home/$USER
 
 [ ! -d "$HOME" ] && alert_die "Home directory $HOME does not exist"
 
-CONFIG_DIR=./config
+CONFIG_DIR=$CURRENT_DIR/config
 
 BIN=/usr/local/bin
 TMP=/tmp/dev-env
@@ -191,7 +192,6 @@ install_packages() {
 
   if [ $OPT_DEPENDENCIES -eq 1 ]; then
     apt-get install --yes -qq --no-install-recommends \
-      ca-certificates=* \
       gnupg2=2.2.12-* \
       make=4.2.1-1.2 \
       openssh-client=1:7.9p1-* \

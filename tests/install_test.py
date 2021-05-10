@@ -138,11 +138,21 @@ def test_copied_fonts(host, font):
 
 
 @pytest.mark.order(2)
-def test_enabled_elixir(host):
+@pytest.mark.parametrize('plugin', [
+    ('mix'),
+    ('mix-fast'),
+])
+def test_enabled_elixir_plugins(host, plugin):
     zshrc = host.file(HOME + '/.zshrc')
+
+    assert zshrc.contains(rf'^  {plugin}$')
+
+
+@pytest.mark.order(2)
+@pytest.mark.parametrize('env_var', [
+    ('ERL_AFLAGS'),
+])
+def test_enabled_elixir_env_vars(host, env_var):
     zshenv = host.file(HOME + '/.zshenv')
 
-    assert '  mix' in zshrc.content_string
-    assert '  mix-fast' in zshrc.content_string
-
-    assert 'export ERL_AFLAGS=' in zshenv.content_string
+    assert zshenv.contains(rf'^export {env_var}=')

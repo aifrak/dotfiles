@@ -5,6 +5,7 @@ RUN set -ex \
   && apt-get update \
   # install dependencies
   && apt-get install --yes --no-install-recommends \
+  ca-certificates=* \
   git=* \
   sudo=* \
   # clean cache and temporary files
