@@ -68,7 +68,7 @@ Ubuntu for example.
 ## How to install 💡
 
 ```shell
-git clone --single-branch --branch "0.0.1" --depth 1 https://github.com/aifrak/dev-env.git
+git clone --single-branch --depth 1 https://github.com/aifrak/dev-env.git
 ./dev-env/install [YOUR_USER_NAME] [options..]
 rm -r ./dev-env
 ```
