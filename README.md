@@ -2,7 +2,7 @@
 
 Installation script of development environment (Debian).
 
-[![Last release](https://img.shields.io/github/v/release/aifrak/dev-env?label=Last%20release&style=plastic)](https://github.com/aifrak/dev-env/releases)
+[![Last release](https://img.shields.io/github/v/release/aifrak/dev-env?label=Last%20release)](https://github.com/aifrak/dev-env/releases)
 [![License](https://img.shields.io/github/license/aifrak/dev-env?color=blue)](https://github.com/aifrak/dev-env/blob/master/LICENSE)
 
 [![Tests](https://github.com/aifrak/dev-env/actions/workflows/tests.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/tests.yml)
@@ -21,6 +21,7 @@ _Use it at your own risk._
 
 - Debian-based distros
 - Superuser rights for dependencies and `lsdeluxe`
+- `ca-certificates` to download the necessary files
 - `git`
 
 ## What is installed by default 🤔
@@ -45,7 +46,6 @@ into the Dockerfile.
 This option is not necessary, if all tools are already pre-installed like in
 Ubuntu for example.
 
-- `ca-certificates` to download the necessary files
 - `gnupg2`
 - `make`
 - `openssh-client` for `git`
@@ -68,9 +68,9 @@ Ubuntu for example.
 ## How to install 💡
 
 ```shell
-git clone --single-branch --branch "0.0.1" --depth 1 git@github.com:aifrak/dev-env.git
-&& ./dev-env/install.sh [YOUR_USER_NAME] [options..]
-&& rm -r ./dev-env
+git clone --single-branch --branch "0.0.1" --depth 1 https://github.com/aifrak/dev-env.git
+./dev-env/install [YOUR_USER_NAME] [options..]
+rm -r ./dev-env
 ```
 
 `oh-my-zsh` will be installed into the given user `$HOME` directory.

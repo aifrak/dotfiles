@@ -15,6 +15,9 @@
     // Shell:
     "foxundermoon.shell-format",
 
+    // Python:
+    "ms-python.python",
+
     // YAML
     "redhat.vscode-yaml",
 

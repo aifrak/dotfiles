@@ -14,3 +14,6 @@ quote_type = auto
 indent_size = 2
 binary_next_line = true
 switch_case_indent = true
+
+[{Makefile, **.mk}]
+indent_style = tab
