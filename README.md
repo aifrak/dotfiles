@@ -71,14 +71,6 @@ git clone --single-branch --branch "0.0.1" --depth 1 git@github.com:aifrak/dev-e
 
 `oh-my-zsh` will be installed into the given user `$HOME` directory.
 
-To install it for a specific user:
-
-```shell
-...
-sh install.sh [YOUR_USER_NAME] [options..]
-...
-```
-
 ## Script options
 
 ```text
