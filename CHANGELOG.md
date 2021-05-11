@@ -8,6 +8,12 @@
 
 # Changelog
 
+## [v0.1.2](https://github.com/aifrak/dev-env/releases/tag/v0.1.2)
+
+### Bug fix
+
+- Fix ignored options after "--zsh"
+
 ## [v0.1.1](https://github.com/aifrak/dev-env/releases/tag/v0.1.1)
 
 ### Bug fix
