@@ -146,7 +146,7 @@ for opt in "$@"; do
 
   # zsh
   --no-zsh) OPT_ZSH=0 ;;
-  --zsh) break ;;
+  --zsh) continue ;;
 
   --* | -*)
     alert "Error: Unknown option $opt"
@@ -410,7 +410,7 @@ install_shfmt() {
     "3f5a47f8fec27fae3e06d611559a2063f5d27e4b9501171dde9959b8c60a3538"
 }
 
-elixir_env() {
+setup_elixir_env() {
   enable_env_var "ERL_AFLAGS"
 
   enable_oh_my_zsh_plugin "mix"
@@ -456,7 +456,7 @@ install_fonts() {
 
 apply_options() {
   [ "$OPT_DOCKERFILE" -eq 1 ] && install_hadolint
-  [ "$OPT_ELIXIR" -eq 1 ] && elixir_env
+  [ "$OPT_ELIXIR" -eq 1 ] && setup_elixir_env
   [ "$OPT_FONTS" -eq 1 ] && install_fonts
 
   if [ "$OPT_SHELLSCRIPT" -eq 1 ]; then
