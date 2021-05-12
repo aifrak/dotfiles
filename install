@@ -231,7 +231,8 @@ install_fzf() {
     return 0
   fi
 
-  git clone --branch "$VERSION" --depth 1 https://github.com/junegunn/fzf.git "$FZF"
+  git clone --quiet --single-branch --branch "$VERSION" --depth 1 \
+    https://github.com/junegunn/fzf.git "$FZF"
   HOME=$HOME "$FZF/install" --no-key-bindings --completion --update-rc
 
   success "✓ FZF installed"
@@ -288,7 +289,7 @@ install_zsh_syntax_highlighting() {
     return 0
   fi
 
-  git clone --single-branch --branch "$VERSION" --depth 1 \
+  git clone --quiet --single-branch --branch "$VERSION" --depth 1 \
     https://github.com/zsh-users/zsh-syntax-highlighting.git "$TARGET_DIR"
 
   success "✓ zsh-syntax-highlighting installed"
@@ -303,7 +304,7 @@ install_zsh_autosuggestions() {
     return 0
   fi
 
-  git clone --single-branch --branch "$VERSION" --depth 1 \
+  git clone --quiet --single-branch --branch "$VERSION" --depth 1 \
     https://github.com/zsh-users/zsh-autosuggestions.git "$TARGET_DIR"
 
   success "✓ zsh-autosuggestions installed"
@@ -318,7 +319,7 @@ install_powerlevel10k() {
     return 0
   fi
 
-  git clone --single-branch --branch "$VERSION" --depth 1 \
+  git clone --quiet --single-branch --branch "$VERSION" --depth 1 \
     https://github.com/romkatv/powerlevel10k.git \
     "$ZSH_THEMES/powerlevel10k"
 
