@@ -52,6 +52,11 @@ Ubuntu for example.
 - `wget`
 - `xz-utils`
 
+#### `--node`
+
+- [node](https://github.com/nodejs/node)
+- [npm](https://github.com/npm/cli)
+
 #### `--fonts`
 
 - Fonts: [Fira Code from Nerd fonts](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode)
@@ -80,6 +85,7 @@ rm -r ./dev-env
 ```text
 Options:
   --dependencies: Install all dependencies to run the install script and oh-my-zsh
+  --node:         Install NodeJS and npm
   --dockerfile:   Add binary to lint Dockerfile (hadolint)
   --elixir:       Add plugins and environment variables for Elixir development
   --fonts:        Install Fira Code from Nerd fonts"
@@ -97,9 +103,8 @@ Options:
 
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k)
 
-## Binaries
+## Other binaries
 
-- [hadolint](https://github.com/hadolint/hadolint)
 - [LSDeluxe](https://github.com/Peltoche/lsd)
 
 ## oh-my-zsh plugins
