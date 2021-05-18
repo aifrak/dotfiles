@@ -44,6 +44,11 @@ def test_home_directory(host):
 
 @pytest.mark.order(2)
 @pytest.mark.parametrize('name, version', [
+    # Node
+    ('node', '14.16.0'),
+    ('npm', '6.14.11'),
+    ('npx', '6.14.11'),
+    # Other binaries
     ('hadolint', '2.1.0'),
     ('shellcheck', '0.7.1'),
     ('shfmt', '3.2.4'),
@@ -156,3 +161,12 @@ def test_enabled_elixir_env_vars(host, env_var):
     zshenv = host.file(HOME + '/.zshenv')
 
     assert zshenv.contains(rf'^export {env_var}=')
+
+
+@pytest.mark.order(2)
+@pytest.mark.parametrize('path, origin', [
+    ('/usr/local/bin/nodejs', '/usr/local/bin/node'),
+])
+def test_symlinks(host, path, origin):
+    assert host.file(path).is_symlink
+    assert host.file(path).linked_to == origin

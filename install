@@ -127,8 +127,9 @@ OPT_DEPENDENCIES=0
 OPT_DOCKERFILE=0
 OPT_ELIXIR=0
 OPT_FONTS=0
-OPT_ZSH=1
+OPT_NODE=0
 OPT_SHELLSCRIPT=0
+OPT_ZSH=1
 
 for opt in "$@"; do
   case $opt in
@@ -142,6 +143,7 @@ for opt in "$@"; do
   --dockerfile) OPT_DOCKERFILE=1 ;;
   --elixir) OPT_ELIXIR=1 ;;
   --fonts) OPT_FONTS=1 ;;
+  --node) OPT_NODE=1 ;;
   --shellscript) OPT_SHELLSCRIPT=1 ;;
 
   # zsh
@@ -262,7 +264,7 @@ install_gitstatus() {
   validate_checksum "$CHECKSUM" "$FILE"
 
   mkdir -p "$DIR"
-  tar zxvf "$FILE" --directory "$DIR"
+  tar zxfo "$FILE" --directory "$DIR"
 
   success "✓ Gitstatus installed"
 }
@@ -355,7 +357,7 @@ enable_oh_my_zsh_plugin() {
 download_binary() {
   NAME=$1
 
-  if [ -f "$BIN/$NAME" ]; then
+  if which "$NAME" >/dev/null; then
     warning "$NAME already installed: skipped"
     return 0
   fi
@@ -388,7 +390,7 @@ install_shellcheck() {
   wget -nv -O "$TMP/$ARCHIVE" $URL
   validate_checksum "$CHECKSUM" "$TMP/$ARCHIVE"
 
-  tar xf "$TMP/$ARCHIVE" -C "$BIN" $NAME-$VERSION/$NAME --strip-components 1
+  tar xfo "$TMP/$ARCHIVE" -C "$BIN" $NAME-$VERSION/$NAME --strip-components=1
 
   chmod +x "$BIN/$NAME"
 
@@ -455,10 +457,38 @@ install_fonts() {
   success "✓ Fira Code from Nerd fonts installed"
 }
 
+# Inspired from https://github.com/nodejs/docker-node
+install_node() {
+  if which node >/dev/null; then
+    warning "Node already installed: skipped"
+    return 0
+  fi
+
+  DIR="/usr/local"
+  FILE=$TMP/node.xz
+  ARCHIVE_ROOT_DIR="node-v14.16.0-linux-x64"
+  VERSION="14.16.0"
+  CHECKSUM="2e079cf638766fedd720d30ec8ffef5d6ceada4e8b441fc2a093cb9a865f4087"
+
+  wget -nv -O "$FILE" https://nodejs.org/dist/v$VERSION/node-v$VERSION-linux-x64.tar.xz
+  validate_checksum "$CHECKSUM" "$FILE"
+
+  mkdir -p "$DIR"
+  tar Jxfo "$FILE" --directory="$DIR" --strip-components=1 \
+    $ARCHIVE_ROOT_DIR/bin \
+    $ARCHIVE_ROOT_DIR/include \
+    $ARCHIVE_ROOT_DIR/lib \
+    $ARCHIVE_ROOT_DIR/share
+  ln -s /usr/local/bin/node /usr/local/bin/nodejs
+
+  success "✓ Elixir: Environment variables exported"
+}
+
 apply_options() {
   [ "$OPT_DOCKERFILE" -eq 1 ] && install_hadolint
   [ "$OPT_ELIXIR" -eq 1 ] && setup_elixir_env
   [ "$OPT_FONTS" -eq 1 ] && install_fonts
+  [ "$OPT_NODE" -eq 1 ] && install_node
 
   if [ "$OPT_SHELLSCRIPT" -eq 1 ]; then
     install_shellcheck

@@ -28,4 +28,5 @@ COPY --chown=$USER:$GROUP . .
 
 RUN \
   export DEBIAN_FRONTEND=noninteractive \
-  && ./install $USER --zsh --dependencies --fonts --dockerfile --shellscript --elixir
+  && ./install $USER \
+  --zsh --dependencies --node --fonts --dockerfile --shellscript --elixir

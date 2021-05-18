@@ -35,6 +35,8 @@ def test_uninstalled_packages(host, name):
 @pytest.mark.order(4)
 @pytest.mark.parametrize('command, path', [
     ('hadolint --version', BIN + '/hadolint'),
+    ('node --version', BIN + '/node'),
+    ('npm --version', BIN + '/npm'),
     ('shellcheck --version', BIN + '/shellcheck'),
     ('shfmt --version', BIN + '/shfmt'),
 ])
@@ -67,11 +69,19 @@ def test_uninstall_gitstatus(host, path):
 
 @pytest.mark.order(4)
 @pytest.mark.parametrize('path', [
+    # Node
+    (BIN + '/node'),
+    (BIN + '/npm'),
+    (BIN + '/npx'),
+    ('/usr/local/share/man/man1/node.1'),
+    ('/usr/local/share/systemtap/tapset/node.stp'),
+    # oh-my-zsh
     (HOME + '/.z'),
     (HOME + '/.zshenv'),
     (HOME + '/.zshrc'),
     (HOME + '/.p10k.zsh'),
     (HOME + '/.oh-my-zsh/custom/aliases.zsh'),
+    # fonts
     (FONTS + '/Fura Code Light Nerd Font Complete.ttf'),
     (FONTS + '/Fura Code Regular Nerd Font Complete.ttf'),
     (FONTS + '/Fura Code Medium Nerd Font Complete.ttf'),
@@ -84,6 +94,11 @@ def test_removed_files(host, path):
 
 @pytest.mark.order(4)
 @pytest.mark.parametrize('path', [
+    # Node
+    ('/usr/local/include/node'),
+    ('/usr/local/lib/node_modules'),
+    ('/usr/local/share/doc/node'),
+    # oh-my-zsh
     (HOME + '/.oh-my-zsh'),
     (HOME + '/.cache/p10k-' + USER),
     (HOME + '/.config/znt'),

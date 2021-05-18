@@ -232,6 +232,19 @@ uninstall_binaries() {
   success "✓ Binaries uninstalled"
 }
 
+uninstall_node() {
+  remove "$BIN/node"
+  remove "$BIN/npm"
+  remove "$BIN/npx"
+  remove "/usr/local/include/node"
+  remove "/usr/local/lib/node_modules"
+  remove "/usr/local/share/doc/node"
+  remove "/usr/local/share/man/man1/node.1"
+  remove "/usr/local/share/systemtap/tapset/node.stp"
+
+  success "✓ Node uninstalled"
+}
+
 # Input:  $@ -> options
 main() {
   uninstall_fonts
@@ -240,6 +253,7 @@ main() {
   uninstall_gitstatus
   uninstall_oh_my_zsh
   uninstall_binaries
+  uninstall_node
   uninstall_packages
 
   success "✓ Uninstall done"
