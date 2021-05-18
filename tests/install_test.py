@@ -45,6 +45,9 @@ def test_home_directory(host):
 @pytest.mark.order(2)
 @pytest.mark.parametrize('name, version', [
     ('hadolint', '2.1.0'),
+    ('node', '14.16.0'),
+    ('npm', '6.14.11'),
+    ('npx', '6.14.11'),
     ('shellcheck', '0.7.1'),
     ('shfmt', '3.2.4'),
 ])

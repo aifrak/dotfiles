@@ -32,7 +32,9 @@
     "ohmyzsh",
     "pytest",
     "readlink",
-    "shfmt"
+    "shfmt",
+    "systemtap",
+    "tapset"
   ],
   "cSpell.ignoreWords": [
     "Fira",
@@ -51,6 +53,7 @@
     "gitstatus",
     "gitstatusd",
     "globalias",
+    "jxfo",
     "lsdeluxe",
     "ludeeus",
     "markdownlint",
@@ -61,6 +64,7 @@
     "tagger",
     "tvdias",
     "zcompdump",
+    "zxfo",
     "zxvf"
   ],
 
