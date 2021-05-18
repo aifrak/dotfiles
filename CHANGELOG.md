@@ -8,6 +8,12 @@
 
 # Changelog
 
+## [v0.2.1](https://github.com/aifrak/dev-env/releases/tag/v0.2.1)
+
+### Bug fix
+
+- Improve documentation in README.md and `--help` option
+
 ## [v0.2.0](https://github.com/aifrak/dev-env/releases/tag/v0.2.0)
 
 ### New
