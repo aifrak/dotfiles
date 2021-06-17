@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      target: dev
+      args:
+        USER_UID: ${USER_UID:-1000}
+        USER_GID: ${USER_GID:-1000}
+    user: ${USER_UID:-1000}:${USER_GID:-1000}
+    volumes:
+      - .:/app:cached
+    command: sleep infinity

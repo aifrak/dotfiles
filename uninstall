@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -e
 
 # ---------------------------------------------- #
 #
-# "install.sh --help" for more information.
+# "uninstall --help" for more information.
 #
 # ---------------------------------------------- #
 
@@ -13,110 +13,86 @@ set -e
 # ---------------------------------------------- #
 
 # Colors
-RED="\e[31m"
-GREEN="\e[32m"
-YELLOW="\e[33m"
-NORMAL="\e[0m"
+red="\e[31m"
+green="\e[32m"
+yellow="\e[33m"
+normal="\e[0m"
 
-# Print an error and die.
-#
-# Input:  $1 -> error:string Error to print
-alert_die() {
-  error="$1"
+function alert_die() {
+  local error="${1}"
 
   print_new_line
-  alert "Error: $error"
+  alert "Error: ${error}"
   die
 }
 
-# Wrapper for "echo".
-print() {
-  echo "$*"
+function print() {
+  echo "${*}"
 }
 
-# Prints an error to STDERR.
-#
-# Input: $* -> string Message to print
-print_error() {
-  print >&2 "$*"
+function print_error() {
+  print >&2 "${*}"
 }
 
-# Prints a new line.
-print_new_line() {
+function print_new_line() {
   print ""
 }
 
 # Prints a green success message.
-#
-# Input:  $* -> string Message to print
-success() {
-  print "${GREEN}$*${NORMAL}"
+function success() {
+  print "${green}${*}${normal}"
 }
 
 # Prints a yellow warning message.
-#
-# Input:  $* -> string Message to print
-warning() {
-  print "${YELLOW}$*${NORMAL}"
+function warning() {
+  print "${yellow}${*}${normal}"
 }
 
 # Prints a red error message.
-#
-# Input:  $* -> string Message to print
-alert() {
-  print_error "${RED}$*${NORMAL}"
+function alert() {
+  print_error "${red}${*}${normal}"
 }
 
 # Wrapper for "exit" when error.
-die() {
+function die() {
   exit 1
 }
 
 # Wrapper for "exit" without error.
-close() {
+function close() {
   exit 0
 }
 
-# Return true, if the user is root.
-is_root() {
-  [ "$(id -u)" -eq 0 ]
-}
-
 # Remove directory and its files.
-#
-# Input:  $1 -> string Path of files to remove
-remove() {
-  print "Remove $1"
-  rm -rf "$1"
+function remove() {
+  print "Remove ${1}"
+  rm -rf "${1}"
 }
 
 # Remove files in a directory from a pattern.
-#
-# Input:  $1 -> string Path of directory
-#         $2 -> string Glob pattern of files to remove
-remove_files() {
-  TARGET_DIR=$1
-  TARGET_FILES=$2
+function remove_by_pattern() {
+  local target_dir=${1}
+  local target_files=$2
 
-  if [ ! -d "$TARGET_DIR" ]; then
-    warning "$TARGET_DIR already removed: skipped"
+  if [[ ! -d $target_dir ]]; then
+    warning "$target_dir already removed: skipped"
     return 0
   fi
 
-  print "Remove $TARGET_FILES in $TARGET_DIR"
-  find "$TARGET_DIR" -name "$TARGET_FILES" -delete
+  print "Remove $target_files in $target_dir"
+  find "$target_dir" -name "$target_files" -delete
 }
 
 # ---------------------------------------------- #
-#                      Main                      #
+#                    Uninstall                   #
 # ---------------------------------------------- #
 
-help() {
+function help() {
   cat <<EOF
 
-Uninstall packages, oh-my-zsh, theme, plugins and fonts.
+Uninstall dotfiles.
 
-Syntax: $0 [username]
+Syntax: $0
 
 Options:
   -h, --help:     Show this message"
@@ -124,139 +100,63 @@ Options:
 EOF
 }
 
-for opt in "$@"; do
-  case $opt in
-  -h | --help)
-    help
-    close
-    ;;
-  --* | -*)
-    alert "Error: Unknown option $opt"
-    help
-    die
-    ;;
-  esac
-done
+function uninstall_zinit() {
+  remove "${HOME}"/.zinit
+  remove_by_pattern "${HOME}" .zcompdump*
+  remove "${HOME}"/.cache/p10k*
+  remove_by_pattern "${HOME}"/.cache p10k*
+  remove "${HOME}"/.p10k.zsh
+  remove_by_pattern "${HOME}" .zsh*
+  remove "${HOME}"/.config/lsd
+  remove "${HOME}"/.config/znt
+  remove "${HOME}/.cache/gitstatus"
 
-if ! is_root; then
-  alert_die "Superuser privilege is required"
-fi
-
-if [ -n "$1" ]; then
-  USER=$1
-elif is_root && [ -z "$1" ]; then
-  # User current user from environment variables
-  USER=$USER
-else
-  alert_die "User name is required"
-fi
-
-HOME=/home/$USER
-
-[ ! -d "$HOME" ] && alert_die "Home directory does not exist"
-
-BIN=/usr/local/bin
-
-uninstall_packages() {
-  apt-get purge --yes -qq \
-    zsh=5.7.1-*
-  apt autoremove --yes -qq
-
-  success "✓ Dependencies uninstalled"
+  success "✓ zinit uninstalled"
 }
 
-uninstall_lsdeluxe() {
-  dpkg --purge lsd
+function uninstall_fonts() {
+  fonts_dir=${HOME}/.local/share/fonts
 
-  success "✓ LSDeluxe uninstalled"
-}
-
-uninstall_oh_my_zsh() {
-  ZSH=$HOME/.oh-my-zsh
-
-  if [ ! -d "$ZSH" ]; then
-    warning "Oh-my-zsh already uninstalled: skipped"
-    return 0
-  fi
-
-  chmod +x "$ZSH/tools/uninstall.sh"
-
-  print "y" | sh -c "$ZSH/tools/uninstall.sh"
-
-  remove "$HOME"/.z
-  remove_files "$HOME" .zcompdump*
-  remove "$HOME"/.cache/p10k*
-  remove_files "$HOME"/.cache p10k*
-  remove "$HOME"/.p10k.zsh
-  remove_files "$HOME" .zsh*
-  remove "$HOME"/.config/znt
-
-  success "✓ Oh-my-zsh uninstalled"
-}
-
-uninstall_gitstatus() {
-  GITSTATUS_DIR=$HOME/.cache/gitstatus
-
-  remove "$GITSTATUS_DIR"
-
-  success "✓ gitstatus uninstalled"
-}
-
-uninstall_fzf() {
-  FZF=$HOME/.fzf
-
-  if [ ! -d "$FZF" ]; then
-    warning "FZF already uninstalled: skipped"
-    return 0
-  fi
-
-  prefix=$FZF prefix_expand=$FZF "$FZF/uninstall"
-  remove "$FZF"
-
-  success "✓ FZF uninstalled"
-}
-
-uninstall_fonts() {
-  FONTS_DIR=$HOME/.local/share/fonts
-
-  remove_files "$FONTS_DIR" Fura*Code*.ttf
+  remove_by_pattern "${fonts_dir}" Fura*Code*.ttf
 
   success "✓ Fonts uninstalled"
 }
 
-uninstall_binaries() {
-  remove "$BIN/hadolint"
-  remove "$BIN/shellcheck"
-  remove "$BIN/shfmt"
+function uninstall_asdf() {
+  remove "${HOME}/.asdf"
+  remove "${HOME}/.tool-versions"
 
-  success "✓ Binaries uninstalled"
+  local dot_bashrc=${HOME}/.bashrc
+  sed -i "/^. \$HOME\/.asdf\/asdf.sh$/d" "${dot_bashrc}"
+  sed -i "/^. \$HOME\/.asdf\/completions\/asdf.bash$/d" "${dot_bashrc}"
+
+  success "✓ asdf uninstalled"
 }
 
-uninstall_node() {
-  remove "$BIN/node"
-  remove "$BIN/npm"
-  remove "$BIN/npx"
-  remove "/usr/local/include/node"
-  remove "/usr/local/lib/node_modules"
-  remove "/usr/local/share/doc/node"
-  remove "/usr/local/share/man/man1/node.1"
-  remove "/usr/local/share/systemtap/tapset/node.stp"
-
-  success "✓ Node uninstalled"
+function parse_options() {
+  for opt in "$@"; do
+    case $opt in
+      -h | --help)
+        help
+        close
+        ;;
+      --* | -*)
+        alert "Error: Unknown option $opt"
+        help
+        die
+        ;;
+    esac
+  done
 }
 
-# Input:  $@ -> options
-main() {
+function uninstall() {
   uninstall_fonts
-  uninstall_lsdeluxe
-  uninstall_fzf
-  uninstall_gitstatus
-  uninstall_oh_my_zsh
-  uninstall_binaries
-  uninstall_node
-  uninstall_packages
+  uninstall_zinit
+  uninstall_asdf
 
   success "✓ Uninstall done"
 }
 
-main "$@"
+parse_options "$@"
+
+uninstall "$@"

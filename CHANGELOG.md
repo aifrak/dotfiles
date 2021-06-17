@@ -8,6 +8,28 @@
 
 # Changelog
 
+## [v0.3.0](https://github.com/aifrak/dev-env/releases/tag/v0.3.0)
+
+### New
+
+- Add `zinit`
+- Install plugins and theme are via `zinit`
+- Add `--asdf` and `--no-asdf`: `asdf` is installed by default
+
+### BREAKING CHANGE
+
+- Remove `username` argument from `./install` and `./uninstall`: copied files
+  will be located in the current user's `HOME` folder
+- Remove `Oh My Zsh`
+- Remove `--dockerfile`
+- Remove `--node`
+- Remove `--shellscript`
+- Rename `--dependencies` into `--deps`
+
+### Improvement
+
+- `fzf` and `lsdeluxe` are installed via `asdf`
+
 ## [v0.2.1](https://github.com/aifrak/dev-env/releases/tag/v0.2.1)
 
 ### Bug fix

@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+. ./scripts/run/docker-file.sh
+. ./scripts/run/shell.sh
+. ./scripts/lib/utils.sh
+
+# If we're running in CI we need to disable TTY allocation for docker-compose
+# commands that enable it by default, such as exec and run.
+# Idea from: https://github.com/nickjj/docker-flask-example/blob/main/run
+TTY=""
+if [[ ! -t 1 ]]; then
+  TTY="-T"
+fi
+
+function help {
+  cat <<EOF
+
+$0 [command] [options...]
+
+Main commands:
+  ci:run                     Run a function from "./run" inside the "app" docker service
+  ci:test                    Test and lint the whole project inside the "app" docker service
+  ci:lint                    Lint the whole project inside the "app" docker service
+
+  dev:code                   Prepare docker services for devolpment environment
+  dev:dc                     Run docker-compose with development configuration
+  dev:run                    Build and run a command a docker service
+
+  format                     Format code of the whole project
+  lint                       Lint the whole project
+  pre-commit                 Format, lint and test the whole project
+  test                       Test the whole project
+EOF
+
+  shell:help
+  dockerfile:help
+}
+
+function ci:run {
+  docker-compose run ${TTY} app ./run "${@}"
+  docker-compose rm -f -v
+}
+
+function ci:test {
+  ci:run test
+}
+
+function ci:lint {
+  ci:run lint
+}
+
+function dev:run {
+  docker-compose build
+  docker-compose run ${TTY} "${@}"
+  docker-compose rm -f -v
+}
+
+function dev:code {
+  dev:dc build
+  dev:dc up -d -V --remove-orphans
+  dev:dc exec app bash
+}
+
+function dev:dc {
+  docker-compose -f docker-compose.yml -f docker-compose.dev.yml "${@}"
+}
+
+function test {
+  pytest
+}
+
+function lint {
+  local status=0
+
+  shell:lint || status=${?}
+  dockerfile:lint || status=${?}
+  npx markdownlint . || status=${?}
+  npx prettier --check . || status=${?}
+
+  if [[ status -eq 0 ]]; then
+    success "✔ Project linted"
+  else
+    alert "✖ Project linted: issue(s) found"
+    exit ${status}
+  fi
+}
+
+function format {
+  shell:format
+  dockerfile:format
+  black tests/.
+  npx prettier --list-different --write .
+
+  success "✔ Project formatted"
+}
+
+function pre-commit {
+  format
+  lint
+  test
+}
+
+# Idea from: https://github.com/adriancooney/Taskfile
+TIMEFORMAT=$'\nTask completed in %3lR'
+time "${@:-help}"
