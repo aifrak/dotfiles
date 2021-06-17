@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       IMAGE_TARGET: base
-      IMAGE_TAG: aifrak/dev-env:latest
+      IMAGE_TAG: aifrak/dotfiles:latest
       CACHE_OLD: /tmp/.buildx-cache
       CACHE_NEW: /tmp/.buildx-cache-new
 

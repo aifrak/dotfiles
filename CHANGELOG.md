@@ -8,7 +8,7 @@
 
 # Changelog
 
-## [v0.3.0](https://github.com/aifrak/dev-env/releases/tag/v0.3.0)
+## [v0.3.0](https://github.com/aifrak/dotfiles/releases/tag/v0.3.0)
 
 ### New
 
@@ -18,6 +18,7 @@
 
 ### BREAKING CHANGE
 
+- Rename repository to `dotfiles`
 - Remove `username` argument from `./install` and `./uninstall`: copied files
   will be located in the current user's `HOME` folder
 - Remove `Oh My Zsh`
@@ -30,13 +31,13 @@
 
 - `fzf` and `lsdeluxe` are installed via `asdf`
 
-## [v0.2.1](https://github.com/aifrak/dev-env/releases/tag/v0.2.1)
+## [v0.2.1](https://github.com/aifrak/dotfiles/releases/tag/v0.2.1)
 
 ### Bug fix
 
 - Improve documentation in README.md and `--help` option
 
-## [v0.2.0](https://github.com/aifrak/dev-env/releases/tag/v0.2.0)
+## [v0.2.0](https://github.com/aifrak/dotfiles/releases/tag/v0.2.0)
 
 ### New
 
@@ -50,13 +51,13 @@
 
 - Less verbose when extract archive
 
-## [v0.1.2](https://github.com/aifrak/dev-env/releases/tag/v0.1.2)
+## [v0.1.2](https://github.com/aifrak/dotfiles/releases/tag/v0.1.2)
 
 ### Bug fix
 
 - Fix ignored options after "--zsh"
 
-## [v0.1.1](https://github.com/aifrak/dev-env/releases/tag/v0.1.1)
+## [v0.1.1](https://github.com/aifrak/dotfiles/releases/tag/v0.1.1)
 
 ### Bug fix
 
@@ -67,7 +68,7 @@
 
 - Add "ca-certificates" package as requirements
 
-## [v0.1.0](https://github.com/aifrak/dev-env/releases/tag/v0.1.0)
+## [v0.1.0](https://github.com/aifrak/dotfiles/releases/tag/v0.1.0)
 
 ### New
 
