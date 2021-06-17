@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -e
 
 # ---------------------------------------------- #
 #
-# "install.sh --help" for more information.
+# "install --help" for more information.
 #
 # ---------------------------------------------- #
 
@@ -13,518 +13,286 @@ set -e
 # ---------------------------------------------- #
 
 # Colors
-RED="\e[31m"
-GREEN="\e[32m"
-YELLOW="\e[33m"
-NORMAL="\e[0m"
+red="\e[31m"
+green="\e[32m"
+yellow="\e[33m"
+normal="\e[0m"
 
-# Print an error and die.
-#
-# Input:  $1 -> error:string Error to print
-alert_die() {
-  error="$1"
+function alert_die {
+  local error="${1}"
 
   print_new_line
-  alert "Error: $error"
+  alert "Error: ${error}"
   die
 }
 
-# Wrapper for "echo".
-print() {
-  echo "$*"
+function print {
+  echo -e "${*}"
 }
 
-# Prints an error to STDERR.
-#
-# Input: $* -> string Message to print
-print_error() {
-  print >&2 "$*"
+function print_error {
+  print >&2 "${*}"
 }
 
-# Prints a new line.
-print_new_line() {
+function print_new_line {
   print ""
 }
 
 # Prints a green success message.
-#
-# Input:  $* -> string Message to print
-success() {
-  print "${GREEN}$*${NORMAL}"
+function success {
+  print "${green}${*}${normal}"
 }
 
 # Prints a yellow warning message.
-#
-# Input:  $* -> string Message to print
-warning() {
-  print "${YELLOW}$*${NORMAL}"
+function warning {
+  print "${yellow}${*}${normal}"
 }
 
 # Prints a red error message.
-#
-# Input:  $* -> string Message to print
-alert() {
-  print_error "${RED}$*${NORMAL}"
+function alert {
+  print_error "${red}${*}${normal}"
 }
 
 # Wrapper for "exit" when error.
-die() {
+function die {
   exit 1
 }
 
 # Wrapper for "exit" without error.
-close() {
+function close {
   exit 0
 }
 
-# Return true, if the user is root.
-is_root() {
-  [ "$(id -u)" -eq 0 ]
-}
+function validate_checksum {
+  local checksum=${1}
+  local file=${2}
 
-# Validate checksum sha256 of a file
-# Input:  $1 -> string Checksum in sha256
-#         $2 -> string File path
-validate_checksum() {
-  CHECKSUM=$1
-  FILE=$2
-
-  print "$CHECKSUM" "$FILE" | sha256sum --quiet --check -
+  print "${checksum}" "${file}" | sha256sum --quiet --check -
 }
 
 # ---------------------------------------------- #
-#                      Main                      #
+#                     Install                    #
 # ---------------------------------------------- #
 
-help() {
+function help {
   cat <<EOF
 
-Install package dependencies, oh-my-zsh, theme, plugins.
+Install package dotfiles.
 
-Syntax: $0 [username] [OPTIONS...]
+Syntax: ${0} [OPTIONS...]
 
 Options:
   -h, --help:     Show this message"
 
-  --dependencies: Install all dependencies to run the install script and oh-my-zsh
-  --node:         Install NodeJS and npm
-  --dockerfile:   Add binary to lint Dockerfile (hadolint)
+  --deps:         Install all dependencies to install and run the development environment
   --elixir:       Add plugins and environment variables for Elixir development
   --fonts:        Install Fira Code from Nerd fonts
+  --[no-]asdf:    [Do not] install asdf (install it by default)
   --[no-]zsh:     [Do not] install zsh (install it by default)
-  --shellscript:  Add binaries to lint and format Shellscript (shellcheck & shfmt)"
 
 EOF
 }
 
-validate_installed_git() {
-  command -v git >/dev/null 2>&1 || alert_die "Git is not installed."
-}
-
-validate_installed_git
-
-# Install options
-OPT_DEPENDENCIES=0
-OPT_DOCKERFILE=0
-OPT_ELIXIR=0
-OPT_FONTS=0
-OPT_NODE=0
-OPT_SHELLSCRIPT=0
-OPT_ZSH=1
-
-for opt in "$@"; do
-  case $opt in
-  -h | --help)
-    help
-    close
-    ;;
-
-  # Install options
-  --dependencies) OPT_DEPENDENCIES=1 ;;
-  --dockerfile) OPT_DOCKERFILE=1 ;;
-  --elixir) OPT_ELIXIR=1 ;;
-  --fonts) OPT_FONTS=1 ;;
-  --node) OPT_NODE=1 ;;
-  --shellscript) OPT_SHELLSCRIPT=1 ;;
-
-  # zsh
-  --no-zsh) OPT_ZSH=0 ;;
-  --zsh) continue ;;
-
-  --* | -*)
-    alert "Error: Unknown option $opt"
-    help
-    die
-    ;;
-  esac
-done
-
-if ! is_root; then
-  alert_die "Superuser privilege is required"
-fi
-
-if [ -n "$1" ]; then
-  USER=$1
-elif ! is_root && [ -z "$1" ]; then
-  # User current user from environment variables
-  USER=$USER
-else
-  alert_die "User name is required"
-fi
-
-CURRENT_DIR="$(dirname "$(readlink -f "$0")")"
-HOME=/home/$USER
-
-[ ! -d "$HOME" ] && alert_die "Home directory $HOME does not exist"
-
-CONFIG_DIR=$CURRENT_DIR/config
-
-BIN=/usr/local/bin
-TMP=/tmp/dev-env
-
-ZSH=$HOME/.oh-my-zsh
-ZSH_CUSTOM=$ZSH/custom
-ZSH_PLUGINS=$ZSH_CUSTOM/plugins
-
-install_packages() {
-  if [ $OPT_DEPENDENCIES -eq 0 ] || [ $OPT_ZSH -eq 0 ]; then
+function install_packages {
+  if [[ ${opt_deps} -eq 0 ]] || [[ ${opt_zsh} -eq 0 ]]; then
     return 0
   fi
 
-  apt-get update -qq
+  sudo apt-get update -qq
 
-  if [ $OPT_DEPENDENCIES -eq 1 ]; then
-    apt-get install --yes -qq --no-install-recommends \
-      gnupg2=2.2.12-* \
-      make=4.2.1-1.2 \
-      openssh-client=1:7.9p1-* \
-      wget=1.20.1-* \
-      xz-utils=5.2.4-*
+  if [[ ${opt_deps} -eq 1 ]]; then
+    sudo apt-get install -y -qq --no-install-recommends \
+      curl \
+      gnupg2 \
+      make \
+      nano \
+      openssh-client \
+      tar \
+      wget \
+      xz-utils
   fi
 
-  if [ $OPT_ZSH -eq 1 ]; then
-    apt-get install --yes -qq --no-install-recommends \
-      zsh=5.7.1-*
+  if [[ ${opt_zsh} -eq 1 ]]; then
+    sudo apt-get install -y -qq --no-install-recommends zsh
   fi
 
   success "✓ Packages installed"
-
 }
 
-install_lsdeluxe() {
-  FILE=$TMP/lsdeluxe.deb
-  VERSION="0.17.0"
-  CHECKSUM="ac85771d6195ef817c9d14f8a8a0d027461bfc290d46cb57e434af342a327bb2"
+function copy_dotfiles {
+  cp -r "${config_dir}/dotfiles/." "${HOME}"
 
-  wget -nv -O "$FILE" https://github.com/Peltoche/lsd/releases/download/$VERSION/lsd_${VERSION}_amd64.deb
-  validate_checksum "$CHECKSUM" "$FILE"
-
-  dpkg --install "$FILE"
-
-  success "✓ LSDeluxe installed"
-}
-
-# Install FZF (required for zsh-interactive-cd)
-install_fzf() {
-  FZF=$HOME/.fzf
-  VERSION="0.21.1"
-
-  if [ -d "$FZF" ]; then
-    warning "FZF directory already exists: skipped"
-    return 0
-  fi
-
-  git clone --quiet --single-branch --branch "$VERSION" --depth 1 \
-    https://github.com/junegunn/fzf.git "$FZF"
-  HOME=$HOME "$FZF/install" --no-key-bindings --completion --update-rc
-
-  success "✓ FZF installed"
-}
-
-copy_dotfiles() {
-  cp -r "$CONFIG_DIR/dotfiles/." "$HOME"
   success "✓ Dotfiles copied"
-
-  cp "$CONFIG_DIR/zsh/aliases.zsh" "$ZSH_CUSTOM"
-  success "✓ Aliases copied"
 }
 
-install_gitstatus() {
-  DIR="$HOME/.cache/gitstatus"
+function uncomment_zshrc_variable {
+  local variable=${1}
 
-  if [ -d "$GITSTATUS_DIR" ]; then
-    warning "Gitstatus already installed: skipped"
+  sed -i "/^# local ${variable}=/s/^# //" "${dot_zshrc}"
+}
+
+function install_asdf {
+  if which asdf >/dev/null; then
+    warning "asdf already installed: skipped"
     return 0
   fi
 
-  FILE=$TMP/gitstatus.tgz
-  VERSION="1.0.0"
-  CHECKSUM="e33867063f091d3c31ede9916fef079ff8cd6fdcc70d051914f962ab3b8f36fd"
+  mkdir "${ASDF_DIR}"
 
-  wget -nv -O "$FILE" https://github.com/romkatv/gitstatus/releases/download/v$VERSION/gitstatusd-linux-x86_64.tar.gz
-  validate_checksum "$CHECKSUM" "$FILE"
+  git clone --quiet --branch v0.8.1 \
+    https://github.com/asdf-vm/asdf.git "${ASDF_DIR}"
 
-  mkdir -p "$DIR"
-  tar zxfo "$FILE" --directory "$DIR"
+  print ". \$HOME/.asdf/asdf.sh" >>"${dot_bashrc}"
+  print ". \$HOME/.asdf/completions/asdf.bash" >>"${dot_bashrc}"
 
-  success "✓ Gitstatus installed"
+  success "✓ asdf installed"
 }
 
-install_oh_my_zsh() {
-  if [ -d "$ZSH" ]; then
-    warning "Oh-my-zsh already installed: skipped"
-    return 0
-  fi
-
-  OH_MY_ZSH_URL=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-
-  ZSH="$ZSH" sh -c "$(wget -qO- $OH_MY_ZSH_URL) --unattended"
-
-  success "✓ Oh-my-zsh installed"
+function install_asdf_versions {
+  setup_asdf_version fzf 0.27.2
+  setup_asdf_version lsd 0.20.1 https://github.com/argylelabcoat/asdf-lsd.git
 }
 
-install_zsh_syntax_highlighting() {
-  TARGET_DIR="$ZSH_PLUGINS/zsh-syntax-highlighting"
-  VERSION="0.7.1"
+function setup_asdf_version {
+  local plugin=${1}
+  local version=${2}
+  local plugin_url=${3:-""}
 
-  if [ -d "$TARGET_DIR" ]; then
-    warning "zsh-syntax-highlighting already installed: skipped"
-    return 0
-  fi
-
-  git clone --quiet --single-branch --branch "$VERSION" --depth 1 \
-    https://github.com/zsh-users/zsh-syntax-highlighting.git "$TARGET_DIR"
-
-  success "✓ zsh-syntax-highlighting installed"
-}
-
-install_zsh_autosuggestions() {
-  TARGET_DIR="$ZSH_PLUGINS/zsh-autosuggestions"
-  VERSION="v0.6.4"
-
-  if [ -d "$TARGET_DIR" ]; then
-    warning "zsh-autosuggestions already installed: skipped"
-    return 0
-  fi
-
-  git clone --quiet --single-branch --branch "$VERSION" --depth 1 \
-    https://github.com/zsh-users/zsh-autosuggestions.git "$TARGET_DIR"
-
-  success "✓ zsh-autosuggestions installed"
-}
-
-install_powerlevel10k() {
-  ZSH_THEMES=$ZSH_CUSTOM/themes
-  VERSION="v1.14.6"
-
-  if [ -d "$ZSH_THEMES/powerlevel10k" ]; then
-    warning "powerlevel10k already installed: skipped"
-    return 0
-  fi
-
-  git clone --quiet --single-branch --branch "$VERSION" --depth 1 \
-    https://github.com/romkatv/powerlevel10k.git \
-    "$ZSH_THEMES/powerlevel10k"
-
-  success "✓ powerlevel10k installed"
-}
-
-# Make sure ownership is related to target user.
-user_as_owner() {
-  ! is_root && return 0
-
-  chown -R "$USER": "$HOME"
-  success "✓ Changed ownership"
-}
-
-enable_env_var() {
-  ENV_VAR=$1
-  ZSHENV="$HOME/.zshenv"
-
-  # Uncomment variables in file
-  sed -i "/^# export $ENV_VAR=/s/^# //" "$ZSHENV"
-}
-
-enable_oh_my_zsh_plugin() {
-  ENV_VAR=$1
-  ZSHRC="$HOME/.zshrc"
-
-  # Uncomment variables in file
-  sed -i "/^  #  $ENV_VAR$/s/^  #//" "$ZSHRC"
+  asdf plugin add "${plugin}" "${plugin_url}"
+  asdf install "${plugin}" "${version}"
+  asdf global "${plugin}" "${version}"
 }
 
 # --------------- BEGIN: Options --------------- #
 
-download_binary() {
-  NAME=$1
+function setup_elixir_env {
+  uncomment_zshrc_variable "dotfiles_elixir"
 
-  if which "$NAME" >/dev/null; then
-    warning "$NAME already installed: skipped"
-    return 0
-  fi
-
-  FILE=$TMP/$NAME
-  URL=$2
-  CHECKSUM=$3
-
-  wget -nv -O "$FILE" "$URL"
-  validate_checksum "$CHECKSUM" "$FILE"
-
-  cp "$FILE" "$BIN"
-  chmod +x "$BIN/$NAME"
-
-  success "✓ $NAME installed"
-}
-
-install_shellcheck() {
-  NAME="shellcheck"
-  ARCHIVE="$NAME.tar.xz"
-  VERSION="v0.7.1"
-  URL=https://github.com/koalaman/shellcheck/releases/download/$VERSION/shellcheck-$VERSION.linux.x86_64.tar.xz
-  CHECKSUM="64f17152d96d7ec261ad3086ed42d18232fcb65148b44571b564d688269d36c8"
-
-  if [ -f "$BIN/$NAME" ]; then
-    warning "$NAME already installed: skipped"
-    return 0
-  fi
-
-  wget -nv -O "$TMP/$ARCHIVE" $URL
-  validate_checksum "$CHECKSUM" "$TMP/$ARCHIVE"
-
-  tar xfo "$TMP/$ARCHIVE" -C "$BIN" $NAME-$VERSION/$NAME --strip-components=1
-
-  chmod +x "$BIN/$NAME"
-
-  success "✓ $NAME installed"
-}
-
-install_hadolint() {
-  VERSION="v2.1.0"
-
-  download_binary "hadolint" \
-    "https://github.com/hadolint/hadolint/releases/download/$VERSION/hadolint-Linux-x86_64" \
-    "ecaf24a8d9dec2f5e16a8f951a6de51bfa9e43f285f4c751b208a9d90c66a0ce"
-}
-
-install_shfmt() {
-  VERSION="v3.2.4"
-
-  download_binary "shfmt" \
-    https://github.com/mvdan/sh/releases/download/$VERSION/shfmt_${VERSION}_linux_amd64 \
-    "3f5a47f8fec27fae3e06d611559a2063f5d27e4b9501171dde9959b8c60a3538"
-}
-
-setup_elixir_env() {
-  enable_env_var "ERL_AFLAGS"
-
-  enable_oh_my_zsh_plugin "mix"
-  enable_oh_my_zsh_plugin "mix-fast"
-
-  success "✓ Elixir: Environment variables exported"
+  success "✓ Setup for elixir: done"
 }
 
 # Install Fira Code from Nerd fonts
-install_fonts() {
-  FONTS_DIR=$HOME/.local/share/fonts
+function install_fonts {
+  local fonts_dir=${HOME}/.local/share/fonts
 
-  if [ "$(find "$FONTS_DIR"/Fura*Code*.ttf 2>/dev/null | wc -l)" -gt 0 ]; then
+  if [[ $(find "${fonts_dir}"/Fura*Code*.ttf 2>/dev/null | wc -l) -gt 0 ]]; then
     warning "Fonts already installed: skipped"
     return 0
   fi
 
-  VERSION="2.1.0"
-  URL=https://github.com/ryanoasis/nerd-fonts/raw/$VERSION/patched-fonts/FiraCode
-  FIRA_CODE_LIGHT_CHECKSUM="5e0e3b18b99fc50361a93d7eb1bfe7ed7618769f4db279be0ef1f00c5b9607d6"
-  FIRA_CODE_REGULAR_CHECKSUM="3771e47c48eb273c60337955f9b33d95bd874d60d52a1ba3dbed924f692403b3"
-  FIRA_CODE_MEDIUM_CHECKSUM="42dc83c9173550804a8ba2346b13ee1baa72ab09a14826d1418d519d58cd6768"
-  FIRA_CODE_BOLD_CHECKSUM="060d4572525972b6959899931b8685b89984f3b94f74c2c8c6c18dba5c98c2fe"
-  FIRA_CODE_RETINA_CHECKSUM="e254b08798d59ac7d02000a3fda0eac1facad093685e705ac8dd4bd0f4961b0b"
+  local version="2.1.0"
+  local url=https://github.com/ryanoasis/nerd-fonts/raw/${version}/patched-fonts/FiraCode
+  local fira_code_light_checksum="5e0e3b18b99fc50361a93d7eb1bfe7ed7618769f4db279be0ef1f00c5b9607d6"
+  local fira_code_regular_checksum="3771e47c48eb273c60337955f9b33d95bd874d60d52a1ba3dbed924f692403b3"
+  local fira_code_medium_checksum="42dc83c9173550804a8ba2346b13ee1baa72ab09a14826d1418d519d58cd6768"
+  local fira_code_bold_checksum="060d4572525972b6959899931b8685b89984f3b94f74c2c8c6c18dba5c98c2fe"
+  local fira_code_retina_checksum="e254b08798d59ac7d02000a3fda0eac1facad093685e705ac8dd4bd0f4961b0b"
 
-  wget -nv -P "$TMP" $URL/Light/complete/Fura%20Code%20Light%20Nerd%20Font%20Complete.ttf
-  wget -nv -P "$TMP" $URL/Regular/complete/Fura%20Code%20Regular%20Nerd%20Font%20Complete.ttf
-  wget -nv -P "$TMP" $URL/Medium/complete/Fura%20Code%20Medium%20Nerd%20Font%20Complete.ttf
-  wget -nv -P "$TMP" $URL/Bold/complete/Fura%20Code%20Bold%20Nerd%20Font%20Complete.ttf
-  wget -nv -P "$TMP" $URL/Retina/complete/Fura%20Code%20Retina%20Nerd%20Font%20Complete.ttf
+  wget -nv -P "${tmp}" ${url}/Light/complete/Fura%20Code%20Light%20Nerd%20Font%20Complete.ttf
+  wget -nv -P "${tmp}" ${url}/Regular/complete/Fura%20Code%20Regular%20Nerd%20Font%20Complete.ttf
+  wget -nv -P "${tmp}" ${url}/Medium/complete/Fura%20Code%20Medium%20Nerd%20Font%20Complete.ttf
+  wget -nv -P "${tmp}" ${url}/Bold/complete/Fura%20Code%20Bold%20Nerd%20Font%20Complete.ttf
+  wget -nv -P "${tmp}" ${url}/Retina/complete/Fura%20Code%20Retina%20Nerd%20Font%20Complete.ttf
 
-  validate_checksum "$FIRA_CODE_LIGHT_CHECKSUM" "$TMP/Fura Code Light Nerd Font Complete.ttf"
-  validate_checksum "$FIRA_CODE_REGULAR_CHECKSUM" "$TMP/Fura Code Regular Nerd Font Complete.ttf"
-  validate_checksum "$FIRA_CODE_MEDIUM_CHECKSUM" "$TMP/Fura Code Medium Nerd Font Complete.ttf"
-  validate_checksum "$FIRA_CODE_BOLD_CHECKSUM" "$TMP/Fura Code Bold Nerd Font Complete.ttf"
-  validate_checksum "$FIRA_CODE_RETINA_CHECKSUM" "$TMP/Fura Code Retina Nerd Font Complete.ttf"
+  validate_checksum "${fira_code_light_checksum}" "${tmp}/Fura Code Light Nerd Font Complete.ttf"
+  validate_checksum "${fira_code_regular_checksum}" "${tmp}/Fura Code Regular Nerd Font Complete.ttf"
+  validate_checksum "${fira_code_medium_checksum}" "${tmp}/Fura Code Medium Nerd Font Complete.ttf"
+  validate_checksum "${fira_code_bold_checksum}" "${tmp}/Fura Code Bold Nerd Font Complete.ttf"
+  validate_checksum "${fira_code_retina_checksum}" "${tmp}/Fura Code Retina Nerd Font Complete.ttf"
 
-  mkdir -p "$FONTS_DIR"
-  cp $TMP/Fura*Code*.ttf "$FONTS_DIR"
+  mkdir -p "${fonts_dir}"
+  cp "${tmp}"/Fura*Code*.ttf "${fonts_dir}"
 
   success "✓ Fira Code from Nerd fonts installed"
 }
 
-# Inspired from https://github.com/nodejs/docker-node
-install_node() {
-  if which node >/dev/null; then
-    warning "Node already installed: skipped"
-    return 0
-  fi
+function parse_options {
+  # Install options
+  opt_asdf=1
+  opt_deps=0
+  opt_elixir=0
+  opt_fonts=0
+  opt_zsh=1
 
-  DIR="/usr/local"
-  FILE=$TMP/node.xz
-  ARCHIVE_ROOT_DIR="node-v14.16.0-linux-x64"
-  VERSION="14.16.0"
-  CHECKSUM="2e079cf638766fedd720d30ec8ffef5d6ceada4e8b441fc2a093cb9a865f4087"
+  for opt in "${@}"; do
+    case ${opt} in
+      -h | --help)
+        help
+        close
+        ;;
 
-  wget -nv -O "$FILE" https://nodejs.org/dist/v$VERSION/node-v$VERSION-linux-x64.tar.xz
-  validate_checksum "$CHECKSUM" "$FILE"
+      # Install options
+      --deps) opt_deps=1 ;;
+      --elixir) opt_elixir=1 ;;
+      --fonts) opt_fonts=1 ;;
 
-  mkdir -p "$DIR"
-  tar Jxfo "$FILE" --directory="$DIR" --strip-components=1 \
-    $ARCHIVE_ROOT_DIR/bin \
-    $ARCHIVE_ROOT_DIR/include \
-    $ARCHIVE_ROOT_DIR/lib \
-    $ARCHIVE_ROOT_DIR/share
-  ln -s /usr/local/bin/node /usr/local/bin/nodejs
+      # asdf
+      --no-asdf) opt_asdf=0 ;;
+      --asdf) continue ;;
 
-  success "✓ Elixir: Environment variables exported"
-}
+      # zsh
+      --no-zsh) opt_zsh=0 ;;
+      --zsh) continue ;;
 
-apply_options() {
-  [ "$OPT_DOCKERFILE" -eq 1 ] && install_hadolint
-  [ "$OPT_ELIXIR" -eq 1 ] && setup_elixir_env
-  [ "$OPT_FONTS" -eq 1 ] && install_fonts
-  [ "$OPT_NODE" -eq 1 ] && install_node
-
-  if [ "$OPT_SHELLSCRIPT" -eq 1 ]; then
-    install_shellcheck
-    install_shfmt
-  fi
-
-  return 0
+      --* | -*)
+        alert "Error: Unknown option ${opt}"
+        help
+        die
+        ;;
+    esac
+  done
 }
 
 # ---------------- END: Options ---------------- #
 
-main() {
-  mkdir -p "$TMP"
+function validate_installed_git {
+  command -v git >/dev/null 2>&1 || alert_die "git is not installed."
+}
+
+function validate_installed_sudo {
+  command -v sudo >/dev/null 2>&1 || alert_die "sudo is not installed."
+}
+
+function validate {
+  validate_installed_git
+  validate_installed_sudo
+}
+
+function install {
+  mkdir -p "${tmp}"
 
   install_packages
-  install_lsdeluxe
-  install_oh_my_zsh
-  install_zsh_syntax_highlighting
-  install_zsh_autosuggestions
-  install_powerlevel10k
-  install_gitstatus
-  install_fzf
+
+  if [[ "${opt_asdf}" -eq 1 ]]; then
+    install_asdf
+  fi
+
+  install_asdf_versions
 
   copy_dotfiles
 
-  apply_options
-
-  user_as_owner
+  [[ "${opt_elixir}" -eq 1 ]] && setup_elixir_env
+  [[ "${opt_fonts}" -eq 1 ]] && install_fonts
 
   success "✓ Install done! Run 'zsh' to start."
 }
 
-clean_tmp() {
-  [ -d "$TMP" ] && rm -r -d "$TMP"
+function clean_tmp {
+  [[ -d "${tmp}" ]] && rm -r -d "${tmp}"
 }
 
+parse_options "${@}"
+validate "${@}"
+
+current_dir="$(dirname "$(readlink -f "${0}")")"
+config_dir=${current_dir}/config
+tmp=${HOME}/tmp/dev-env
+
+export ASDF_DIR=${HOME}/.asdf
+export PATH="${PATH}:${ASDF_DIR}/bin:${ASDF_DIR}/shims"
+
+dot_bashrc=${HOME}/.bashrc
+dot_zshrc=${HOME}/.zshrc
+
 trap "clean_tmp" EXIT
-main "$@"
+install "${@}"

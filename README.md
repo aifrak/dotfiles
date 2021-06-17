@@ -1,137 +1,88 @@
-# Development environment
+# Dotfiles
 
-Installation script of development environment (Debian).
+Personal install script for dotfiles, zsh, asdf and zinit (Debian).
 
 [![Last release](https://img.shields.io/github/v/release/aifrak/dev-env?label=Last%20release)](https://github.com/aifrak/dev-env/releases)
-[![License](https://img.shields.io/github/license/aifrak/dev-env?color=blue)](https://github.com/aifrak/dev-env/blob/master/LICENSE)
-
 [![Tests](https://github.com/aifrak/dev-env/actions/workflows/tests.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/tests.yml)
-[![Shell lint](https://github.com/aifrak/dev-env/actions/workflows/shell-lint.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/shell-lint.yml)
-[![Dockerfile lint](https://github.com/aifrak/dev-env/actions/workflows/dockerfile-lint.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/dockerfile-lint.yml)
-[![Markdown lint](https://github.com/aifrak/dev-env/actions/workflows/markdown-lint.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/markdown-lint.yml)
-
-## Warning ⚠️
-
-This is just a personal setup. I don't plan to make it work for other distros or
-to improve it.
-
-_Use it at your own risk._
+[![License](https://img.shields.io/github/license/aifrak/dev-env?color=blue)](https://github.com/aifrak/dev-env/blob/master/LICENSE)
 
 ## Requirements ❗
 
 - Debian-based distros
-- Superuser rights for dependencies and `lsdeluxe`
+- Superuser rights
 - `ca-certificates` to download the necessary files
 - `git`
 
 ## What is installed by default 🤔
 
 - Dotfiles
-- `oh-my-zsh`
-- [oh-my-zsh plugins](#oh-my-zsh-plugins)
-- `zsh`
-
-### Extra binaries
-
-- [fzf](https://github.com/junegunn/fzf)
+- `asdf`
+- [fzf](https://github.com/junegunn/fzf) required by zsh-interactive-`zsh-interactive-cd`
 - [lsdeluxe](https://github.com/Peltoche/lsd) with its custom aliases
+- `zsh`
+- `zinit`
 
-### Optionally installed
+Note: Files are created in the current user's `HOME` folder.
 
-#### `--dependencies`
+## Optionally installed
 
-Adding `--dependencies` might be useful, if you do not wish to copy all packages
+### Dependencies
+
+Adding `--deps` might be useful, if you do not wish to copy all packages
 into the Dockerfile.
 
-This option is not necessary, if all tools are already pre-installed like in
-Ubuntu for example.
+This option is not necessary, if all tools are already pre-installed.
 
+- `curl`
 - `gnupg2`
 - `make`
 - `openssh-client` for `git`
+- `nano`
+- `tar`
 - `wget`
 - `xz-utils`
 
-#### `--node`
+### Fonts
 
-- [node](https://github.com/nodejs/node)
-- [npm](https://github.com/npm/cli)
-
-#### `--fonts`
-
-- Fonts: [Fira Code from Nerd fonts](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode)
-
-#### `--dockerfile`
-
-- [hadolint](https://github.com/hadolint/hadolint): Dockerfile lint
-
-#### `--shellscript`
-
-- [shellcheck](https://github.com/koalaman/shellcheck): Shell lint
-- [shfmt](https://github.com/mvdan/sh): Shell format
+[Fira Code from Nerd fonts](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode)
 
 ## How to install 💡
 
 ```shell
-git clone --single-branch --depth 1 https://github.com/aifrak/dev-env.git
-./dev-env/install [YOUR_USER_NAME] [options..]
-rm -r ./dev-env
+git clone https://github.com/aifrak/dev-env.git
+./dev-env/install [options...]
 ```
 
-`oh-my-zsh` will be installed into the given user `$HOME` directory.
-
-## Script options
+### Install options
 
 ```text
 Options:
-  --dependencies: Install all dependencies to run the install script and oh-my-zsh
-  --node:         Install NodeJS and npm
-  --dockerfile:   Add binary to lint Dockerfile (hadolint)
+  --deps:         Install all dependencies to install and run the development environment
   --elixir:       Add plugins and environment variables for Elixir development
-  --fonts:        Install Fira Code from Nerd fonts"
+  --fonts:        Install Fira Code from Nerd fonts
+  --[no-]asdf:    [Do not] install asdf (install it by default)
   --[no-]zsh:     [Do not] install zsh (install it by default)
-  --shellscript:  Add binaries to lint and format Shellscript (shellcheck & shfmt)
 ```
 
-## Quick references
+## How to uninstall ➖
 
-- **Docker image equivalent**: <https://hub.docker.com/r/aifrak/oh-my-zsh>
-- **Github of Docker image**: <https://github.com/aifrak/oh-my-zsh-docker>
-- **Changelog**: <https://github.com/aifrak/dev-env/blob/master/CHANGELOG.md>
+```shell
+./dev-env/uninstall
+```
+
+Note: Dependencies are not removed.
+
+### How to update ➕
+
+```shell
+./dev-env/uninstall
+(cd ./dev-env && git fetch && git pull)
+./dev-env/install [install options...]
+```
 
 ## Theme
 
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k)
-
-## Other binaries
-
-- [LSDeluxe](https://github.com/Peltoche/lsd)
-
-## oh-my-zsh plugins
-
-### Installed by default
-
-- colored-man-pages
-- colorize
-- command-not-found
-- cp
-- copydir
-- copyfile
-- dirhistory
-- extract
-- git
-- git-extras
-- globalias
-- [z](https://github.com/rupa/z)
-- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-- [zsh-interactive-cd](https://github.com/changyuheng/zsh-interactive-cd) + [fzf](https://github.com/junegunn/fzf)
-- [zsh-navigation-tools](https://github.com/psprint/zsh-navigation-tools)
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-
-### Installed with `--elixir`
-
-- mix
-- mix-fast
 
 ## License
 

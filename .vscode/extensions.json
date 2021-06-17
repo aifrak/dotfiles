@@ -1,10 +1,13 @@
 {
   "recommendations": [
+    // Remote container
+    "ms-vscode-remote.remote-containers",
+
     // EditorConfig:
     "editorconfig.editorconfig",
 
-    // Docker:
-    "ms-azuretools.vscode-docker",
+    // Tasks / Makefile targets
+    "spmeesseman.vscode-taskexplorer",
 
     // Dockerfile:
     "exiasr.hadolint", // Binary version: v2.1.0
@@ -12,11 +15,15 @@
     // Github Actions:
     "cschleiden.vscode-github-actions",
 
-    // Shell:
-    "foxundermoon.shell-format",
+    // Docker:
+    "ms-azuretools.vscode-docker",
 
     // Python:
     "ms-python.python",
+
+    // Shell:
+    "foxundermoon.shell-format",
+    "timonwong.shellcheck",
 
     // YAML
     "redhat.vscode-yaml",
@@ -27,7 +34,7 @@
     "yzhang.markdown-all-in-one",
 
     // Formatters:
-    "esbenp.prettier-vscode", // YAML, Markdown
+    "esbenp.prettier-vscode",
 
     // Comments:
     "stackbreak.comment-divider"

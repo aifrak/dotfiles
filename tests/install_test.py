@@ -1,111 +1,68 @@
-import os
-import platform
-
 import pytest
-import testinfra
 
-ROOT = 'root'
-USER = 'dev-user'
-GROUP = 'dev-user'
-HOME = '/home/' + USER
-FONTS = HOME + '/.local/share/fonts'
-ZSH = HOME + '/.oh-my-zsh'
+USER = "app-user"
+GROUP = USER
+HOME = "/home/" + USER
+FONTS = HOME + "/.local/share/fonts"
+DOT_ZSHRC = HOME + "/.zshrc"
 
 
 @pytest.mark.order(1)
-def test_zsh(host):
-    cmd = host.run('zsh')
+def test_install(host):
+    install = host.run("./install --asdf --deps --elixir --fonts --zsh")
+    zsh = host.run("zsh")
 
-    assert cmd.succeeded
+    assert install.succeeded
+    assert zsh.succeeded
 
 
 @pytest.mark.order(2)
-@pytest.mark.parametrize('name, version', [
-    ('gnupg2', '2.2.12'),
-    ('lsd', '0.17.0'),
-    ('make', '4.2.1-1.2'),
-    ('openssh-client', '1:7.9p1'),
-    ('wget', '1.20.1'),
-    ('xz-utils', '5.2.4'),
-    ('zsh', '5.7.1'),
-])
-def test_packages(host, name, version):
+@pytest.mark.parametrize(
+    "name",
+    [
+        ("curl"),
+        ("gnupg2"),
+        ("nano"),
+        ("make"),
+        ("openssh-client"),
+        ("wget"),
+        ("xz-utils"),
+        ("zsh"),
+    ],
+)
+def test_packages(host, name):
     package = host.package(name)
 
     assert package.is_installed
-    if version:
-        assert package.version.startswith(version)
 
 
 @pytest.mark.order(2)
-def test_home_directory(host):
-    assert HOME == '/home/' + USER
+def test_home_directory():
+    assert HOME == "/home/" + USER
 
 
 @pytest.mark.order(2)
-@pytest.mark.parametrize('name, version', [
-    # Node
-    ('node', '14.16.0'),
-    ('npm', '6.14.11'),
-    ('npx', '6.14.11'),
-    # Other binaries
-    ('hadolint', '2.1.0'),
-    ('shellcheck', '0.7.1'),
-    ('shfmt', '3.2.4'),
-])
-def test_binaries(host, name, version):
-    binary_version_cmd = host.run(name + ' --version')
+def test_asdf_installed(host):
+    version = "v0.8.1"
 
-    assert binary_version_cmd.succeeded
-    assert version in binary_version_cmd.stdout
+    version_cmd = host.run(HOME + "/.asdf/bin/asdf --version")
+
+    bashrc = host.file(HOME + "/.bashrc")
+
+    assert version_cmd.succeeded
+    assert version_cmd.stdout.startswith(version)
+    assert bashrc.contains(rf"^. $HOME/.asdf/asdf.sh")
+    assert bashrc.contains(rf"^. $HOME/.asdf/completions/asdf.bash")
 
 
 @pytest.mark.order(2)
-def test_fzf_installed(host):
-    fzf_version_cmd = host.run(HOME + '/.fzf/bin/fzf --version')
-    fzf_dir = host.file(HOME + '/.fzf')
-
-    assert fzf_version_cmd.succeeded
-    assert fzf_version_cmd.stdout.startswith('0.21.1')
-
-    assert fzf_dir.is_directory
-    assert len(fzf_dir.listdir()) > 0
-    assert fzf_dir.user == USER
-    assert fzf_dir.group == GROUP
-
-
-@pytest.mark.order(2)
-@pytest.mark.parametrize('path, user, group', [
-    (ZSH + '/custom/plugins/zsh-syntax-highlighting', USER, GROUP),
-    (ZSH + '/custom/plugins/zsh-autosuggestions', USER, GROUP),
-    (ZSH + '/custom/themes/powerlevel10k', USER, GROUP),
-])
-def test_installed_plugin_directories(host, path, user, group):
-    file = host.file(path)
-
-    assert file.is_directory
-    assert len(file.listdir()) > 0
-    assert file.user == user
-    assert file.group == group
-
-
-@pytest.mark.order(2)
-def test_gitstatus(host):
-    path = HOME + '/.cache/gitstatus/gitstatusd-linux-x86_64'
-    file = host.file(path)
-
-    assert file.is_file
-    assert file.user == USER
-    assert file.group == GROUP
-
-
-@pytest.mark.order(2)
-@pytest.mark.parametrize('path, user, group', [
-    (HOME + '/.zshenv', USER, GROUP),
-    (HOME + '/.zshrc', USER, GROUP),
-    (HOME + '/.p10k.zsh', USER, GROUP),
-    (HOME + '/.oh-my-zsh/custom/aliases.zsh', USER, GROUP),
-])
+@pytest.mark.parametrize(
+    "path, user, group",
+    [
+        (DOT_ZSHRC, USER, GROUP),
+        (HOME + "/.p10k.zsh", USER, GROUP),
+    ],
+)
 def test_copied_files(host, path, user, group):
     file = host.file(path)
 
@@ -115,27 +72,18 @@ def test_copied_files(host, path, user, group):
 
 
 @pytest.mark.order(2)
-@pytest.mark.parametrize('path, user, group', [
-    (HOME + '/.cache', USER, GROUP),
-])
-def test_copied_directories(host, path, user, group):
-    directory = host.file(path)
-
-    assert directory.is_directory
-    assert directory.user == user
-    assert directory.group == group
-
-
-@pytest.mark.order(2)
-@pytest.mark.parametrize('font', [
-    ('Fura Code Light Nerd Font Complete'),
-    ('Fura Code Regular Nerd Font Complete'),
-    ('Fura Code Medium Nerd Font Complete'),
-    ('Fura Code Bold Nerd Font Complete'),
-    ('Fura Code Retina Nerd Font Complete'),
-])
+@pytest.mark.parametrize(
+    "font",
+    [
+        ("Fura Code Light Nerd Font Complete"),
+        ("Fura Code Regular Nerd Font Complete"),
+        ("Fura Code Medium Nerd Font Complete"),
+        ("Fura Code Bold Nerd Font Complete"),
+        ("Fura Code Retina Nerd Font Complete"),
+    ],
+)
 def test_copied_fonts(host, font):
-    file = host.file(FONTS + '/' + font + '.ttf')
+    file = host.file(FONTS + "/" + font + ".ttf")
 
     assert file.is_file
     assert file.user == USER
@@ -143,30 +91,13 @@ def test_copied_fonts(host, font):
 
 
 @pytest.mark.order(2)
-@pytest.mark.parametrize('plugin', [
-    ('mix'),
-    ('mix-fast'),
-])
-def test_enabled_elixir_plugins(host, plugin):
-    zshrc = host.file(HOME + '/.zshrc')
+@pytest.mark.parametrize(
+    "variable_name",
+    [
+        ("dotfiles_elixir"),
+    ],
+)
+def test_uncomment_zshrc_variables(host, variable_name):
+    file = host.file(DOT_ZSHRC)
 
-    assert zshrc.contains(rf'^  {plugin}$')
-
-
-@pytest.mark.order(2)
-@pytest.mark.parametrize('env_var', [
-    ('ERL_AFLAGS'),
-])
-def test_enabled_elixir_env_vars(host, env_var):
-    zshenv = host.file(HOME + '/.zshenv')
-
-    assert zshenv.contains(rf'^export {env_var}=')
-
-
-@pytest.mark.order(2)
-@pytest.mark.parametrize('path, origin', [
-    ('/usr/local/bin/nodejs', '/usr/local/bin/node'),
-])
-def test_symlinks(host, path, origin):
-    assert host.file(path).is_symlink
-    assert host.file(path).linked_to == origin
+    assert file.contains(rf"^local {variable_name}=")

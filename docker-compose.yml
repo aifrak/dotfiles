@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      target: base
+    image: aifrak/dev-env:latest
+    volumes:
+      - .:/app
+      - app-node-modules:/app/node_modules
+
+volumes:
+  app-node-modules:

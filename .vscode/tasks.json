@@ -1,0 +1,160 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    /* -------------------------------------------- */
+    /*                      Run                     */
+    /* -------------------------------------------- */
+    {
+      "label": "ci:run",
+      "type": "shell",
+      "command": "./run ci:run ${input:fun}",
+      "problemMatcher": [],
+      "detail": "Run a function from './run' inside the 'app' docker service"
+    },
+    {
+      "label": "ci:test",
+      "type": "shell",
+      "command": "./run ",
+      "args": ["ci:test"],
+      "problemMatcher": [],
+      "detail": "Test and lint the whole project inside the 'app' docker service"
+    },
+    {
+      "label": "ci:lint",
+      "type": "shell",
+      "command": "./run ",
+      "args": ["ci:lint"],
+      "problemMatcher": [],
+      "detail": "Lint the whole project inside the 'app' docker service"
+    },
+    {
+      "label": "dev:code",
+      "type": "shell",
+      "command": "./run",
+      "args": ["dev:code"],
+      "problemMatcher": [],
+      "detail": "Build, run a command and down a docker service"
+    },
+    {
+      "label": "dev:dc",
+      "type": "shell",
+      "command": "./run",
+      "args": ["dev:dc", "${input:dockerCmd}"],
+      "problemMatcher": [],
+      "detail": "Run docker-compose with development configuration"
+    },
+    {
+      "label": "dev:run",
+      "type": "shell",
+      "command": "./run dev:run ${input:dockerService} ${input:cmd}",
+      "problemMatcher": [],
+      "detail": "Build, run a command and down a docker service"
+    },
+    {
+      "label": "format",
+      "type": "shell",
+      "command": "./run",
+      "args": ["format"],
+      "problemMatcher": [],
+      "detail": "Format code of the whole project"
+    },
+    {
+      "label": "lint",
+      "type": "shell",
+      "command": "./run",
+      "args": ["lint"],
+      "problemMatcher": [],
+      "detail": "Lint of the whole project"
+    },
+    {
+      "label": "pre-commit",
+      "type": "shell",
+      "command": "./run",
+      "args": ["pre-commit"],
+      "problemMatcher": [],
+      "detail": "Format, lint and test the whole project"
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "./run",
+      "args": ["test"],
+      "problemMatcher": [],
+      "detail": "Test and lint the whole project"
+    },
+    /* -------------------------------------------- */
+    /*                     Shell                    */
+    /* -------------------------------------------- */
+    {
+      "label": "shell:format",
+      "type": "shell",
+      "command": "./run",
+      "args": ["shell:format"],
+      "problemMatcher": [],
+      "detail": "Format Shell scripts"
+    },
+    {
+      "label": "shell:lint",
+      "type": "shell",
+      "command": "./run",
+      "args": ["shell:lint"],
+      "problemMatcher": [],
+      "detail": "Lint Shell scripts"
+    },
+    /* -------------------------------------------- */
+    /*                  Dockerfile                  */
+    /* -------------------------------------------- */
+    {
+      "label": "dockerfile:format",
+      "type": "shell",
+      "command": "./run",
+      "args": ["dockerfile:format"],
+      "problemMatcher": [],
+      "detail": "Format all Dockerfiles"
+    },
+    {
+      "label": "dockerfile:lint",
+      "type": "shell",
+      "command": "./run",
+      "args": ["dockerfile:lint"],
+      "problemMatcher": [],
+      "detail": "Lint all Dockerfiles"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "dockerService",
+      "type": "pickString",
+      "description": "Docker service?",
+      "options": ["app"],
+      "default": "app"
+    },
+    {
+      "id": "cmd",
+      "type": "promptString",
+      "description": "Command? (e.g. ./run test)"
+    },
+    {
+      "id": "fun",
+      "type": "promptString",
+      "description": "Function from './run'? (e.g. lint)"
+    },
+    {
+      "id": "dockerCmd",
+      "type": "promptString",
+      "description": "Docker command? (e.g. up -d)"
+    },
+    {
+      "id": "userUid",
+      "type": "promptString",
+      "description": "User ID?",
+      "default": "1000"
+    },
+    {
+      "id": "groupUid",
+      "type": "promptString",
+      "description": "Group ID?",
+      "default": "1000"
+    }
+  ]
+}
