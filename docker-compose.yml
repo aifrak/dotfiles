@@ -5,7 +5,7 @@ services:
     build:
       context: .
       target: base
-    image: aifrak/dev-env:latest
+    image: aifrak/dotfiles:latest
     volumes:
       - .:/app
       - app-node-modules:/app/node_modules

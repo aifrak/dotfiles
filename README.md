@@ -2,9 +2,9 @@
 
 Personal install script for dotfiles, zsh, asdf and zinit (Debian).
 
-[![Last release](https://img.shields.io/github/v/release/aifrak/dev-env?label=Last%20release)](https://github.com/aifrak/dev-env/releases)
-[![Tests](https://github.com/aifrak/dev-env/actions/workflows/tests.yml/badge.svg)](https://github.com/aifrak/dev-env/actions/workflows/tests.yml)
-[![License](https://img.shields.io/github/license/aifrak/dev-env?color=blue)](https://github.com/aifrak/dev-env/blob/master/LICENSE)
+[![Last release](https://img.shields.io/github/v/release/aifrak/dotfiles?label=Last%20release)](https://github.com/aifrak/dotfiles/releases)
+[![Tests](https://github.com/aifrak/dotfiles/actions/workflows/tests.yml/badge.svg)](https://github.com/aifrak/dotfiles/actions/workflows/tests.yml)
+[![License](https://img.shields.io/github/license/aifrak/dotfiles?color=blue)](https://github.com/aifrak/dotfiles/blob/master/LICENSE)
 
 ## Requirements ❗
 
@@ -49,8 +49,8 @@ This option is not necessary, if all tools are already pre-installed.
 ## How to install 💡
 
 ```shell
-git clone https://github.com/aifrak/dev-env.git
-./dev-env/install [options...]
+git clone https://github.com/aifrak/dotfiles.git
+./dotfiles/install [options...]
 ```
 
 ### Install options
@@ -67,7 +67,7 @@ Options:
 ## How to uninstall ➖
 
 ```shell
-./dev-env/uninstall
+./dotfiles/uninstall
 ```
 
 Note: Dependencies are not removed.
@@ -75,9 +75,9 @@ Note: Dependencies are not removed.
 ### How to update ➕
 
 ```shell
-./dev-env/uninstall
-(cd ./dev-env && git fetch && git pull)
-./dev-env/install [install options...]
+./dotfiles/uninstall
+(cd ./dotfiles && git fetch && git pull)
+./dotfiles/install [install options...]
 ```
 
 ## Theme
@@ -86,4 +86,4 @@ Note: Dependencies are not removed.
 
 ## License
 
-[MIT License](https://github.com/aifrak/dev-env/blob/main/LICENSE)
+[MIT License](https://github.com/aifrak/dotfiles/blob/main/LICENSE)

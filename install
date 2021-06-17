@@ -120,7 +120,7 @@ function install_packages {
 }
 
 function copy_dotfiles {
-  cp -r "${config_dir}/dotfiles/." "${HOME}"
+  cp -r "${config_dir}/zsh/." "${HOME}"
 
   success "✓ Dotfiles copied"
 }
@@ -286,7 +286,7 @@ validate "${@}"
 
 current_dir="$(dirname "$(readlink -f "${0}")")"
 config_dir=${current_dir}/config
-tmp=${HOME}/tmp/dev-env
+tmp=${HOME}/tmp/dotfiles
 
 export ASDF_DIR=${HOME}/.asdf
 export PATH="${PATH}:${ASDF_DIR}/bin:${ASDF_DIR}/shims"

@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "dotfiles",
   "dockerComposeFile": [
     "../docker-compose.yml",
     "../docker-compose.dev.yml",
