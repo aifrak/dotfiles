@@ -111,7 +111,7 @@ dev_dc_options=(
 
 function dev:code {
   dev:build
-  dev:dc up -d -V --remove-orphans
+  dev:dc up -d --remove-orphans
   dev:dc exec app bash
 }
 
