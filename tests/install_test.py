@@ -9,7 +9,7 @@ DOT_ZSHRC = HOME + "/.zshrc"
 
 @pytest.mark.order(1)
 def test_install(host):
-    install = host.run("./install --asdf --deps --elixir --fonts --zsh")
+    install = host.run("./install --asdf --deps --docker --elixir --fonts --zsh")
     zsh = host.run("zsh")
 
     assert install.succeeded

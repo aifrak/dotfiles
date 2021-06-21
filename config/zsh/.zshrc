@@ -64,6 +64,19 @@ zinit fpath -f "${ASDF_DIR}/completions"
 zicompinit
 
 # ---------------------------------------------- #
+#                     docker                     #
+# ---------------------------------------------- #
+
+# option "--docker" will uncomment this line
+# local dotfiles_docker=1
+
+if [[ ${dotfiles_docker:-0} -eq 1 ]]; then
+  zinit wait lucid for \
+    OMZP::docker-compose \
+    as"completion" https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/docker/_docker
+fi
+
+# ---------------------------------------------- #
 #                     elixir                     #
 # ---------------------------------------------- #
 

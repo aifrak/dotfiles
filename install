@@ -85,6 +85,7 @@ Options:
   -h, --help:     Show this message"
 
   --deps:         Install all dependencies to install and run the development environment
+  --docker:       Install zinit plugins for docker
   --elixir:       Add plugins and environment variables for Elixir development
   --fonts:        Install Fira Code from Nerd fonts
   --[no-]asdf:    [Do not] install asdf (install it by default)
@@ -165,10 +166,16 @@ function setup_asdf_version {
 
 # --------------- BEGIN: Options --------------- #
 
-function setup_elixir_env {
+function setup_elixir_plugins {
   uncomment_zshrc_variable "dotfiles_elixir"
 
   success "✓ Setup for elixir: done"
+}
+
+function setup_docker_plugins {
+  uncomment_zshrc_variable "dotfiles_docker"
+
+  success "✓ Setup for docker: done"
 }
 
 # Install Fira Code from Nerd fonts
@@ -210,6 +217,7 @@ function parse_options {
   # Install options
   opt_asdf=1
   opt_deps=0
+  opt_docker=0
   opt_elixir=0
   opt_fonts=0
   opt_zsh=1
@@ -223,6 +231,7 @@ function parse_options {
 
       # Install options
       --deps) opt_deps=1 ;;
+      --docker) opt_docker=1 ;;
       --elixir) opt_elixir=1 ;;
       --fonts) opt_fonts=1 ;;
 
@@ -271,7 +280,8 @@ function install {
 
   copy_dotfiles
 
-  [[ "${opt_elixir}" -eq 1 ]] && setup_elixir_env
+  [[ "${opt_docker}" -eq 1 ]] && setup_docker_plugins
+  [[ "${opt_elixir}" -eq 1 ]] && setup_elixir_plugins
   [[ "${opt_fonts}" -eq 1 ]] && install_fonts
 
   success "✓ Install done! Run 'zsh' to start."
