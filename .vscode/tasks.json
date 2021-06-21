@@ -2,54 +2,8 @@
   "version": "2.0.0",
   "tasks": [
     /* -------------------------------------------- */
-    /*                      Run                     */
+    /*                     Main                     */
     /* -------------------------------------------- */
-    {
-      "label": "ci:run",
-      "type": "shell",
-      "command": "./run ci:run ${input:fun}",
-      "problemMatcher": [],
-      "detail": "Run a function from './run' inside the 'app' docker service"
-    },
-    {
-      "label": "ci:test",
-      "type": "shell",
-      "command": "./run ",
-      "args": ["ci:test"],
-      "problemMatcher": [],
-      "detail": "Test and lint the whole project inside the 'app' docker service"
-    },
-    {
-      "label": "ci:lint",
-      "type": "shell",
-      "command": "./run ",
-      "args": ["ci:lint"],
-      "problemMatcher": [],
-      "detail": "Lint the whole project inside the 'app' docker service"
-    },
-    {
-      "label": "dev:code",
-      "type": "shell",
-      "command": "./run",
-      "args": ["dev:code"],
-      "problemMatcher": [],
-      "detail": "Build, run a command and down a docker service"
-    },
-    {
-      "label": "dev:dc",
-      "type": "shell",
-      "command": "./run",
-      "args": ["dev:dc", "${input:dockerCmd}"],
-      "problemMatcher": [],
-      "detail": "Run docker-compose with development configuration"
-    },
-    {
-      "label": "dev:run",
-      "type": "shell",
-      "command": "./run dev:run ${input:dockerService} ${input:cmd}",
-      "problemMatcher": [],
-      "detail": "Build, run a command and down a docker service"
-    },
     {
       "label": "format",
       "type": "shell",
@@ -82,6 +36,70 @@
       "problemMatcher": [],
       "detail": "Test and lint the whole project"
     },
+    /* -------------------------------------------- */
+    /*                      CI                      */
+    /* -------------------------------------------- */
+    {
+      "label": "ci:run",
+      "type": "shell",
+      "command": "./run ci:run ${input:fun}",
+      "problemMatcher": [],
+      "detail": "Run a function from './run' inside the 'app' docker service"
+    },
+    {
+      "label": "ci:test",
+      "type": "shell",
+      "command": "./run ",
+      "args": ["ci:test"],
+      "problemMatcher": [],
+      "detail": "Test and lint the whole project inside the 'app' docker service"
+    },
+    {
+      "label": "ci:lint",
+      "type": "shell",
+      "command": "./run ",
+      "args": ["ci:lint"],
+      "problemMatcher": [],
+      "detail": "Lint the whole project inside the 'app' docker service"
+    },
+    /* -------------------------------------------- */
+    /*                      Dev                     */
+    /* -------------------------------------------- */
+    {
+      "label": "dev:code",
+      "type": "shell",
+      "command": "./run",
+      "args": ["dev:code"],
+      "problemMatcher": [],
+      "detail": "Build, run a command and down a docker service"
+    },
+    {
+      "label": "dev:dc",
+      "type": "shell",
+      "command": "./run",
+      "args": ["dev:dc", "${input:dockerCmd}"],
+      "problemMatcher": [],
+      "detail": "Run docker-compose with development configuration"
+    },
+    {
+      "label": "dev:build",
+      "type": "shell",
+      "command": "./run",
+      "args": ["dev:build"],
+      "problemMatcher": [],
+      "detail": "Build docker service with development configuration"
+    },
+    /* -------------------------------------------- */
+    /*                docker-compose                */
+    /* -------------------------------------------- */
+    {
+      "label": "dc:run",
+      "type": "shell",
+      "command": "./run dc:run ${input:dockerService} ${input:cmd}",
+      "problemMatcher": [],
+      "detail": "Build, run a command and down a docker service"
+    },
+
     /* -------------------------------------------- */
     /*                     Shell                    */
     /* -------------------------------------------- */

@@ -6,7 +6,7 @@ FROM koalaman/shellcheck:v0.7.2 as shellcheck
 FROM mvdan/shfmt:v3.3.0 as shfmt
 FROM hadolint/hadolint:v2.4.1 as hadolint
 
-FROM ubuntu:groovy-20210524 as base
+FROM ubuntu:focal-20210609 as base
 
 ENV LANG=C.UTF-8
 

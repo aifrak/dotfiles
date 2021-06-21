@@ -20,52 +20,32 @@ function help {
 $0 [command] [options...]
 
 Main commands:
-  ci:run                     Run a function from "./run" inside the "app" docker service
-  ci:test                    Test and lint the whole project inside the "app" docker service
-  ci:lint                    Lint the whole project inside the "app" docker service
-
-  dev:code                   Prepare docker services for devolpment environment
-  dev:dc                     Run docker-compose with development configuration
-  dev:run                    Build and run a command a docker service
-
   format                     Format code of the whole project
   lint                       Lint the whole project
   pre-commit                 Format, lint and test the whole project
   test                       Test the whole project
+
+CI commands:
+  ci:run                     Run a function from "./run" inside the "app" docker service
+  ci:test                    Test and lint the whole project inside the "app" docker service
+  ci:lint                    Lint the whole project inside the "app" docker service
+
+Dev commands:
+  dev:code                   Prepare docker services for development environment
+  dev:dc                     Run docker-compose with development configuration
+  dev:build                  Build docker service with development configuration
+
+docker-compose command:
+  dc:run                     Build and run a command a docker service
 EOF
 
   shell:help
   dockerfile:help
 }
 
-function ci:run {
-  docker-compose run ${TTY} app ./run "${@}"
-  docker-compose rm -f -v
-}
-
-function ci:test {
-  ci:run test
-}
-
-function ci:lint {
-  ci:run lint
-}
-
-function dev:run {
-  docker-compose build
-  docker-compose run ${TTY} "${@}"
-  docker-compose rm -f -v
-}
-
-function dev:code {
-  dev:dc build
-  dev:dc up -d -V --remove-orphans
-  dev:dc exec app bash
-}
-
-function dev:dc {
-  docker-compose -f docker-compose.yml -f docker-compose.dev.yml "${@}"
-}
+# ---------------------------------------------- #
+#                      Main                      #
+# ---------------------------------------------- #
 
 function test {
   pytest
@@ -100,6 +80,57 @@ function pre-commit {
   format
   lint
   test
+}
+
+# ---------------------------------------------- #
+#                       CI                       #
+# ---------------------------------------------- #
+
+function ci:run {
+  # No build here: build is done in the workflow
+  docker-compose run ${TTY} app ./run "${@}"
+  docker-compose rm -f -v
+}
+
+function ci:test {
+  ci:run test
+}
+
+function ci:lint {
+  ci:run lint
+}
+
+# ---------------------------------------------- #
+#                       Dev                      #
+# ---------------------------------------------- #
+
+dev_dc_options=(
+  -f docker-compose.yml
+  -f docker-compose.dev.yml
+)
+
+function dev:code {
+  dev:build
+  dev:dc up -d -V --remove-orphans
+  dev:dc exec app bash
+}
+
+function dev:dc {
+  docker-compose "${dev_dc_options[@]}" "${@}"
+}
+
+function dev:build {
+  docker buildx bake "${dev_dc_options[@]}"
+}
+
+# ---------------------------------------------- #
+#                 docker-compose                 #
+# ---------------------------------------------- #
+
+function dc:run {
+  docker buildx bake
+  docker-compose run ${TTY} "${@}"
+  docker-compose rm -f -v
 }
 
 # Idea from: https://github.com/adriancooney/Taskfile
