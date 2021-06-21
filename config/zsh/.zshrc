@@ -59,12 +59,9 @@ zinit wait lucid for \
 
 # asdf is installed via "./install"
 export ASDF_DIR="${ASDF_DIR:-$HOME/.asdf}"
-
-# fzf is installed via asdf (used by fzf-tab and zsh-interactive-cd)
-export FZF_BASE="${ASDF_DIR}/shims/fzf"
-
-zinit wait lucid as"completion" for OMZP::asdf
-zinit fpath -f ${ASDF_DIR}/completions
+source "${ASDF_DIR}/asdf.sh"
+zinit fpath -f "${ASDF_DIR}/completions"
+zicompinit
 
 # ---------------------------------------------- #
 #                     elixir                     #

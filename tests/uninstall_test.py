@@ -4,7 +4,6 @@ USER = "app-user"
 GROUP = USER
 HOME = "/home/" + USER
 FONTS = HOME + "/.local/share/fonts"
-ZSH = HOME + "/.oh-my-zsh"
 DOT_BASHRC = HOME + "/.bashrc"
 DOT_ZSHRC = HOME + "/.zshrc"
 
@@ -39,13 +38,10 @@ def test_gitstatus_uninstall(host, path):
 @pytest.mark.parametrize(
     "path",
     [
-        # asdf
-        (HOME + "/.default-npm-packages"),
-        # oh-my-zsh
+        # zinit
         (DOT_ZSHRC),
         (HOME + "/.zinit"),
         (HOME + "/.p10k.zsh"),
-        (HOME + "/.oh-my-zsh/custom/aliases.zsh"),
         # fonts
         (FONTS + "/Fura Code Light Nerd Font Complete.ttf"),
         (FONTS + "/Fura Code Regular Nerd Font Complete.ttf"),
@@ -64,7 +60,7 @@ def test_removed_files(host, path):
     [
         # asdf
         (HOME + "/.asdf"),
-        # oh-my-zsh
+        # zinit
         (HOME + "/.cache/p10k-" + USER),
         (HOME + "/.config/lsd"),
         (HOME + "/.config/znt"),

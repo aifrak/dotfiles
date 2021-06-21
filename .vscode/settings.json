@@ -97,6 +97,7 @@
     "asdf",
     "autoload",
     "autoremove",
+    "buildx",
     "chmod",
     "compinit",
     "copydir",
