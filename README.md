@@ -58,6 +58,7 @@ git clone https://github.com/aifrak/dotfiles.git
 ```text
 Options:
   --deps:         Install all dependencies to install and run the development environment
+  --docker:       Install zinit plugins for docker and docker-compose
   --elixir:       Add plugins and environment variables for Elixir development
   --fonts:        Install Fira Code from Nerd fonts
   --[no-]asdf:    [Do not] install asdf (install it by default)
