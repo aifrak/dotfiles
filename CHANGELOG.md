@@ -8,6 +8,17 @@
 
 # Changelog
 
+## [v0.4.0](https://github.com/aifrak/dotfiles/releases/tag/v0.4.0)
+
+### New
+
+- Add `--docker` to installed `docker` and `docker-compose` plugins from `Oh My Zsh`
+
+### Bug fix
+
+- Fix completion for `asdf`
+- Remove `asdf` plugin (imports are done manually)
+
 ## [v0.3.0](https://github.com/aifrak/dotfiles/releases/tag/v0.3.0)
 
 ### New
