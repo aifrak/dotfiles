@@ -22,7 +22,7 @@
 
 You can change the user's UID/GID inside the container, you can export the
 variables `USER_UID` and/or `USER_GID`. This can be used when using
-`./run dev:code` or `./run dev:run`.
+`./run dev:...`.
 
 ```bash
 export USER_UID=1000 USER_GID=1000; ./run dev:code

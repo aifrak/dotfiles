@@ -10,7 +10,7 @@
     "spmeesseman.vscode-taskexplorer",
 
     // Dockerfile:
-    "exiasr.hadolint", // Binary version: v2.1.0
+    "exiasr.hadolint",
 
     // Github Actions:
     "cschleiden.vscode-github-actions",
