@@ -8,6 +8,7 @@ services:
         USER_UID: ${USER_UID:-1000}
         USER_GID: ${USER_GID:-1000}
     user: ${USER_UID:-1000}:${USER_GID:-1000}
+    image: aifrak/dotfiles:dev
     volumes:
       - .:/app:cached
     command: sleep infinity

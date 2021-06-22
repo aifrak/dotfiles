@@ -14,6 +14,9 @@ if [[ ! -t 1 ]]; then
   TTY="-T"
 fi
 
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+
 function help {
   cat <<EOF
 
@@ -25,18 +28,13 @@ Main commands:
   pre-commit                 Format, lint and test the whole project
   test                       Test the whole project
 
-CI commands:
-  ci:run                     Run a function from "./run" inside the "app" docker service
-  ci:test                    Test and lint the whole project inside the "app" docker service
-  ci:lint                    Lint the whole project inside the "app" docker service
+docker-compose commands:
+  dc:run                     Run a function from "./run" inside the "app" docker service
 
 Dev commands:
   dev:code                   Prepare docker services for development environment
   dev:dc                     Run docker-compose with development configuration
   dev:build                  Build docker service with development configuration
-
-docker-compose command:
-  dc:run                     Build and run a command a docker service
 EOF
 
   shell:help
@@ -44,60 +42,81 @@ EOF
 }
 
 # ---------------------------------------------- #
+#                Helper functions                #
+# ---------------------------------------------- #
+
+# Check if the command is from the docker container or the host.
+# INSIDE_DOCKER=1 is set from the Dockerfile
+function is_inside_docker {
+  if [[ ${INSIDE_DOCKER:-0} -eq 1 ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+# ---------------------------------------------- #
 #                      Main                      #
 # ---------------------------------------------- #
 
 function test {
-  pytest
+  if is_inside_docker; then
+    pytest
+  else
+    dc:run test
+  fi
 }
 
 function lint {
-  local status=0
+  if is_inside_docker; then
+    local status=0
 
-  shell:lint || status=${?}
-  dockerfile:lint || status=${?}
-  npx markdownlint . || status=${?}
-  npx prettier --check . || status=${?}
+    shell:lint || status=${?}
+    dockerfile:lint || status=${?}
+    npx markdownlint . || status=${?}
+    npx prettier --check . || status=${?}
 
-  if [[ status -eq 0 ]]; then
-    success "✔ Project linted"
+    if [[ ${status} -eq 0 ]]; then
+      success "✔ Project linted"
+    else
+      alert "✖ Project linted: issue(s) found"
+      exit ${status}
+    fi
   else
-    alert "✖ Project linted: issue(s) found"
-    exit ${status}
+    dc:run lint
   fi
 }
 
 function format {
-  shell:format
-  dockerfile:format
-  black tests/.
-  npx prettier --list-different --write .
+  if is_inside_docker; then
+    shell:format
+    dockerfile:format
+    black tests/.
+    npx prettier --list-different --write .
 
-  success "✔ Project formatted"
+    success "✔ Project formatted"
+  else
+    dc:run format
+  fi
 }
 
 function pre-commit {
-  format
-  lint
-  test
+  if is_inside_docker; then
+    format
+    lint
+    test
+  else
+    dc:run pre-commit
+  fi
 }
 
 # ---------------------------------------------- #
-#                       CI                       #
+#                 docker-compose                 #
 # ---------------------------------------------- #
 
-function ci:run {
-  # No build here: build is done in the workflow
+function dc:run {
   docker-compose run ${TTY} app ./run "${@}"
   docker-compose rm -f -v
-}
-
-function ci:test {
-  ci:run test
-}
-
-function ci:lint {
-  ci:run lint
 }
 
 # ---------------------------------------------- #
@@ -121,16 +140,6 @@ function dev:dc {
 
 function dev:build {
   docker buildx bake "${dev_dc_options[@]}"
-}
-
-# ---------------------------------------------- #
-#                 docker-compose                 #
-# ---------------------------------------------- #
-
-function dc:run {
-  docker buildx bake
-  docker-compose run ${TTY} "${@}"
-  docker-compose rm -f -v
 }
 
 # Idea from: https://github.com/adriancooney/Taskfile

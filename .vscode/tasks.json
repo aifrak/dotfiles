@@ -37,30 +37,14 @@
       "detail": "Test and lint the whole project"
     },
     /* -------------------------------------------- */
-    /*                      CI                      */
+    /*                docker-compose                */
     /* -------------------------------------------- */
     {
-      "label": "ci:run",
+      "label": "dc:run",
       "type": "shell",
-      "command": "./run ci:run ${input:fun}",
+      "command": "./run dc:run ${input:fun}",
       "problemMatcher": [],
       "detail": "Run a function from './run' inside the 'app' docker service"
-    },
-    {
-      "label": "ci:test",
-      "type": "shell",
-      "command": "./run ",
-      "args": ["ci:test"],
-      "problemMatcher": [],
-      "detail": "Test and lint the whole project inside the 'app' docker service"
-    },
-    {
-      "label": "ci:lint",
-      "type": "shell",
-      "command": "./run ",
-      "args": ["ci:lint"],
-      "problemMatcher": [],
-      "detail": "Lint the whole project inside the 'app' docker service"
     },
     /* -------------------------------------------- */
     /*                      Dev                     */
@@ -89,17 +73,6 @@
       "problemMatcher": [],
       "detail": "Build docker service with development configuration"
     },
-    /* -------------------------------------------- */
-    /*                docker-compose                */
-    /* -------------------------------------------- */
-    {
-      "label": "dc:run",
-      "type": "shell",
-      "command": "./run dc:run ${input:dockerService} ${input:cmd}",
-      "problemMatcher": [],
-      "detail": "Build, run a command and down a docker service"
-    },
-
     /* -------------------------------------------- */
     /*                     Shell                    */
     /* -------------------------------------------- */

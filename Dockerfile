@@ -1,5 +1,5 @@
 FROM node:16.3.0-buster as node
-RUN npm install -g npm@7.17.0 --quiet
+RUN npm install -g npm@7.18.1 --quiet
 
 FROM python:3.9.5-buster as python
 FROM koalaman/shellcheck:v0.7.2 as shellcheck
@@ -8,10 +8,10 @@ FROM hadolint/hadolint:v2.5.0 as hadolint
 
 FROM ubuntu:focal-20210609 as base
 
-ENV LANG=C.UTF-8
-
 USER root
 
+ENV INSIDE_DOCKER=1
+ENV LANG=C.UTF-8
 ENV USERNAME=app-user
 ARG GROUPNAME=${USERNAME}
 ARG USER_UID=1000

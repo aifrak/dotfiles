@@ -97,6 +97,7 @@
     "asdf",
     "autoload",
     "autoremove",
+    "buildkit",
     "buildx",
     "chmod",
     "compinit",
