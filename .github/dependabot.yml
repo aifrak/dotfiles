@@ -1,5 +1,8 @@
 version: 2
 
+# By default, Dependabot checks for new versions on Monday at 05:00 UTC.
+# https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates#scheduleday
+
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -10,6 +13,11 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "node"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "python"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "npm"
     directory: "/"

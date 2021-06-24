@@ -1,0 +1,19 @@
+name: Dependabot auto merge
+
+# Check Dependabot every Monday at 05:30 UTC (30 min after Dependabot)
+on:
+  schedule:
+    - cron: "30 5 * * MON"
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Dependabot auto merge
+        uses: PabioHQ/dependabot-pr-action@v1.1.12
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          auto-label: true
+          approve: true
+          merge-minor: true
+          merge-patch: true
