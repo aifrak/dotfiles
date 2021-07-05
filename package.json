@@ -2,7 +2,7 @@
   "devDependencies": {
     "markdownlint-cli": "^0.27.1",
     "prettier": "~2.3.0",
-    "husky": "^6.0.0"
+    "husky": "^7.0.0"
   },
   "engines": {
     "node": "16",
