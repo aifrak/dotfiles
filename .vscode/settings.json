@@ -114,6 +114,8 @@
     "markdownlintignore",
     "mkdir",
     "ohmyzsh",
+    "preminor",
+    "prepatch",
     "pytest",
     "readlink",
     "semver",
