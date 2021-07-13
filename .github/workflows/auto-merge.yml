@@ -1,9 +1,9 @@
 name: Dependabot auto merge
 
-# Check Dependabot every Monday at 05:30 UTC (30 min after Dependabot)
+# Check Dependabot PRs every weekday at 06:30 UTC (after Dependabot)
 on:
   schedule:
-    - cron: "30 5 * * MON"
+    - cron: "30 6 * * 1-5"
 
 jobs:
   auto-merge:
@@ -17,3 +17,5 @@ jobs:
           approve: true
           merge-minor: true
           merge-patch: true
+          merge-preminor: true
+          merge-prepatch: true
