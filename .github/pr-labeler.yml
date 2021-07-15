@@ -1,0 +1,8 @@
+bug: ["bug/*", "fix/*"]
+ci: ["ci/*"]
+dependencies: ["dep/*", "deps/*", "dependency/*", "dependencies/*"]
+documentation: ["doc/*", "docs/*"]
+enhancement: ["feat/*", "feature/*"]
+refactoring: ["refactor/*", "refactoring/*"]
+chore: ["chore/*", "dev/*"]
+tests: ["test/*", "tests/*"]
