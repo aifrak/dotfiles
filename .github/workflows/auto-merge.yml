@@ -8,6 +8,7 @@ permissions:
 
 jobs:
   auto-merge:
+    name: Dependabot auto merge
     runs-on: ubuntu-20.04
     if: ${{ github.actor == 'dependabot[bot]' }}
 
@@ -18,13 +19,13 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Dependabot auto approve
+      - name: Approve PR
         run: gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Dependabot auto merge
+      - name: Merge PR
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
