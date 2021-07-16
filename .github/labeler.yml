@@ -1,0 +1,58 @@
+# ---------------------------------------------- #
+#                Labels by purpose               #
+# ---------------------------------------------- #
+
+source:
+  - install
+  - uninstall
+  - config/**/*
+
+tests:
+  - tests/**/*
+  - pytest.ini
+
+dependencies:
+  - package*.json
+  - requirements.txt
+
+documentation:
+  - ./**/*.md
+
+chore:
+  - .devcontainer
+  - .editorconfig
+  - .gitignore
+  - .hadolint*
+  - .husky/**/*
+  - .markdownlint*
+  - .npmrc
+  - .prettier*
+  - .vscode/**/*
+  - scripts/**/*
+  - run
+  - LICENSE
+
+# ---------------------------------------------- #
+#         Labels by technology / language        #
+# ---------------------------------------------- #
+
+docker:
+  - .dockerignore
+  - docker-compose*.yml
+  - Dockerfile*
+
+github_actions:
+  - .github/**/*
+
+python:
+  - ./**/*.py
+
+shellscript:
+  - install
+  - uninstall
+  - pre-commit
+  - run
+  - ./**/*.sh
+
+vscode:
+  - .vscode/**/*
