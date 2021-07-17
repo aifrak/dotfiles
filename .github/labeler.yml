@@ -16,7 +16,7 @@ dependencies:
   - requirements.txt
 
 documentation:
-  - ./**/*.md
+  - "**/*.md"
 
 chore:
   - .devcontainer
@@ -45,14 +45,14 @@ github_actions:
   - .github/**/*
 
 python:
-  - ./**/*.py
+  - "**/*.py"
 
 shellscript:
   - install
   - uninstall
   - pre-commit
   - run
-  - ./**/*.sh
+  - "**/*.sh"
 
 vscode:
   - .vscode/**/*
