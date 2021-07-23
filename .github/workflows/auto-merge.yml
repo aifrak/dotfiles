@@ -30,11 +30,4 @@ jobs:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr merge --auto --squash "$PR_URL"
-
-      - name: Close PR
-        env:
-          PR_URL: ${{ github.event.pull_request.html_url }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr close "$PR_URL"
+          gh pr merge --auto --squash --delete-branch "$PR_URL"
