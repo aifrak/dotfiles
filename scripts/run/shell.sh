@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 shell_scripts_globs=(
-  ./install
-  ./uninstall
-  ./run
-  ./scripts/**/*.sh
+  install
+  uninstall
+  run
+  scripts/**/*.sh
 )
 
 function shell:help {

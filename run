@@ -2,9 +2,13 @@
 
 set -euo pipefail
 
-. ./scripts/run/docker-file.sh
-. ./scripts/run/shell.sh
-. ./scripts/lib/utils.sh
+if [[ -z "${APP_DIR:-""}" ]]; then
+  APP_DIR="$(dirname "${0}")"
+fi
+
+. "${APP_DIR}/scripts/run/docker-file.sh"
+. "${APP_DIR}/scripts/run/shell.sh"
+. "${APP_DIR}/scripts/lib/utils.sh"
 
 # If we're running in CI we need to disable TTY allocation for docker-compose
 # commands that enable it by default, such as exec and run.

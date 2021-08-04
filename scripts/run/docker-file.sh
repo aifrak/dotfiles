@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dockerfile_globs=(./Dockerfile*)
+dockerfile_globs=(Dockerfile*)
 
 function dockerfile:help {
   cat <<EOF
