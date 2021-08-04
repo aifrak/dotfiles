@@ -1,10 +1,6 @@
 name: Tests
 
-on:
-  push:
-    paths-ignore:
-      - "LICENSE"
-  pull_request:
+on: [push]
 
 jobs:
   skip-duplicate-actions:
