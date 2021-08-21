@@ -3,7 +3,7 @@
 Personal install script for dotfiles, zsh, asdf and zinit (Debian).
 
 [![Last release](https://img.shields.io/github/v/release/aifrak/dotfiles?label=Last%20release)](https://github.com/aifrak/dotfiles/releases)
-[![Tests](https://github.com/aifrak/dotfiles/actions/workflows/tests.yml/badge.svg)](https://github.com/aifrak/dotfiles/actions/workflows/tests.yml)
+[![CI](https://github.com/aifrak/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/aifrak/dotfiles/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/aifrak/dotfiles?color=blue)](https://github.com/aifrak/dotfiles/blob/master/LICENSE)
 
 ## Requirements ❗
