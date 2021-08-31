@@ -6,7 +6,7 @@ FROM koalaman/shellcheck:v0.7.2 as shellcheck
 FROM mvdan/shfmt:v3.3.1 as shfmt
 FROM hadolint/hadolint:v2.7.0 as hadolint
 
-FROM ubuntu:focal-20210723 as base
+FROM ubuntu:focal-20210827 as base
 
 USER root
 
