@@ -1,4 +1,4 @@
-FROM node:16.11.0-buster as node
+FROM node:16.11.1-buster as node
 RUN npm install -g npm@7.20.1 --quiet
 
 FROM python:3.10.0-buster as python
