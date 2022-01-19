@@ -1,7 +1,7 @@
 FROM node:16.13.2-buster as node
 RUN npm install -g npm@7.20.1 --quiet
 
-FROM python:3.10.1-buster as python
+FROM python:3.10.2-buster as python
 FROM koalaman/shellcheck:v0.8.0 as shellcheck
 FROM mvdan/shfmt:v3.4.2 as shfmt
 FROM hadolint/hadolint:v2.8.0 as hadolint
