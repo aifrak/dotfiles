@@ -5,6 +5,11 @@
     "prettier": "~2.5.1",
     "husky": "^7.0.4"
   },
+  "overrides": {
+    "markdownlint-cli": {
+      "markdownlint": "^0.25.1"
+    }
+  },
   "engines": {
     "node": "16",
     "npm": "8"
