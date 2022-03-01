@@ -13,6 +13,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Label PR from files
-        uses: actions/labeler@v3.0.2
+        uses: actions/labeler@v3.1.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
