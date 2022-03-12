@@ -8,11 +8,19 @@
 
 # Changelog
 
+## [v0.5.0](https://github.com/aifrak/dotfiles/releases/tag/v0.5.0)
+
+### Improvement
+
+- Bump `asdf` to 0.9.0
+- Bump `fzf` to 0.29.0
+- Bump `lsd` to 0.21.0
+
 ## [v0.4.0](https://github.com/aifrak/dotfiles/releases/tag/v0.4.0)
 
 ### New
 
-- Add `--docker` to installed `docker` and `docker compose` plugins from `Oh My Zsh`
+- Add `--docker` to installed `docker` and `docker-compose` plugins from `Oh My Zsh`
 
 ### Bug fix
 
