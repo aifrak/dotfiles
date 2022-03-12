@@ -37,7 +37,7 @@
       "detail": "Test and lint the whole project"
     },
     /* -------------------------------------------- */
-    /*                docker-compose                */
+    /*                docker compose                */
     /* -------------------------------------------- */
     {
       "label": "dc:run",
@@ -63,7 +63,7 @@
       "command": "./run",
       "args": ["dev:dc", "${input:dockerCmd}"],
       "problemMatcher": [],
-      "detail": "Run docker-compose with development configuration"
+      "detail": "Run docker compose with development configuration"
     },
     {
       "label": "dev:build",

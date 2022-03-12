@@ -10,7 +10,7 @@ fi
 . "${APP_DIR}/scripts/run/shell.sh"
 . "${APP_DIR}/scripts/lib/utils.sh"
 
-# If we're running in CI we need to disable TTY allocation for docker-compose
+# If we're running in CI we need to disable TTY allocation for docker compose
 # commands that enable it by default, such as exec and run.
 # Idea from: https://github.com/nickjj/docker-flask-example/blob/main/run
 TTY=""
@@ -32,12 +32,12 @@ Main commands:
   pre-commit                 Format, lint and test the whole project
   test                       Test the whole project
 
-docker-compose commands:
+docker compose commands:
   dc:run                     Run a function from "./run" inside the "app" docker service
 
 Dev commands:
   dev:code                   Prepare docker services for development environment
-  dev:dc                     Run docker-compose with development configuration
+  dev:dc                     Run docker compose with development configuration
   dev:build                  Build docker service with development configuration
 EOF
 
@@ -115,12 +115,12 @@ function pre-commit {
 }
 
 # ---------------------------------------------- #
-#                 docker-compose                 #
+#                 docker compose                 #
 # ---------------------------------------------- #
 
 function dc:run {
-  docker-compose run ${TTY} app ./run "${@}"
-  docker-compose rm -f -v
+  docker compose run ${TTY} app ./run "${@}"
+  docker compose rm -f -v
 }
 
 # ---------------------------------------------- #
@@ -139,7 +139,7 @@ function dev:code {
 }
 
 function dev:dc {
-  docker-compose "${dev_dc_options[@]}" "${@}"
+  docker compose "${dev_dc_options[@]}" "${@}"
 }
 
 function dev:build {
