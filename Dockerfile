@@ -11,7 +11,6 @@ FROM ubuntu:focal-20220302 as base
 USER root
 
 ENV INSIDE_DOCKER=1
-ENV LANG=C.UTF-8
 ENV USERNAME=app-user
 ARG GROUPNAME=${USERNAME}
 ARG USER_UID=1000
@@ -23,8 +22,10 @@ RUN set -e \
   && export DEBIAN_FRONTEND=noninteractive \
   && apt-get update -qq \
   && apt-get install -y -qq --no-install-recommends ca-certificates=* git=* sudo=* \
+  && echo "--- Give sudo rights to 'USERNAME' ---" \
   && echo "${USERNAME}" ALL=\(root\) NOPASSWD:ALL >/etc/sudoers.d/"${USERNAME}" \
   && chmod 0440 /etc/sudoers.d/"${USERNAME}" \
+  && echo "--- Clean ---" \
   && apt-get clean \
   && apt-get autoremove \
   && rm -rf /var/lib/apt/lists/*
@@ -79,6 +80,27 @@ RUN set -e \
 CMD [ "bash" ]
 
 FROM base as dev
+
+USER root
+
+RUN set -e \
+  && export DEBIAN_FRONTEND=noninteractive \
+  && echo "--- Install packages ---" \
+  && apt-get update -qq \
+  && apt-get install -y -qq --no-install-recommends \
+    gnupg2=* \
+    openssh-client=* \
+    locales=* \
+  && echo "--- Add locales ---" \
+  && sed -i "/en_US.UTF-8/s/^# //g" /etc/locale.gen \
+  && locale-gen "en_US.UTF-8" \
+  && echo "--- Clean ---" \
+  && apt-get clean \
+  && apt-get autoremove \
+  && rm -rf /var/lib/apt/lists/*
+
+USER ${USERNAME}
+
 FROM dev as vscode
 
 WORKDIR ${HOME}
