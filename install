@@ -140,7 +140,7 @@ function install_asdf {
 
   mkdir "${ASDF_DIR}"
 
-  git clone --quiet --branch v0.8.1 \
+  git clone --quiet --branch v0.9.0 \
     https://github.com/asdf-vm/asdf.git "${ASDF_DIR}"
 
   print ". \$HOME/.asdf/asdf.sh" >>"${dot_bashrc}"
@@ -150,8 +150,8 @@ function install_asdf {
 }
 
 function install_asdf_versions {
-  setup_asdf_version fzf 0.27.2
-  setup_asdf_version lsd 0.20.1 https://github.com/argylelabcoat/asdf-lsd.git
+  setup_asdf_version fzf 0.29.0
+  setup_asdf_version lsd 0.21.0 https://github.com/argylelabcoat/asdf-lsd.git
 }
 
 function setup_asdf_version {
