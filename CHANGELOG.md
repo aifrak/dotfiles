@@ -12,7 +12,7 @@
 
 ### New
 
-- Add `--docker` to installed `docker` and `docker-compose` plugins from `Oh My Zsh`
+- Add `--docker` to installed `docker` and `docker compose` plugins from `Oh My Zsh`
 
 ### Bug fix
 

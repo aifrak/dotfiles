@@ -3,7 +3,7 @@
 ## Install
 
 1. Install [docker](https://docs.docker.com/get-docker/) 20.10.7+.
-1. Install [docker-compose](https://docs.docker.com/compose/install/) 1.29.2+.
+1. Install [docker compose](https://docs.docker.com/compose/install/) 2.2.3+.
 
 ### Development with VSCode - Remote container (recommended)
 
