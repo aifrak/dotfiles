@@ -43,7 +43,7 @@ def test_home_directory():
 
 @pytest.mark.order(2)
 def test_asdf_installed(host):
-    version = "v0.8.1"
+    version = "v0.9.0"
 
     version_cmd = host.run(HOME + "/.asdf/bin/asdf --version")
 
