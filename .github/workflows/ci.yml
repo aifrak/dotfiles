@@ -12,7 +12,7 @@ jobs:
     steps:
       - id: skip-check
         name: Check if workflow is not already running
-        uses: fkirc/skip-duplicate-actions@v3.4.1
+        uses: fkirc/skip-duplicate-actions@v4.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           concurrent_skipping: "same_content"
