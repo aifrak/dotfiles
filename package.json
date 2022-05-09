@@ -3,7 +3,7 @@
   "devDependencies": {
     "markdownlint-cli": "^0.31.1",
     "prettier": "~2.6.2",
-    "husky": "^7.0.4"
+    "husky": "^8.0.0"
   },
   "overrides": {
     "markdownlint-cli": {
