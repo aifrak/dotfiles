@@ -3,7 +3,7 @@ RUN npm install -g npm@8.3.2 --quiet
 
 FROM python:3.11.0b1-buster as python
 FROM koalaman/shellcheck:v0.8.0 as shellcheck
-FROM mvdan/shfmt:v3.4.3 as shfmt
+FROM mvdan/shfmt:v3.5.1 as shfmt
 FROM hadolint/hadolint:v2.10.0 as hadolint
 
 FROM ubuntu:focal-20220426 as base
