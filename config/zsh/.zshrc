@@ -38,8 +38,8 @@ zinit wait lucid for \
   OMZP::cp \
   OMZP::colored-man-pages \
   OMZP::command-not-found \
-  OMZP::copydir \
   OMZP::copyfile \
+  OMZP::copypath \
   OMZP::dirhistory \
   OMZP::extract \
   OMZP::colorize \
