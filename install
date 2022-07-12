@@ -84,46 +84,51 @@ Syntax: ${0} [OPTIONS...]
 Options:
   -h, --help:     Show this message"
 
-  --deps:         Install all dependencies to install and run the development environment
-  --docker:       Install zinit plugins for docker and docker compose
-  --elixir:       Add plugins and environment variables for Elixir development
-  --fonts:        Install Fira Code from Nerd fonts
-  --[no-]asdf:    [Do not] install asdf (install it by default)
-  --[no-]zsh:     [Do not] install zsh (install it by default)
+  --deps          Install all dependencies to install and run the development environment
+  --docker        Install zinit plugins for docker and docker compose
+  --elixir        Add plugins and environment variables for Elixir development
+  --fonts         Install Fira Code from Nerd fonts
+  --wsl-gpg       Setup files used by GPG inside WSL
+  --wsl-ssh       Install dependencies and setup files used by GPG inside WSL
+  --[no-]asdf     [Do not] install asdf (install it by default)
+  --[no-]zsh      [Do not] install zsh (install it by default)
 
 EOF
 }
 
-function install_packages {
-  if [[ ${opt_deps} -eq 0 ]] || [[ ${opt_zsh} -eq 0 ]]; then
+function may_update_package_list {
+  if [[ ${opt_deps} -eq 1 ||
+    ${opt_zsh} -eq 1 ||
+    ${opt_wsl_gpg} -eq 1 ||
+    ${opt_wsl_ssh} -eq 1 ]]; then
+    sudo apt update -qq
+  fi
+}
+
+function may_install_deps_packages {
+  if [[ ${opt_deps} -eq 0 ]]; then
     return 0
   fi
 
-  sudo apt-get update -qq
+  sudo apt install -y -qq --no-install-recommends \
+    curl \
+    gnupg2 \
+    make \
+    nano \
+    openssh-client \
+    tar \
+    wget \
+    xz-utils
 
-  if [[ ${opt_deps} -eq 1 ]]; then
-    sudo apt-get install -y -qq --no-install-recommends \
-      curl \
-      gnupg2 \
-      make \
-      nano \
-      openssh-client \
-      tar \
-      wget \
-      xz-utils
-  fi
-
-  if [[ ${opt_zsh} -eq 1 ]]; then
-    sudo apt-get install -y -qq --no-install-recommends zsh
-  fi
-
-  success "✓ Packages installed"
+  success "✓ Dependencies packages installed"
 }
 
-function copy_dotfiles {
-  cp -r "${config_dir}/zsh/." "${HOME}"
+function may_install_zsh {
+  if [[ ${opt_zsh} -eq 1 ]]; then
+    sudo apt install -y -qq --no-install-recommends zsh
 
-  success "✓ Dotfiles copied"
+    cp -r "${config_dir}/zsh/." "${HOME}"
+  fi
 }
 
 function uncomment_zshrc_variable {
@@ -132,7 +137,11 @@ function uncomment_zshrc_variable {
   sed -i "/^# local ${variable}=/s/^# //" "${dot_zshrc}"
 }
 
-function install_asdf {
+function may_install_asdf {
+  if [[ ${opt_asdf} -eq 0 ]]; then
+    return 0
+  fi
+
   if which asdf >/dev/null; then
     warning "asdf already installed: skipped"
     return 0
@@ -147,6 +156,48 @@ function install_asdf {
   print ". \$HOME/.asdf/completions/asdf.bash" >>"${dot_bashrc}"
 
   success "✓ asdf installed"
+}
+
+function may_setup_wsl_gpg {
+  if [[ ${opt_wsl_gpg} -eq 0 ]]; then
+    return 0
+  fi
+
+  gnupg_dir="${HOME}/.gnupg"
+  gpg_agent_config="${gnupg_dir}/gpg-agent.conf"
+
+  if [[ -f "${gpg_agent_config}" ]]; then
+    warning "GPG for WSL is already set up: skipped"
+    return 0
+  fi
+
+  mkdir -p "${gnupg_dir}"
+  chmod 700 "${gnupg_dir}"
+
+  cp -r "${config_dir}/gpg/." "${gnupg_dir}"
+
+  gpg-connect-agent reloadagent /bye
+
+  success "✓ Setup GPG for WSL done"
+}
+
+function may_setup_wsl_ssh {
+  if [[ ${opt_wsl_ssh} -eq 0 ]]; then
+    return 0
+  fi
+
+  if which keychain >/dev/null; then
+    warning "SSH for WSL is already set up: skipped"
+    return 0
+  fi
+
+  sudo apt install -y -qq --no-install-recommends keychain
+
+  # shellcheck disable=SC2016
+  print 'eval "$(keychain --eval --agents ssh id_rsa)"' >>"${dot_bashrc}"
+  uncomment_zshrc_variable "dotfiles_wsl_ssh"
+
+  success "✓ Setup SSH for WSL done"
 }
 
 function install_asdf_versions {
@@ -166,20 +217,32 @@ function setup_asdf_version {
 
 # --------------- BEGIN: Options --------------- #
 
-function setup_elixir_plugins {
+function may_setup_elixir_plugins {
+  if [[ ${opt_elixir} -eq 0 ]]; then
+    return 0
+  fi
+
   uncomment_zshrc_variable "dotfiles_elixir"
 
   success "✓ Setup for elixir: done"
 }
 
-function setup_docker_plugins {
+function may_setup_docker_plugins {
+  if [[ ${opt_docker} -eq 0 ]]; then
+    return 0
+  fi
+
   uncomment_zshrc_variable "dotfiles_docker"
 
   success "✓ Setup for docker: done"
 }
 
 # Install Fira Code from Nerd fonts
-function install_fonts {
+function may_install_fonts {
+  if [[ ${opt_fonts} -eq 0 ]]; then
+    return 0
+  fi
+
   local fonts_dir=${HOME}/.local/share/fonts
 
   if [[ $(find "${fonts_dir}"/Fura*Code*.ttf 2>/dev/null | wc -l) -gt 0 ]]; then
@@ -220,6 +283,8 @@ function parse_options {
   opt_docker=0
   opt_elixir=0
   opt_fonts=0
+  opt_wsl_gpg=0
+  opt_wsl_ssh=0
   opt_zsh=1
 
   for opt in "${@}"; do
@@ -234,6 +299,8 @@ function parse_options {
       --docker) opt_docker=1 ;;
       --elixir) opt_elixir=1 ;;
       --fonts) opt_fonts=1 ;;
+      --wsl-gpg) opt_wsl_gpg=1 ;;
+      --wsl-ssh) opt_wsl_ssh=1 ;;
 
       # asdf
       --no-asdf) opt_asdf=0 ;;
@@ -270,21 +337,27 @@ function validate {
 function install {
   mkdir -p "${tmp}"
 
-  install_packages
-
-  if [[ "${opt_asdf}" -eq 1 ]]; then
-    install_asdf
-  fi
+  may_update_package_list
+  may_install_deps_packages
+  may_install_zsh
+  may_install_asdf
 
   install_asdf_versions
 
-  copy_dotfiles
-
-  [[ "${opt_docker}" -eq 1 ]] && setup_docker_plugins
-  [[ "${opt_elixir}" -eq 1 ]] && setup_elixir_plugins
-  [[ "${opt_fonts}" -eq 1 ]] && install_fonts
+  may_setup_docker_plugins
+  may_setup_elixir_plugins
+  may_install_fonts
+  may_setup_wsl_gpg
+  may_setup_wsl_ssh
 
   success "✓ Install done! Run 'zsh' to start."
+  may_warn_wsl_setup
+}
+
+function may_warn_wsl_setup {
+  if [[ ${opt_wsl_gpg} -eq 1 || ${opt_wsl_ssh} -eq 1 ]]; then
+    warning "Checklist for WSL setup: https://github.com/aifrak/dotfiles#checklist-for-wsl-setup"
+  fi
 }
 
 function clean_tmp {
