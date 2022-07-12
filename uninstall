@@ -100,7 +100,9 @@ Options:
 EOF
 }
 
-function uninstall_zinit() {
+function uninstall_zsh() {
+  sudo apt remove -y zsh
+
   remove "${HOME}"/.zinit
   remove_by_pattern "${HOME}" .zcompdump*
   remove "${HOME}"/.cache/p10k*
@@ -126,11 +128,28 @@ function uninstall_asdf() {
   remove "${HOME}/.asdf"
   remove "${HOME}/.tool-versions"
 
-  local dot_bashrc=${HOME}/.bashrc
   sed -i "/^. \$HOME\/.asdf\/asdf.sh$/d" "${dot_bashrc}"
   sed -i "/^. \$HOME\/.asdf\/completions\/asdf.bash$/d" "${dot_bashrc}"
 
   success "✓ asdf uninstalled"
+}
+
+function remove_wsl_gpg() {
+  remove "${HOME}/.gnupg/gpg-agent.conf"
+
+  gpg-connect-agent reloadagent /bye
+
+  success "✓ Setup for SSH for WSL removed"
+}
+
+function remove_wsl_ssh() {
+  sudo apt remove -y keychain
+
+  remove "${HOME}/.keychain"
+
+  sed -i "/^eval \"\$(keychain --eval --agents ssh id_rsa)\"$/d" "${dot_bashrc}"
+
+  success "✓ Setup for GPG for WSL removed"
 }
 
 function parse_options() {
@@ -150,13 +169,17 @@ function parse_options() {
 }
 
 function uninstall() {
+  remove_wsl_ssh
+  remove_wsl_gpg
   uninstall_fonts
-  uninstall_zinit
+  uninstall_zsh
   uninstall_asdf
 
   success "✓ Uninstall done"
 }
 
 parse_options "$@"
+
+dot_bashrc="${HOME}/.bashrc"
 
 uninstall "$@"

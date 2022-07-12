@@ -4,16 +4,39 @@ USER = "app-user"
 GROUP = USER
 HOME = "/home/" + USER
 FONTS = HOME + "/.local/share/fonts"
+DOT_BASHRC = HOME + "/.bashrc"
 DOT_ZSHRC = HOME + "/.zshrc"
 
 
+def __assert_zshrc_uncommented_variable(host, variable_name):
+    assert host.file(DOT_ZSHRC).contains(rf"^local {variable_name}=1$")
+
+
+def __assert_copied_dotfiles(host, path):
+    file = host.file(path)
+
+    assert file.is_file
+    assert file.user == USER
+    assert file.group == GROUP
+
+
 @pytest.mark.order(1)
-def test_install(host):
-    install = host.run("./install --asdf --deps --docker --elixir --fonts --zsh")
-    zsh = host.run("zsh")
+def test_install_deps(host):
+    install = host.run(
+        """
+        ./install \
+            --asdf \
+            --deps \
+            --docker \
+            --elixir \
+            --fonts \
+            --wsl-gpg \
+            --wsl-ssh \
+            --zsh
+        """
+    )
 
     assert install.succeeded
-    assert zsh.succeeded
 
 
 @pytest.mark.order(2)
@@ -27,13 +50,10 @@ def test_install(host):
         ("openssh-client"),
         ("wget"),
         ("xz-utils"),
-        ("zsh"),
     ],
 )
-def test_packages(host, name):
-    package = host.package(name)
-
-    assert package.is_installed
+def test_installed_deps_packages(host, name):
+    assert host.package(name).is_installed
 
 
 @pytest.mark.order(2)
@@ -42,33 +62,55 @@ def test_home_directory():
 
 
 @pytest.mark.order(2)
+def test_installed_zsh(host):
+    assert host.package("zsh").is_installed
+    assert host.run("zsh").succeeded
+    __assert_copied_dotfiles(host, DOT_ZSHRC)
+    __assert_copied_dotfiles(host, HOME + "/.p10k.zsh")
+
+
+@pytest.mark.order(2)
+@pytest.mark.parametrize(
+    "variable_name",
+    [
+        ("dotfiles_elixir"),
+        ("dotfiles_docker"),
+    ],
+)
+def test_zsh_plugins_set_up(host, variable_name):
+    __assert_zshrc_uncommented_variable(host, variable_name)
+
+
+@pytest.mark.order(2)
 def test_asdf_installed(host):
     version = "v0.9.0"
 
     version_cmd = host.run(HOME + "/.asdf/bin/asdf --version")
 
-    bashrc = host.file(HOME + "/.bashrc")
+    bashrc = host.file(DOT_BASHRC)
 
     assert version_cmd.succeeded
     assert version_cmd.stdout.startswith(version)
-    assert bashrc.contains(rf"^. $HOME/.asdf/asdf.sh")
-    assert bashrc.contains(rf"^. $HOME/.asdf/completions/asdf.bash")
+    assert bashrc.contains(r"^. $HOME/.asdf/asdf.sh$")
+    assert bashrc.contains(r"^. $HOME/.asdf/completions/asdf.bash$")
 
 
 @pytest.mark.order(2)
-@pytest.mark.parametrize(
-    "path, user, group",
-    [
-        (DOT_ZSHRC, USER, GROUP),
-        (HOME + "/.p10k.zsh", USER, GROUP),
-    ],
-)
-def test_copied_files(host, path, user, group):
-    file = host.file(path)
+def test_wsl_gpg_setup(host):
+    gpg_agent_config = host.file(HOME + "/.gnupg/gpg-agent.conf")
+    pinentry_path = "/mnt/c/Program Files (x86)/Gpg4win/bin/pinentry.exe"
 
-    assert file.is_file
-    assert file.user == user
-    assert file.group == group
+    assert gpg_agent_config.is_file
+    assert gpg_agent_config.contains(f"^pinentry-program {pinentry_path}$")
+
+
+@pytest.mark.order(2)
+def test_wsl_ssh_setup(host):
+    assert host.package("keychain").is_installed
+    __assert_zshrc_uncommented_variable(host, "dotfiles_wsl_ssh")
+    assert host.file(DOT_BASHRC).contains(
+        r'^eval "$(keychain --eval --agents ssh id_rsa)"$'
+    )
 
 
 @pytest.mark.order(2)
@@ -88,16 +130,3 @@ def test_copied_fonts(host, font):
     assert file.is_file
     assert file.user == USER
     assert file.group == GROUP
-
-
-@pytest.mark.order(2)
-@pytest.mark.parametrize(
-    "variable_name",
-    [
-        ("dotfiles_elixir"),
-    ],
-)
-def test_uncomment_zshrc_variables(host, variable_name):
-    file = host.file(DOT_ZSHRC)
-
-    assert file.contains(rf"^local {variable_name}=")

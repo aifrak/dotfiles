@@ -10,39 +10,35 @@ DOT_ZSHRC = HOME + "/.zshrc"
 
 @pytest.mark.order(3)
 def test_uninstall(host):
-    cmd = host.run("./uninstall")
-
-    assert cmd.succeeded
+    assert host.run("./uninstall").succeeded
 
 
 @pytest.mark.order(4)
-def test_asdf_uninstalled(host):
-    version_cmd = host.run(HOME + "/.asdf/bin/asdf --version")
+def test_uninstalled_asdf(host):
+    bashrc = host.file(DOT_BASHRC)
 
-    dot_bashrc = host.file(DOT_BASHRC)
-
-    assert not version_cmd.succeeded
-    assert not dot_bashrc.contains(rf"^. $HOME/.asdf/asdf.sh")
-    assert not dot_bashrc.contains(rf"^. $HOME/.asdf/completions/asdf.bash")
+    assert not host.file(HOME + "/.asdf").exists
+    assert not host.run(HOME + "/.asdf/bin/asdf --version").succeeded
+    assert not bashrc.contains(r"^. $HOME/.asdf/asdf.sh$")
+    assert not bashrc.contains(r"^. $HOME/.asdf/completions/asdf.bash$")
 
 
 @pytest.mark.order(4)
-@pytest.mark.parametrize("path", [(HOME + "/.cache/gitstatus")])
-def test_gitstatus_uninstall(host, path):
-    directory = host.file(path)
-
-    assert not directory.exists
+def test_uninstalled_zsh(host):
+    assert not host.package("zsh").is_installed
+    assert not host.file(HOME + "/.cache/gitstatus").exists
+    assert not host.file(HOME + "/.cache/p10k-" + USER).exists
+    assert not host.file(HOME + "/.config/lsd").exists
+    assert not host.file(HOME + "/.config/znt").exists
+    assert not host.file(DOT_ZSHRC).exists
+    assert not host.file(HOME + "/.zinit").exists
+    assert not host.file(HOME + "/.p10k.zsh").exists
 
 
 @pytest.mark.order(4)
 @pytest.mark.parametrize(
     "path",
     [
-        # zinit
-        (DOT_ZSHRC),
-        (HOME + "/.zinit"),
-        (HOME + "/.p10k.zsh"),
-        # fonts
         (FONTS + "/Fura Code Light Nerd Font Complete.ttf"),
         (FONTS + "/Fura Code Regular Nerd Font Complete.ttf"),
         (FONTS + "/Fura Code Medium Nerd Font Complete.ttf"),
@@ -50,24 +46,19 @@ def test_gitstatus_uninstall(host, path):
         (FONTS + "/Fura Code Retina Nerd Font Complete.ttf"),
     ],
 )
-def test_removed_files(host, path):
+def test_uninstalled_fonts(host, path):
     assert not host.file(path).exists
 
 
 @pytest.mark.order(4)
-@pytest.mark.parametrize(
-    "path",
-    [
-        # asdf
-        (HOME + "/.asdf"),
-        # zinit
-        (HOME + "/.cache/p10k-" + USER),
-        (HOME + "/.config/lsd"),
-        (HOME + "/.config/znt"),
-    ],
-)
-@pytest.mark.order(4)
-def test_removed_directories(host, path):
-    directory = host.file(path)
+def test_removed_wsl_gpg(host):
+    assert not host.file(HOME + "/.gnupg/gpg-agent.conf").exists
 
-    assert not directory.exists
+
+@pytest.mark.order(4)
+def test_removed_wsl_ssh(host):
+    assert not host.package("keychain").is_installed
+    assert not host.file(HOME + "/.keychain").exists
+    assert not host.file(DOT_BASHRC).contains(
+        r'^eval "$(keychain --eval --agents ssh id_rsa)"$'
+    )
