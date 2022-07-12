@@ -97,9 +97,13 @@ def test_asdf_installed(host):
 
 @pytest.mark.order(2)
 def test_wsl_gpg_setup(host):
-    gpg_agent_config = host.file(HOME + "/.gnupg/gpg-agent.conf")
+    gnupg_dir_path = HOME + "/.gnupg"
+    gnupg_dir = host.file(gnupg_dir_path)
+    gpg_agent_config = host.file(gnupg_dir_path + "/gpg-agent.conf")
     pinentry_path = "/mnt/c/Program Files (x86)/Gpg4win/bin/pinentry.exe"
 
+    assert gnupg_dir.is_directory
+    assert gnupg_dir.mode == 0o700
     assert gpg_agent_config.is_file
     assert gpg_agent_config.contains(f"^pinentry-program {pinentry_path}$")
 

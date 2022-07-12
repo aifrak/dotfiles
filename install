@@ -163,15 +163,18 @@ function may_setup_wsl_gpg {
     return 0
   fi
 
-  gpg_agent_config="${HOME}/.gnupg/gpg-agent.conf"
+  gnupg_dir="${HOME}/.gnupg"
+  gpg_agent_config="${gnupg_dir}/gpg-agent.conf"
 
   if [[ -f "${gpg_agent_config}" ]]; then
     warning "GPG for WSL is already set up: skipped"
     return 0
   fi
 
-  pinentry_path='/mnt/c/Program Files (x86)/Gpg4win/bin/pinentry.exe'
-  print "pinentry-program ${pinentry_path}" >"${gpg_agent_config}"
+  mkdir -p "${gnupg_dir}"
+  chmod 700 "${gnupg_dir}"
+
+  cp -r "${config_dir}/gpg/." "${gnupg_dir}"
 
   gpg-connect-agent reloadagent /bye
 
