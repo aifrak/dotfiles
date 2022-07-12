@@ -6,6 +6,9 @@ node_modules/*
 # Folder should exists to avoid root ownership
 !node_modules/.gitkeep
 
+# Docker
+.docker
+
 # Docker compose
 docker-compose.override.yml
 
