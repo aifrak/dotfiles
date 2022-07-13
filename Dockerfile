@@ -1,5 +1,5 @@
 FROM node:16.16.0-buster as node
-FROM python:3.11.0b3-buster as python
+FROM python:3.11.0b4-buster as python
 FROM koalaman/shellcheck:v0.8.0 as shellcheck
 FROM mvdan/shfmt:v3.5.1 as shfmt
 FROM hadolint/hadolint:v2.10.0 as hadolint
