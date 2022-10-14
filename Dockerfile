@@ -1,4 +1,4 @@
-FROM node:16.17.1-buster as node
+FROM node:16.18.0-buster as node
 FROM python:3.11.0rc2-buster as python
 FROM koalaman/shellcheck:v0.8.0 as shellcheck
 FROM mvdan/shfmt:v3.5.1 as shfmt
