@@ -61,7 +61,7 @@ This option is not necessary, if all tools are already pre-installed.
 
 ### Resources
 
-- [VSCode setup](https://code.visualstudio.com/docs/remote/containers#_sharing-git-credentials-with-your-container)
+- [VSCode setup](https://code.visualstudio.com/remote/advancedcontainers/sharing-git-credentials)
 
 ### Fonts
 
