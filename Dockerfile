@@ -1,7 +1,7 @@
 FROM node:16.20.0-buster as node
 FROM python:3.12.0b2-buster as python
 FROM koalaman/shellcheck:v0.9.0 as shellcheck
-FROM mvdan/shfmt:v3.6.0 as shfmt
+FROM mvdan/shfmt:v3.7.0 as shfmt
 FROM hadolint/hadolint:v2.12.0 as hadolint
 
 FROM ubuntu:focal-20230605 as base
