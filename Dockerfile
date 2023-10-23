@@ -4,7 +4,7 @@ FROM koalaman/shellcheck:v0.9.0 as shellcheck
 FROM mvdan/shfmt:v3.7.0 as shfmt
 FROM hadolint/hadolint:v2.12.0 as hadolint
 
-FROM ubuntu:focal-20230801 as base
+FROM ubuntu:focal-20231003 as base
 
 USER root
 
