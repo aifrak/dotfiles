@@ -3,56 +3,76 @@
 # ---------------------------------------------- #
 
 source:
-  - install
-  - uninstall
-  - config/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - install
+          - uninstall
+          - config/**/*
 
 tests:
-  - tests/**/*
-  - pytest.ini
+  - changed-files:
+      - any-glob-to-any-file:
+          - tests/**/*
+          - pytest.ini
 
 dependencies:
-  - package*.json
-  - requirements.txt
+  - changed-files:
+      - any-glob-to-any-file:
+          - package*.json
+          - requirements.txt
 
 documentation:
-  - "**/*.md"
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.md"
 
 chore:
-  - .devcontainer
-  - .editorconfig
-  - .gitignore
-  - .hadolint*
-  - .husky/**/*
-  - .markdownlint*
-  - .npmrc
-  - .prettier*
-  - .vscode/**/*
-  - scripts/**/*
-  - run
-  - LICENSE
+  - changed-files:
+      - any-glob-to-any-file:
+          - .devcontainer
+          - .editorconfig
+          - .gitignore
+          - .hadolint*
+          - .husky/**/*
+          - .markdownlint*
+          - .npmrc
+          - .prettier*
+          - .vscode/**/*
+          - scripts/**/*
+          - run
+          - LICENSE
 
 # ---------------------------------------------- #
 #         Labels by technology / language        #
 # ---------------------------------------------- #
 
 docker:
-  - .dockerignore
-  - docker-compose*.yml
-  - Dockerfile*
+  - changed-files:
+      - any-glob-to-any-file:
+          - .dockerignore
+          - docker-compose*.yml
+          - Dockerfile*
 
 github_actions:
-  - .github/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/**/*
 
 python:
-  - "**/*.py"
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.py"
 
 shellscript:
-  - install
-  - uninstall
-  - pre-commit
-  - run
-  - "**/*.sh"
+  - changed-files:
+      - any-glob-to-any-file:
+          - install
+          - uninstall
+          - pre-commit
+          - run
+          - "**/*.sh"
 
 vscode:
-  - .vscode/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - .vscode/**/*
