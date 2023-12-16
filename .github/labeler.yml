@@ -1,3 +1,4 @@
-root:
-- changed-files:
-  - any-glob-to-any-file: '*'
+source:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: ['*']
