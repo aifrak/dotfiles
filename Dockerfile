@@ -1,10 +1,10 @@
-FROM node:16.20.2-buster as node
-FROM python:3.12.0b2-buster as python
+FROM node:20.10.0-bookworm as node
+FROM python:3.12.1-bookworm as python
 FROM koalaman/shellcheck:v0.9.0 as shellcheck
 FROM mvdan/shfmt:v3.7.0 as shfmt
 FROM hadolint/hadolint:v2.12.0 as hadolint
 
-FROM ubuntu:focal-20231128 as base
+FROM ubuntu:jammy-20231128 as base
 
 USER root
 
