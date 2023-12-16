@@ -4,10 +4,7 @@
 
 source:
   - changed-files:
-      - any-glob-to-any-file:
-          - install
-          - uninstall
-          - config/**/*
+      - any-glob-to-any-file: ["install", "uninstall", "config/**/*"]
 
 tests:
   - changed-files:
