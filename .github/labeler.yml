@@ -3,3 +3,4 @@
 root:
 - changed-files:
   - any-glob-to-any-file: '*'
+- base-branch: 'main'
