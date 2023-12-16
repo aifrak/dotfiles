@@ -19,7 +19,7 @@ ENV APP_DIR=/app
 RUN set -e \
   && export DEBIAN_FRONTEND=noninteractive \
   && apt-get update -qq \
-  && apt-get install -y -qq --no-install-recommends ca-certificates=* git=* sudo=* \
+  && apt-get install -y -qq --no-install-recommends ca-certificates=* git=* sudo=* gcc=* build-essential=* \
   && echo "--- Give sudo rights to 'USERNAME' ---" \
   && echo "${USERNAME}" ALL=\(root\) NOPASSWD:ALL >/etc/sudoers.d/"${USERNAME}" \
   && chmod 0440 /etc/sudoers.d/"${USERNAME}" \
