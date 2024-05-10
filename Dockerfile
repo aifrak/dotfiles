@@ -1,4 +1,4 @@
-FROM node:20.13.0-bookworm as node
+FROM node:20.13.1-bookworm as node
 FROM python:3.12.3-bookworm as python
 FROM koalaman/shellcheck:v0.10.0 as shellcheck
 FROM mvdan/shfmt:v3.8.0 as shfmt
