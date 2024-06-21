@@ -45,7 +45,7 @@ jobs:
             ${{ runner.os }}-buildx-
 
       - name: Build image and cache
-        uses: docker/build-push-action@v6.0.1
+        uses: docker/build-push-action@v6.0.2
         with:
           load: true
           target: ${{ env.IMAGE_TARGET }}
