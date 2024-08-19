@@ -1,7 +1,7 @@
 FROM node:20.16.0-bookworm as node
 FROM python:3.12.5-bookworm as python
 FROM koalaman/shellcheck:v0.10.0 as shellcheck
-FROM mvdan/shfmt:v3.8.0 as shfmt
+FROM mvdan/shfmt:v3.9.0 as shfmt
 FROM hadolint/hadolint:v2.12.0 as hadolint
 
 FROM ubuntu:jammy-20240530 as base
