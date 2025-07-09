@@ -1,5 +1,5 @@
 FROM node:20.19.0-bookworm as node
-FROM python:3.14.0a7-bookworm as python
+FROM python:3.14.0b4-bookworm as python
 FROM koalaman/shellcheck:v0.10.0 as shellcheck
 FROM mvdan/shfmt:v3.11.0 as shfmt
 FROM hadolint/hadolint:v2.12.0 as hadolint
