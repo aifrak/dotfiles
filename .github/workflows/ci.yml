@@ -5,7 +5,7 @@ on: [push, workflow_dispatch]
 jobs:
   skip-duplicate-actions:
     name: Skip duplicate actions
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       should-skip: ${{ steps.skip-check.outputs.should_skip }}
 
@@ -22,7 +22,7 @@ jobs:
     name: CI
     needs: skip-duplicate-actions
     if: ${{ needs.skip-duplicate-actions.outputs.should-skip != 'true' }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       IMAGE_TARGET: base
       IMAGE_TAG: aifrak/dotfiles:latest

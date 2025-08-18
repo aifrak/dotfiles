@@ -5,7 +5,7 @@ on: [pull_request_target]
 jobs:
   pr-labeler:
     name: Label PR
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Label PR from branch prefix
         uses: TimonVS/pr-labeler-action@v5.0.0
