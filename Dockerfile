@@ -4,7 +4,7 @@ FROM koalaman/shellcheck:v0.11.0 as shellcheck
 FROM mvdan/shfmt:v3.12.0 as shfmt
 FROM hadolint/hadolint:v2.12.0 as hadolint
 
-FROM ubuntu:jammy-20250730 as base
+FROM ubuntu:jammy-20250819 as base
 
 USER root
 
