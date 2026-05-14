@@ -1,17 +1,3 @@
-# option "--wsl" will uncomment this line
-# local dotfiles_wsl_ssh=1
-
-if [[ ${dotfiles_wsl_ssh:-0} -eq 1 ]]; then
-  eval $(keychain --eval --agents ssh id_rsa)
-fi
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export TERM="xterm-256color"
 
 # ---------------------------------------------- #
@@ -27,6 +13,14 @@ if [[ ! -f "${HOME}/.zinit/bin/zinit.zsh" ]]; then
 fi
 
 source "${HOME}/.zinit/bin/zinit.zsh"
+
+# ---------------------------------------------- #
+#                  Install oh-my-posh            #
+# ---------------------------------------------- #
+
+if [[ ! -f "${HOME}/.local/bin/oh-my-posh" ]]; then
+  curl -s https://ohmyposh.dev/install.sh | bash -s
+fi
 
 # ---------------------------------------------- #
 #                     Plugins                    #
@@ -53,60 +47,22 @@ zinit wait lucid for \
   OMZP::git \
   OMZP::globalias \
   OMZP::zsh-interactive-cd \
+  OMZP::docker-compose \
+  OMZP::docker \
   Aloxaf/fzf-tab \
   agkozak/zsh-z \
   psprint/zsh-navigation-tools \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" zdharma/fast-syntax-highlighting \
   atload"!_zsh_autosuggest_start" zsh-users/zsh-autosuggestions \
-  as"completion" OMZP::fzf
-
-# ---------------------------------------------- #
-#                      asdf                      #
-# ---------------------------------------------- #
-
-# asdf is installed via "./install"
-export ASDF_DIR="${ASDF_DIR:-$HOME/.asdf}"
-source "${ASDF_DIR}/asdf.sh"
-zinit fpath -f "${ASDF_DIR}/completions"
-zicompinit
-
-# ---------------------------------------------- #
-#                     docker                     #
-# ---------------------------------------------- #
-
-# option "--docker" will uncomment this line
-# local dotfiles_docker=1
-
-if [[ ${dotfiles_docker:-0} -eq 1 ]]; then
-  zinit wait lucid for \
-    OMZP::docker-compose \
-    as"completion" https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/docker/_docker
-fi
-
-# ---------------------------------------------- #
-#                     elixir                     #
-# ---------------------------------------------- #
-
-# option "--elixir" will uncomment this line
-# local dotfiles_elixir=1
-
-if [[ ${dotfiles_elixir:-0} -eq 1 ]]; then
-  export ERL_AFLAGS="-kernel shell_history enabled"
-
-  zinit wait lucid for \
-    gusaiani/elixir-oh-my-zsh \
-    as"completion" https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/mix/_mix \
-    as"completion" OMZP::mix-fast
-fi
+  as"completion" OMZP::fzf \
+  as"completion" https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/mix/_mix \
+  as"completion" OMZP::mix-fast
 
 # ---------------------------------------------- #
 #                      Theme                     #
 # ---------------------------------------------- #
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-zinit ice depth"1" atload"source ~/.p10k.zsh"
-zinit light romkatv/powerlevel10k
+eval "$(oh-my-posh init zsh --config $HOME/dotfiles/oh-my-posh/custom-theme.omp.yml)"
 
 # ---------------------------------------------- #
 #                   zsh options                  #
@@ -136,3 +92,10 @@ alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
+
+# devbox
+if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then . "${HOME}/.nix-profile/etc/profile.d/nix.sh"; fi # added by Nix installer
+
+# mise (asdf)
+eval "$($HOME/.local/bin/mise activate zsh)"
+command -v mise &> /dev/null && eval "$(mise activate zsh)"

@@ -1,0 +1,20 @@
+[diff]
+  tool = nvimdiff
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[difftool]
+  prompt = false
+[merge]
+  tool = nvimdiff
+[mergetool "nvimdiff"]
+  layout = "LOCAL,BASE,REMOTE / MERGED"
+[mergetool]
+  prompt = false
+  keepBackup = false
+[color "status"]
+  added = green bold
+  changed = red bold
+  untracked = cyan
+  branch = yellow black bold
+[include]
+  path = %(prefix)/dotfiles/git/config

@@ -1,0 +1,2 @@
+[env]
+_.path = ["~/.local/share/nvim/mason/bin"]

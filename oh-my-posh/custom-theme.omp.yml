@@ -1,0 +1,121 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+palette:
+  aws_background: "#FFA400"
+  executiontime_background: "#4c1f5e"
+  exit_error: "#dc2626"
+  exit_success: "#16a34a"
+  git_ahead: "#89d1dc"
+  git_background: "#17d7a0"
+  git_behind: "#fffb38"
+  git_changes: "#c4a000"
+  git_no_changes: "#f26d50"
+  os_background: "#464646"
+  path_background: "#003543"
+  root_background: "#ffff66"
+  session_background: "#170B3B"
+  shell_background: "#341948"
+  text_alt_foreground: "#111111"
+  text_foreground: "#ffffff"
+  time_background: "#0E050F"
+console_title_template: "{{ .Shell }} {{if .Root}} ⚡ {{end}}{{.UserName}} ➔ 📁{{.Folder}}"
+blocks:
+- type: prompt
+  alignment: left
+  segments:
+  - style: diamond
+    leading_diamond: 
+    trailing_diamond: 
+    template: " {{ if .Env.DEVBOX_SHELL_ENABLED }}\uf487 {{ end }}{{ .Icon }} {{ if .WSL }}(wsl){{ end }} "
+    foreground: p:text_foreground
+    background: p:os_background
+    type: os
+  - style: diamond
+    trailing_diamond: 
+    template: " ⚡ "
+    foreground: p:text_alt_foreground
+    background: p:root_brackground
+    type: root
+  - properties:
+      home_icon:   ~
+      style: full
+    style: diamond
+    trailing_diamond: 
+    template: " {{ path .Path .Location }} {{ if not .Writable }}\uf023{{ end }}"
+    foreground: p:text_foreground
+    background: p:path_background
+    type: path
+  - properties:
+      branch_max_length: 25
+      fetch_stash_count: true
+      fetch_status: true
+      fetch_upstream_icon: true
+    style: diamond
+    template: " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus  }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and  (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{  end }} "
+    foreground: p:text_alt_foreground
+    background: p:git_background
+    type: git
+    background_templates:
+    - "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git_changes{{ end }}"
+    - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git_no_changes{{ end }}"
+    - "{{ if gt .Ahead 0 }}p:git_ahead{{ end }}"
+    - "{{ if gt .Behind 0 }}p:git_behind{{ end }}"
+  - properties:
+      display_default: false
+    style: diamond
+    trailing_diamond: 
+    template: " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} "
+    foreground: p:text_foreground
+    background: p:aws_background
+    type: aws
+  - properties:
+      always_enabled: true
+    style: diamond
+    trailing_diamond: 
+    template: " {{ if gt .Code 0 }}\uf00d {{ reason .Code }}{{ else }}\uf00c{{ end }} "
+    foreground: p:text_foreground
+    background: p:exit_success
+    type: status
+    background_templates:
+    - "{{ if gt .Code 0 }}p:exit_error{{ end }}"
+- type: prompt
+  alignment: right
+  segments:
+  - properties:
+      always_enabled: true
+    style: diamond
+    leading_diamond: 
+    template: " \ueba2 {{ .FormattedMs }} "
+    foreground: p:text_foreground
+    background: p:executiontime_background
+    type: executiontime
+  - style: diamond
+    leading_diamond: 
+    template: " \uf489 {{ .Name }} "
+    foreground: p:text_foreground
+    background: p:shell_background
+    type: shell
+  - style: diamond
+    leading_diamond: 
+    template: " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }}@{{ .HostName }} "
+    foreground: p:text_foreground
+    background: p:session_background
+    type: session
+  - style: diamond
+    leading_diamond: 
+    trailing_diamond: 
+    template: " \ue38a {{ .CurrentDate | date .Format }} "
+    foreground: p:text_foreground
+    background: p:time_background
+    type: time
+- type: prompt
+  alignment: left
+  segments:
+  - style: plain
+    template: 
+    foreground: "#81ff91"
+    background: ""
+    type: text
+  newline: true
+version: 3
+final_space: true

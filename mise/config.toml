@@ -1,0 +1,29 @@
+[settings]
+env_shell_expand = true
+
+[tools]
+go = "1.26.2"
+node = "24.9.0"
+rust = "1.95.0"
+python = "3.14.4"
+"aqua:expert-lsp/expert" = "latest"
+fzf = "latest"
+lsd = "latest"
+typstyle = "latest"
+yarn = "latest"
+tree-sitter = "latest"
+# snacks.nvim (picker)
+ripgrep = "latest"
+# snacks.nvim (lazygit)
+lazygit = "latest"
+# snacks.nvim (picker)
+fd = "latest"
+
+
+[env]
+# copy configs
+VALE_CONFIG_PATH = "$HOME/dotfiles/vale/vale.ini"
+WEZTERM_CONFIG_FILE = "$HOME/dotfiles/wezterm/wezterm.lua"
+OH_MY_POSH_CONFIG = "$HOME/dotfiles/oh-my-posh/custom-theme.omp.yml"
+# keep elixir iex history
+ERL_AFLAGS = "-kernel shell_history enabled"
