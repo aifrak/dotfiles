@@ -14,5 +14,5 @@ sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
 sudo apt update -y
 sudo apt install -y wezterm-nightly
 
-source "$(dirname "$0")/scripts/install-common-linux.sh"
+source "$(dirname "$0")/scripts/install-common-debian.sh"
 source "$(dirname "$0")/scripts/install-common-unix.sh"
