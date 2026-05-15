@@ -1,8 +1,6 @@
 # Dotfiles
 
-Personal dotfiles.
-
-A VS Code-inspired Neovim configuration packed with preinstalled LSPs, linters and formatters.
+Personal dotfiles for Windows, WSL, Ubuntu and MacOS with a VS Code-inspired Neovim configuration packed with preinstalled LSPs, linters and formatters.
 
 Github Dark Default theme for wezterm and Neovim.
 
