@@ -44,9 +44,11 @@ New-Item -ItemType SymbolicLink -Path $PROFILE -Target "$env:USERPROFILE\dotfile
 # wsl
 New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.wslconfig" -Target "$env:USERPROFILE\dotfiles\wsl\.wslconfig"
 # mise
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.config\mise" -Force
 New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.config\mise\config.toml" -Target "$env:USERPROFILE\dotfiles\mise\config.toml"
 New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\mise.toml" -Target "$env:USERPROFILE\dotfiles\mise\mise.windows.toml"
 # neovim
+New-Item -ItemType Directory -Path "$env:LOCALAPPDATA\nvim" -Force
 New-Item -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\nvim" -Target "$env:USERPROFILE\dotfiles\nvim"
 # markdownlint
 New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.markdownlint.json" -Target "$env:USERPROFILE\dotfiles\markdownlint\.markdownlint.json"
@@ -115,7 +117,6 @@ curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/sh
 echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
 sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
 sudo apt update
-sudo apt install wezterm
 sudo apt install wezterm-nightly
 ```
 
@@ -126,9 +127,11 @@ sudo apt install wezterm-nightly
 # zshrc
 ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
 # mise
+mkdir -p ~/.config/mise
 ln -s ~/dotfiles/mise/config.toml ~/.config/mise/config.toml
 ln -s ~/dotfiles/mise/mise.unix.toml ~/mise.toml
 # neovim
+mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/nvim ~/.config/nvim
 # markdownlint
 ln -s ~/dotfiles/markdownlint/.markdownlint.json ~/.markdownlint.json
@@ -175,9 +178,11 @@ curl -fsSL https://get.jetify.com/devbox | bash
 # zshrc
 ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
 # mise
+mkdir -p ~/.config/mise
 ln -s ~/dotfiles/mise/config.toml ~/.config/mise/config.toml
 ln -s ~/dotfiles/mise/mise.unix.toml ~/mise.toml
 # neovim
+mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/nvim ~/.config/nvim
 # markdownlint
 ln -s ~/dotfiles/markdownlint/.markdownlint.json ~/.markdownlint.json
