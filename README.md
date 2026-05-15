@@ -128,6 +128,7 @@ sudo apt install -y wezterm-nightly
 - Add symlinks (backup old files if necessary):
 
 ```sh
+mkdir -p ~/.config
 # zshrc
 ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
 # git
@@ -138,7 +139,6 @@ mkdir -p ~/.config/mise
 ln -s ~/dotfiles/mise/config.toml ~/.config/mise/config.toml
 ln -s ~/dotfiles/mise/mise.unix.toml ~/mise.toml
 # neovim
-mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/nvim ~/.config/nvim
 # markdownlint
 ln -s ~/dotfiles/markdownlint/.markdownlint.json ~/.markdownlint.json
@@ -182,6 +182,7 @@ curl -fsSL https://get.jetify.com/devbox | bash
 - Add symlinks (backup old files if necessary):
 
 ```sh
+mkdir -p ~/.config
 # zshrc
 ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
 # git
@@ -192,7 +193,6 @@ mkdir -p ~/.config/mise
 ln -s ~/dotfiles/mise/config.toml ~/.config/mise/config.toml
 ln -s ~/dotfiles/mise/mise.unix.toml ~/mise.toml
 # neovim
-mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/nvim ~/.config/nvim
 # markdownlint
 ln -s ~/dotfiles/markdownlint/.markdownlint.json ~/.markdownlint.json
