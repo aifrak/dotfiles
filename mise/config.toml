@@ -11,6 +11,7 @@ yarn = "latest"
 
 # -- terminal tools
 oh-my-posh = "latest"
+opencode = "latest"
 fzf = "latest"
 lsd = "latest"
 
