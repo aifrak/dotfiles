@@ -17,8 +17,9 @@ lsd = "latest"
 # -- neovim tools
 neovim = "stable"
 tree-sitter = "latest"
-"aqua:expert-lsp/expert" = "latest"
 typstyle = "latest"
+# elixir LSP
+"aqua:expert-lsp/expert" = "latest"
 # snacks.nvim (picker)
 ripgrep = "latest"
 # snacks.nvim (lazygit)
