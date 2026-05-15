@@ -11,7 +11,6 @@ scoop bucket add extras
 
 scoop install main/git
 scoop install nerd-fonts/FiraCode-NF
-scoop install main/oh-my-posh
 scoop install main/mise
 scoop install versions/wezterm-nightly
 scoop install extras/psfzf

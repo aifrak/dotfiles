@@ -1,5 +1,3 @@
-oh-my-posh init pwsh --config ~\dotfiles\oh-my-posh\custom-theme.omp.yml | Invoke-Expression
-
 # ---------------------------------------------- #
 #                     Aliases                    #
 # ---------------------------------------------- #
@@ -24,3 +22,5 @@ $commandOverride = [ScriptBlock]{ param($Location) Write-Host $Location }
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
 mise activate pwsh | Out-String | Invoke-Expression
+
+oh-my-posh init pwsh --config ~\dotfiles\oh-my-posh\custom-theme.omp.yml | Invoke-Expression

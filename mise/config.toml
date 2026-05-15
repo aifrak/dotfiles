@@ -10,6 +10,7 @@ python = "3.14.4"
 yarn = "latest"
 
 # -- terminal tools
+oh-my-posh = "latest"
 fzf = "latest"
 lsd = "latest"
 
