@@ -1,4 +1,4 @@
-oh-my-posh init pwsh --config ~\custom-theme.omp.yml | Invoke-Expression
+oh-my-posh init pwsh --config ~\dotfiles\oh-my-posh\custom-theme.omp.yml | Invoke-Expression
 
 # ---------------------------------------------- #
 #                     Aliases                    #

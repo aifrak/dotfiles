@@ -24,6 +24,5 @@ fd = "latest"
 # copy configs
 VALE_CONFIG_PATH = "$HOME/dotfiles/vale/vale.ini"
 WEZTERM_CONFIG_FILE = "$HOME/dotfiles/wezterm/wezterm.lua"
-OH_MY_POSH_CONFIG = "$HOME/dotfiles/oh-my-posh/custom-theme.omp.yml"
 # keep elixir iex history
 ERL_AFLAGS = "-kernel shell_history enabled"

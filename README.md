@@ -40,6 +40,7 @@ scoop install extras/psfzf
 
 ```powershell
 # powershell
+New-Item -ItemType Directory -Path "$env:USERPROFILE\Documents\PowerShell" -Force
 New-Item -ItemType SymbolicLink -Path $PROFILE -Target "$env:USERPROFILE\dotfiles\powershell\Microsoft.PowerShell_profile.ps1"
 # wsl
 New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.wslconfig" -Target "$env:USERPROFILE\dotfiles\wsl\.wslconfig"
