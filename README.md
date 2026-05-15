@@ -43,6 +43,9 @@ scoop install extras/psfzf
 New-Item -ItemType SymbolicLink -Path $PROFILE -Target "$env:USERPROFILE\dotfiles\powershell\profile.ps1"
 # wsl
 New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.wslconfig" -Target "$env:USERPROFILE\dotfiles\wsl\.wslconfig"
+# git
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.config\git" -Force
+New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.config\git\.gitconfig" -Target "$env:USERPROFILE\dotfiles\git\.gitconfig"
 # mise
 New-Item -ItemType Directory -Path "$env:USERPROFILE\.config\mise" -Force
 New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.config\mise\config.toml" -Target "$env:USERPROFILE\dotfiles\mise\config.toml"
@@ -91,14 +94,14 @@ scoop install main/luarocks
 - Install tools:
 
 ```bash
-sudo apt update
-sudo apt install git
-sudo apt install zsh
+sudo apt update -y
+sudo apt install -y git
+sudo apt install -y zsh
 curl -s https://ohmyposh.dev/install.sh | bash -s
 curl https://mise.run | sh
 sudo apt-add-repository ppa:neovim-ppa/unstable
-sudo apt update
-sudo apt install neovim
+sudo apt update -y
+sudo apt install -y neovim
 curl -fsSL https://get.jetify.com/devbox | bash
 ```
 
@@ -116,8 +119,8 @@ fc-cache -fv
 curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
 echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
 sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
-sudo apt update
-sudo apt install wezterm-nightly
+sudo apt update -y
+sudo apt install -y wezterm-nightly
 ```
 
 - Clone this repository.
@@ -126,6 +129,9 @@ sudo apt install wezterm-nightly
 ```sh
 # zshrc
 ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
+# git
+mkdir -p ~/.config/git
+ln -s ~/dotfiles/git/.gitconfig ~/.config/git/.gitconfig
 # mise
 mkdir -p ~/.config/mise
 ln -s ~/dotfiles/mise/config.toml ~/.config/mise/config.toml
@@ -177,6 +183,9 @@ curl -fsSL https://get.jetify.com/devbox | bash
 ```sh
 # zshrc
 ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
+# git
+mkdir -p ~/.config/git
+ln -s ~/dotfiles/git/.gitconfig ~/.config/git/.gitconfig
 # mise
 mkdir -p ~/.config/mise
 ln -s ~/dotfiles/mise/config.toml ~/.config/mise/config.toml
@@ -217,6 +226,8 @@ Snippets to remove symlinks.
 Remove-Item "$env:LOCALAPPDATA\nvim"
 # powershell
 Remove-Item $PROFILE
+# git
+Remove-Item "$env:USERPROFILE\.config\git\.gitconfig"
 # mise
 Remove-Item "$env:USERPROFILE\.config\mise\config.toml"
 Remove-Item "$env:USERPROFILE\mise.toml"
@@ -231,6 +242,8 @@ Remove-Item "$env:USERPROFILE\.markdownlint.json"
 ```sh
 # zshrc
 rm ~/.zshrc
+# git
+rm ~/.config/git/.gitconfig
 # mise
 rm ~/.config/mise/config.toml
 rm ~/mise.toml
