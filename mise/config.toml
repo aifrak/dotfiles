@@ -2,17 +2,22 @@
 env_shell_expand = true
 
 [tools]
-neovim = "stable"
+# -- programming languages
 go = "1.26.2"
 node = "24.9.0"
 rust = "1.95.0"
 python = "3.14.4"
-"aqua:expert-lsp/expert" = "latest"
+yarn = "latest"
+
+# -- terminal tools
 fzf = "latest"
 lsd = "latest"
-typstyle = "latest"
-yarn = "latest"
+
+# -- neovim tools
+neovim = "stable"
 tree-sitter = "latest"
+"aqua:expert-lsp/expert" = "latest"
+typstyle = "latest"
 # snacks.nvim (picker)
 ripgrep = "latest"
 # snacks.nvim (lazygit)
