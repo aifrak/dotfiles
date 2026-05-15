@@ -8,7 +8,7 @@ sudo apt install -y imagemagick
 # cannot be installed with mise without building from source
 sudo apt install -y lua5.1 luarocks
 
-# - Symlinks
+# -- Symlinks
 
 mkdir -p ~/.config
 
@@ -25,3 +25,11 @@ ln -s ~/dotfiles/mise/mise.unix.toml ~/mise.toml
 ln -s ~/dotfiles/nvim ~/.config/nvim
 # markdownlint
 ln -s ~/dotfiles/markdownlint/.markdownlint.json ~/.markdownlint.json
+
+# post-install instructions
+echo ""
+echo "Manual step: add the following at the top of ~/.gitconfig:"
+echo ""
+echo "[include]"
+echo "  path = ~/dotfiles/git/.gitconfig"
+echo ""
