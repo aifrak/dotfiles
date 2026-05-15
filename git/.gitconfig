@@ -16,5 +16,3 @@
   changed = red bold
   untracked = cyan
   branch = yellow black bold
-[include]
-  path = %(prefix)/dotfiles/git/config
