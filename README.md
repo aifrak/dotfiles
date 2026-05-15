@@ -26,6 +26,10 @@ Still WIP.
 - Install tools:
 
 ```powershell
+scoop bucket add nerd-fonts
+scoop bucket add versions
+scoop bucket add extras
+
 scoop install main/git
 scoop install nerd-fonts/FiraCode-NF
 scoop install main/oh-my-posh
