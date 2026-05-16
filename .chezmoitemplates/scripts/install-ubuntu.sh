@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-snap install chezmoi --classic
+echo "Install for Ubuntu"
 
 # FiraCode Nerd Fonts
 mkdir -p ~/.local/share/fonts
@@ -16,5 +16,4 @@ sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
 sudo apt update -y
 sudo apt install -y wezterm-nightly
 
-source "$(dirname "$0")/scripts/install-common-debian.sh"
-source "$(dirname "$0")/scripts/install-common-unix.sh"
+{{ includeTemplate "scripts/common-install-debian.sh" . }}

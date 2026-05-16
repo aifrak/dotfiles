@@ -1,0 +1,21 @@
+[include]
+  path = ~/.config/git/.gitconfig
+
+{{ if .isPersonal -}}
+[user]
+  name = {{ (keepassxc "GPG key").UserName }}
+  email = {{ keepassxcAttribute "GPG key" "email" }}
+  signingkey = {{ keepassxcAttribute "GPG key" "signingkey" }}
+[commit]
+  gpgsign = true
+[gpg]
+{{- if .isWindows }}
+  program = {{ .chezmoi.homeDir }}/scoop/apps/gpg4win/current/GnuPG/bin/gpg.exe
+{{- else if .isWSL }}
+  program = /mnt/c/Users/{{ .windowsHostUsername }}/scoop/apps/gpg4win/current/GnuPG/bin/gpg.exe
+{{- end }}
+[credential]
+  helper = manager
+[credential "helperselector"]
+  selected = manager
+{{- end }}

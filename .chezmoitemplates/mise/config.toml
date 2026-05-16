@@ -28,10 +28,7 @@ lazygit = "latest"
 # snacks.nvim (picker)
 fd = "latest"
 
-
 [env]
-# config paths
-VALE_CONFIG_PATH = "{{ get_env(name='HOME', default=env.USERPROFILE) }}/dotfiles/vale/vale.ini"
-WEZTERM_CONFIG_FILE = "{{ get_env(name='HOME', default=env.USERPROFILE) }}/dotfiles/wezterm/wezterm.lua"
+XDG_CONFIG_HOME = "{{ .chezmoi.homeDir }}/.config"
 # keep elixir iex history
 ERL_AFLAGS = "-kernel shell_history enabled"

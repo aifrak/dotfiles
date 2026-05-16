@@ -1,0 +1,5 @@
+{{ if .isWindows -}}
+{{ includeTemplate "mise/config-windows.local.toml" . }}
+{{ else -}}
+{{ includeTemplate "mise/config-unix.local.toml" . }}
+{{ end -}}

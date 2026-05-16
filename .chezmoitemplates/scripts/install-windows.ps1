@@ -1,7 +1,4 @@
-# -- Install scoop
-
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+Write-Host "Install for Windows"
 
 # -- Install tools
 
@@ -12,9 +9,11 @@ scoop bucket add extras
 scoop install main/git
 scoop install nerd-fonts/FiraCode-NF
 scoop install main/mise
-scoop install main/chezmoi
 scoop install versions/wezterm-nightly
 scoop install extras/psfzf
+{{- if .isPersonal }}
+scoop install extras/keepassxc
+{{- end }}
 
 # -- blink.cmp
 
