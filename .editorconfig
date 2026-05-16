@@ -17,5 +17,8 @@ switch_case_indent = true
 [{Dockerfile*,*.dockerfile}]
 binary_next_line = true
 
-[{*.md,*.markdown}]
-trim_trailing_whitespace = false
+[*.{bat,BAT,Bat,cmd,CMD,Cmd,ps1,PS1}]
+end_of_line = crlf
+
+[.wslconfig]
+end_of_line = crlf
