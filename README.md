@@ -13,57 +13,7 @@ Still WIP.
 
 ## Installation
 
-### For Windows {#windows-install}
-
-Inside your PowerShell terminal, run below:
-
-```powershell
-.\scripts\install-windows.ps1
-```
-
-### For WSL {#wsl-install}
-
-Inside your terminal, run below:
-
-```sh
-sh ./scripts/install-ubuntu.sh
-```
-
-### For Ubuntu {#ubuntu-install}
-
-Inside your terminal, run below:
-
-```sh
-sh ./scripts/install-ubuntu.sh
-```
-
-### For MacOS {#macos-install}
-
-Inside your terminal, run below:
-
-```sh
-sh ./scripts/install-macos.sh
-```
-
-## Uninstallation
-
-Scripts to remove symlinks.
-
-### For Windows
-
-Inside your PowerShell terminal, run below:
-
-```sh
-.\scripts\uninstall-windows.ps1
-```
-
-### For Ubuntu, WSL and MacOS
-
-Inside your terminal, run below:
-
-```sh
-sh ./scripts/uninstall-unix.ps1
-```
+TBD
 
 ## License
 

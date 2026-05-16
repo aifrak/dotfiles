@@ -12,27 +12,9 @@ scoop bucket add extras
 scoop install main/git
 scoop install nerd-fonts/FiraCode-NF
 scoop install main/mise
+scoop install main/chezmoi
 scoop install versions/wezterm-nightly
 scoop install extras/psfzf
-
-# -- Symlinks
-
-# powershell
-New-Item -ItemType Directory -Path "$env:USERPROFILE\Documents\PowerShell" -Force
-New-Item -ItemType SymbolicLink -Path $PROFILE -Target "$env:USERPROFILE\dotfiles\powershell\Microsoft.PowerShell_profile.ps1"
-# wsl
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.wslconfig" -Target "$env:USERPROFILE\dotfiles\wsl\.wslconfig"
-# git
-New-Item -ItemType Directory -Path "$env:USERPROFILE\.config\git" -Force
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.config\git\.gitconfig" -Target "$env:USERPROFILE\dotfiles\git\.gitconfig"
-# mise
-New-Item -ItemType Directory -Path "$env:USERPROFILE\.config\mise" -Force
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.config\mise\config.toml" -Target "$env:USERPROFILE\dotfiles\mise\config.toml"
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\mise.toml" -Target "$env:USERPROFILE\dotfiles\mise\mise.windows.toml"
-# neovim
-New-Item -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\nvim" -Target "$env:USERPROFILE\dotfiles\nvim"
-# markdownlint
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.markdownlint.json" -Target "$env:USERPROFILE\dotfiles\markdownlint\.markdownlint.json"
 
 # -- blink.cmp
 

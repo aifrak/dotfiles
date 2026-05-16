@@ -5,6 +5,7 @@
 brew install git \
 brew install --cask font-fira-code-nerd-font
 brew install mise
+brew install chezmoi
 brew install --cask wezterm@nightly
 curl -fsSL https://get.jetify.com/devbox | bash
 

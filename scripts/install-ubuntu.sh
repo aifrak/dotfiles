@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+snap install chezmoi --classic
+
 # FiraCode Nerd Fonts
 mkdir -p ~/.local/share/fonts
 (cd ~/.local/share/fonts \
