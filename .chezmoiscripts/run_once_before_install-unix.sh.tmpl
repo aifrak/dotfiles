@@ -1,6 +1,4 @@
-{{ if .isWindows -}}
-{{/* Do nothing */}}
-{{- else if .isWSL }}
+{{ if .isWSL }}
 {{ includeTemplate "scripts/install_wsl.sh" . }}
 {{- else if .isMacOs }}
 {{ includeTemplate "scripts/install_macos.sh" . }}
