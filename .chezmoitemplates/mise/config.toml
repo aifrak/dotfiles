@@ -2,12 +2,21 @@
 env_shell_expand = true
 
 [tools]
+# -- package managers (node)
+pnpm = "latest"
+# used by mise
+aube = "latest"
+# used by Neovim plugin
+yarn = "latest"
+
+# -- package managers (python)
+uv = "latest"
+
 # -- programming languages
 go = "1.26.2"
 node = "lts"
 rust = "1.95.0"
 python = "3.14.4"
-yarn = "latest"
 
 # -- terminal tools
 oh-my-posh = "latest"
