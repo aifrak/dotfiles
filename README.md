@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/) for Windows, WSL, Ubuntu and MacOS with a VS Code-inspired Neovim configuration packed with preinstalled LSPs, linters and formatters.
+Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/) for Windows, WSL2, Ubuntu and MacOS with a VS Code-inspired Neovim configuration packed with preinstalled LSPs, linters and formatters.
 
 Github Dark Default theme for [wezterm](https://wezterm.org) and [Neovim](https://neovim.io/).
 
@@ -24,7 +24,7 @@ scoop install chezmoi
 chezmoi init aifrak/dotfiles
 ```
 
-### For WSL / Ubuntu
+### For WSL2 / Ubuntu
 
 ```sh
 sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply aifrak
