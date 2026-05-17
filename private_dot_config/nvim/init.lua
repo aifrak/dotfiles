@@ -1,8 +1,7 @@
 -- ~/.config/nvim/init.lua
 
 -- =========================================================
---  Neovim IDE - Plain, Professional, Modular
---  Uses lazy.nvim, blink.cmp, Minuet, CodeCompanion
+--  Neovim IDE
 --  Works on Linux, Windows, and WSL
 -- =========================================================
 
