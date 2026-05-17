@@ -1,0 +1,15 @@
+.github/
+.vscode/
+.gitattributes
+.gitignore
+scripts/
+CHANGELOG.md
+README.md
+LICENSE
+
+{{ if not .isWindows }}
+  dot_wslconfig
+  readonly_Documents/PowerShell/Microsoft.PowerShell_profile.ps1
+{{ else }}
+  dot_zshrc
+{{ end }}

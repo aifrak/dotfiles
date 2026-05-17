@@ -1,10 +1,10 @@
 # Dotfiles
 
-Personal dotfiles for Windows, WSL, Ubuntu and MacOS with a VS Code-inspired Neovim configuration packed with preinstalled LSPs, linters and formatters.
+Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/) for Windows, WSL, Ubuntu and MacOS with a VS Code-inspired Neovim configuration packed with preinstalled LSPs, linters and formatters.
 
-Github Dark Default theme for wezterm and Neovim.
+Github Dark Default theme for [wezterm](https://wezterm.org) and [Neovim](https://neovim.io/).
 
-Custom theme for Oh-My-Posh.
+Custom theme for [Oh-My-Posh](https://ohmyposh.dev/).
 
 Still WIP.
 
@@ -13,56 +13,31 @@ Still WIP.
 
 ## Installation
 
-### For Windows {#windows-install}
-
-Inside your PowerShell terminal, run below:
-
-```powershell
-.\scripts\install-windows.ps1
-```
-
-### For WSL {#wsl-install}
-
-Inside your terminal, run below:
-
-```sh
-sh ./scripts/install-ubuntu.sh
-```
-
-### For Ubuntu {#ubuntu-install}
-
-Inside your terminal, run below:
-
-```sh
-sh ./scripts/install-ubuntu.sh
-```
-
-### For MacOS {#macos-install}
-
-Inside your terminal, run below:
-
-```sh
-sh ./scripts/install-macos.sh
-```
-
-## Uninstallation
-
-Scripts to remove symlinks.
-
 ### For Windows
 
-Inside your PowerShell terminal, run below:
+```powershell
+# Install scoop
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 
-```sh
-.\scripts\uninstall-windows.ps1
+scoop install chezmoi
+chezmoi init aifrak/dotfiles
 ```
 
-### For Ubuntu, WSL and MacOS
-
-Inside your terminal, run below:
+### For WSL / Ubuntu
 
 ```sh
-sh ./scripts/uninstall-unix.ps1
+sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply aifrak
+```
+
+### For MacOS
+
+```sh
+# Install brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install chezmoi
+chezmoi init aifrak/dotfiles
 ```
 
 ## License

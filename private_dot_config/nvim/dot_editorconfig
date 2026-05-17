@@ -3,6 +3,7 @@ root = true
 [*]
 indent_style = space
 indent_size = 2
+tab_width = 2
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
@@ -10,15 +11,15 @@ insert_final_newline = true
 max_line_length = 80
 quote_type = auto
 
-[{install,uninstall,run,*.sh,*.sh.tmpl}]
+[*.{bat,cmd}]
+end_of_line = crlf
+
+[*.sh]
 binary_next_line = true
 switch_case_indent = true
 
-[{Dockerfile*,*.dockerfile}]
+[Dockerfile*]
 binary_next_line = true
 
-[*.{bat,BAT,Bat,cmd,CMD,Cmd,ps1,PS1,ps1.tmpl,PS1.tmpl}]
-end_of_line = crlf
-
-[.wslconfig]
-end_of_line = crlf
+[*.md]
+trim_trailing_whitespace = false

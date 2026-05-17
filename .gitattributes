@@ -1,3 +1,7 @@
 * text=auto eol=lf
 *.{bat,[bB][aA][tT]} text eol=crlf
 *.{cmd,[cC][mM][dD]} text eol=crlf
+*.{ps1,[pP][sS]1} text eol=crlf
+*.{ps1.tmpl,[pP][sS]1.tmpl} text eol=crlf
+.wslconfig text eol=crlf
+

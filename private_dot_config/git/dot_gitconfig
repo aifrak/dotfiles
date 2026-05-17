@@ -1,9 +1,13 @@
+[fetch]
+  prune = true
 [diff]
   tool = nvimdiff
 [difftool "nvimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [difftool]
   prompt = false
+[core]
+  editor = nvim --wait
 [merge]
   tool = nvimdiff
 [mergetool "nvimdiff"]

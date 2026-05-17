@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-# -- Install tools
-
-source "$(dirname "$0")/scripts/install-common-linux.sh"
-source "$(dirname "$0")/scripts/install-common-unix.sh"
+echo "Install for Ubuntu"
 
 # FiraCode Nerd Fonts
 mkdir -p ~/.local/share/fonts
@@ -18,3 +15,5 @@ echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/w
 sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
 sudo apt update -y
 sudo apt install -y wezterm-nightly
+
+{{ includeTemplate "scripts/common-install-debian.sh" . }}

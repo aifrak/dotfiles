@@ -1,4 +1,5 @@
 [env]
+_.path = ['${LOCALAPPDATA}\nvim-data\mason\bin']
 # Fix for Windows and Neovim - blink.cmp (Rust fuzzy search)
 RUSTUP_TOOLCHAIN = "stable-x86_64-pc-windows-gnu"
 # Fix error when running below:
