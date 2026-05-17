@@ -4,7 +4,7 @@ env_shell_expand = true
 [tools]
 # -- programming languages
 go = "1.26.2"
-node = "24.9.0"
+node = "lts"
 rust = "1.95.0"
 python = "3.14.4"
 yarn = "latest"
