@@ -1,0 +1,5 @@
+{{ if .isWindows -}}
+# mise-lock.json hash: {{ include (joinPath .chezmoi.homeDir ".config/mise/mise.lock") | sha256sum }}
+
+mise install
+{{- end }}

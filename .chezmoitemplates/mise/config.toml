@@ -41,6 +41,9 @@ fd = "latest"
 "npm:skills" = "latest"
 
 [env]
+{{ if .isPersonal }}
+MISE_GITHUB_TOKEN = "{{ keepassxcAttribute "GitHub" "PAT_CRAWL_REPOS" }}"
+{{ end }}
 XDG_CONFIG_HOME = "{{ .chezmoi.homeDir }}/.config"
 # keep elixir iex history
 ERL_AFLAGS = "-kernel shell_history enabled"
