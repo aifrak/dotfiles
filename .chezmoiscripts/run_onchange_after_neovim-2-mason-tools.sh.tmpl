@@ -1,7 +1,7 @@
 {{ if .isUnix -}}
 #!/usr/bin/env bash
 
-# mason lock hash: {{ include (joinPath .chezmoi.homeDir ".config/nvim/lua/mason-lock.json") | sha256sum }}
+# mason lock hash: {{ include (joinPath .chezmoi.homeDir ".config/nvim/mason-lock.json") | sha256sum }}
 
-nvim --headless "+MasonLockRestore" +qa
+nvim --headless "+MasonLockRestoreSync"
 {{- end }}

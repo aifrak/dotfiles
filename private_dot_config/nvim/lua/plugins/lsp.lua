@@ -11,6 +11,20 @@ return {
       require("mason-lock").setup({
         lockfile_path = vim.fn.stdpath("config") .. "/mason-lock.json" -- (default)
       })
+
+      -- Fix issue while synching from "chezmoi apply"
+      vim.api.nvim_create_user_command("MasonLockRestoreSync", function()
+        vim.cmd("MasonLockRestore")
+
+        -- Wait for Mason to finish installing
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "MasonToolsUpdateCompleted",
+          once = true,
+          callback = function()
+            vim.cmd("qa")
+          end,
+        })
+      end, {})
     end,
   },
   {
