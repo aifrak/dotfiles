@@ -37,6 +37,9 @@ lazygit = "latest"
 # snacks.nvim (picker)
 fd = "latest"
 
+# -- AI skills
+"npm:skills" = "latest"
+
 [env]
 XDG_CONFIG_HOME = "{{ .chezmoi.homeDir }}/.config"
 # keep elixir iex history
