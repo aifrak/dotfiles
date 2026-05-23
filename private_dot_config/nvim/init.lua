@@ -1,5 +1,3 @@
--- ~/.config/nvim/init.lua
-
 -- =========================================================
 --  Neovim IDE
 --  Works on Linux, Windows, and WSL
