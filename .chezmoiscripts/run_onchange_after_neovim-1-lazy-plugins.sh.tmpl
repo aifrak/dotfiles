@@ -1,0 +1,7 @@
+{{ if .isUnix -}}
+#!/usr/bin/env bash
+
+# lazy-lock.json hash: {{ include (joinPath .chezmoi.homeDir ".config/nvim/lazy-lock.json") | sha256sum }}
+
+nvim --headless "+Lazy! restore" +qa
+{{- end }}

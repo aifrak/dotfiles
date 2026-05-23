@@ -1,0 +1,5 @@
+{{ if .isWindows -}}
+# mason lock hash: {{ include (joinPath .chezmoi.homeDir ".config/nvim/lua/plugins/mason-tool-installer.lua") | sha256sum }}
+
+nvim --headless "+MasonToolsInstallSync" +qa
+{{- end }}
