@@ -1,28 +1,5 @@
 -- Theme
 
--- return {
---   "EdenEast/nightfox.nvim",
---   lazy = false,
---   priority = 1000,
---   config = function()
---     local palette = require("theme.carbonfox.palette").palette
---     local spec = require("theme.carbonfox.spec").spec
---     local groups = require("theme.carbonfox.groups").groups
---     local plugin_groups = require("theme.carbonfox.plugins").plugins
-
---     require("nightfox").setup({
---       palettes = { carbonfox = palette },
---       specs = { carbonfox = spec },
---       groups = {
---         carbonfox = vim.tbl_extend("force", groups, plugin_groups),
---       },
---     })
-
---     vim.cmd("colorscheme carbonfox")
---   end,
--- }
-
-
 return {
   "projekt0n/github-nvim-theme",
   lazy = false,
@@ -64,6 +41,7 @@ return {
         },
       },
     })
+    require("github-theme").compile()
     vim.cmd("colorscheme github_dark_default")
   end,
 }
