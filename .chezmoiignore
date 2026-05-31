@@ -1,7 +1,7 @@
 .github/
-.vscode/
 .gitattributes
 .gitignore
+.vscode/
 scripts/
 CHANGELOG.md
 README.md
