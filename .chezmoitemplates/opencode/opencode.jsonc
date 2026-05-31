@@ -1,0 +1,52 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+{{- if .isPersonal }}
+    "Context7": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}",
+      },
+    },
+    "DeepWiki": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.deepwiki.com/mcp",
+    },
+    "StackOverflow": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.stackoverflow.com",
+    },
+    "Tidewave": {
+      "enabled": true,
+      "type": "remote",
+      "url": "http://localhost:4000/tidewave/mcp",
+    },
+{{- end }}
+    "ChromeDevTools": {
+      "enabled": true,
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@1.1.1",
+        "--no-usage-statistics",
+      ],
+    },
+    "ServerMemory": {
+      "enabled": true,
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-memory@2026.1.26"
+      ],
+      "env": {
+        "MEMORY_FILE_PATH": "{{ .chezmoi.homeDir }}/mcp-server-memory.jsonl"
+      },
+    },
+  },
+}

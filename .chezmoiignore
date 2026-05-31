@@ -4,8 +4,8 @@
 .vscode/
 scripts/
 CHANGELOG.md
-README.md
 LICENSE
+README.md
 
 {{ if not .isWindows }}
   dot_wslconfig

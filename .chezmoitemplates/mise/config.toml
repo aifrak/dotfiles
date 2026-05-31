@@ -43,6 +43,7 @@ fd = "latest"
 [env]
 {{ if .isPersonal }}
 MISE_GITHUB_TOKEN = "{{ keepassxcAttribute "GitHub" "PAT_CRAWL_REPOS" }}"
+CONTEXT7_API_KEY = "{{ keepassxcAttribute "Context7" "API key" }}"
 {{ end }}
 XDG_CONFIG_HOME = "{{ .chezmoi.homeDir }}/.config"
 # keep elixir iex history
