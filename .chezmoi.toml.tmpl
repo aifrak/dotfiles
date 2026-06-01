@@ -22,7 +22,7 @@
 
 [data]
   isWindows = {{ $isWindows }}
-  isUnix = {{ or .isWSL .isUbuntu .isMacOs }}
+  isUnix = {{ or $isWSL $isUbuntu $isMacOs }}
   isWSL = {{ $isWSL }}
   isMacOs = {{ $isMacOs }}
   isUbuntu = {{ $isUbuntu }}
