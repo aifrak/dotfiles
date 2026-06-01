@@ -21,7 +21,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 
 scoop install chezmoi
-chezmoi init aifrak/dotfiles
+chezmoi init aifrak/dotfiles --apply
 ```
 
 ### For WSL2 / Ubuntu
@@ -37,7 +37,7 @@ sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply aifrak
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 brew install chezmoi
-chezmoi init aifrak/dotfiles
+chezmoi init aifrak/dotfiles --apply
 ```
 
 ## License
