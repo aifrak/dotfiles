@@ -59,12 +59,6 @@ zinit wait lucid for \
   as"completion" OMZP::mix-fast
 
 # ---------------------------------------------- #
-#                      Theme                     #
-# ---------------------------------------------- #
-
-eval "$(oh-my-posh init zsh --config $HOME/dotfiles/oh-my-posh/custom-theme.omp.yml)"
-
-# ---------------------------------------------- #
 #                   zsh options                  #
 # ---------------------------------------------- #
 
@@ -99,3 +93,6 @@ if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then . "${HOME}/.nix-prof
 # mise (needs mise in path also chezmoi custom scripts)
 eval "$($HOME/.local/bin/mise activate zsh)" # needed when mise install inside devbox
 command -v mise &> /dev/null && eval "$(mise activate zsh)"
+
+# custom theme (oh-my-posh)
+eval "$(oh-my-posh init zsh --config $HOME/custom-theme.omp.yml)"
