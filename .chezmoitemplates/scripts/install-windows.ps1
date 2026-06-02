@@ -37,5 +37,5 @@ scoop install imagemagick
 # -- Lua
 # cannot be installed with mise without building from source
 
-scoop install main/lua51
+scoop install versions/lua51
 scoop install main/luarocks

@@ -87,7 +87,7 @@ scoop install imagemagick
 #### Lua
 
 ```powershell
-scoop install main/lua51
+scoop install versions/lua51
 scoop install main/luarocks
 ```
 
