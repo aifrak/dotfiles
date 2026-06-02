@@ -3,5 +3,7 @@
 
 # mise-lock.json hash: {{ include (joinPath .chezmoi.homeDir ".config/mise/mise.lock") | sha256sum }}
 
+{{ includeTemplate "scripts/helpers-unix.sh" . }}
+
 mise install
 {{- end }}

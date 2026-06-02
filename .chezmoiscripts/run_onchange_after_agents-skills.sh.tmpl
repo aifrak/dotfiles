@@ -4,6 +4,8 @@
 # skills-lock.json hash:          {{ include (joinPath .chezmoi.homeDir "skills-lock.json") | sha256sum }}
 # ./agents/.skill-lock.json hash: {{ include (joinPath .chezmoi.homeDir ".agents/.skill-lock.json") | sha256sum }}
 
+{{ includeTemplate "scripts/helpers-unix.sh" . }}
+
 cd {{ .chezmoi.homeDir }}
 skills experimental_install
 {{- end }}

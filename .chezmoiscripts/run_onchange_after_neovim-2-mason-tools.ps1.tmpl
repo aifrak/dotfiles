@@ -1,5 +1,7 @@
 {{ if .isWindows -}}
 # mason lock hash: {{ include (joinPath .chezmoi.homeDir ".config/nvim/mason-lock.json") | sha256sum }}
 
+{{ includeTemplate "scripts/helpers-windows.ps1" . }}
+
 nvim --headless "+MasonLockRestoreSync"
 {{- end }}

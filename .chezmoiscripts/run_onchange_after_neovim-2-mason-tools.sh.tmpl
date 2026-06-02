@@ -3,5 +3,7 @@
 
 # mason lock hash: {{ include (joinPath .chezmoi.homeDir ".config/nvim/mason-lock.json") | sha256sum }}
 
+{{ includeTemplate "scripts/helpers-unix.sh" . }}
+
 nvim --headless "+MasonLockRestoreSync"
 {{- end }}
