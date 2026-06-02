@@ -96,6 +96,6 @@ alias lt='ls --tree'
 # devbox
 if [ -e "${HOME}/.nix-profile/etc/profile.d/nix.sh" ]; then . "${HOME}/.nix-profile/etc/profile.d/nix.sh"; fi # added by Nix installer
 
-# mise (asdf)
-eval "$($HOME/.local/bin/mise activate zsh)"
+# mise (needs mise in path also chezmoi custom scripts)
+eval "$($HOME/.local/bin/mise activate zsh)" # needed when mise install inside devbox
 command -v mise &> /dev/null && eval "$(mise activate zsh)"
