@@ -9,6 +9,7 @@ scoop bucket add extras
 scoop install main/git
 scoop install nerd-fonts/FiraCode-NF
 scoop install main/mise
+scoop install extras/vcredist2022
 scoop install versions/wezterm-nightly
 scoop install extras/psfzf
 {{- if .isPersonal }}

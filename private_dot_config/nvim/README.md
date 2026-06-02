@@ -34,6 +34,7 @@ scoop install main/oh-my-posh
 
 ```powershell
 scoop install main/mise
+scoop install extras/vcredist2022
 ```
 
 - Install [Neovim](https://neovim.io/) 0.12+:
