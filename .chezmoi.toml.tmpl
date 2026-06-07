@@ -31,6 +31,11 @@
   computerType = {{ $computerType | quote }}
   windowsHostUserDir = {{ $windowsHostUserDir | quote }}
   wslMemory = {{ $wslMemory | quote }}
+  chromeDevToolHost = {{- if $isWSL -}}
+{{- output "sh" "-c" "ip route show default | awk '{print $3}'" | trim | quote -}}
+{{- else -}}
+"127.0.0.1"
+{{- end }}
 
 {{ if $isPersonal }}
 [keepassxc]
