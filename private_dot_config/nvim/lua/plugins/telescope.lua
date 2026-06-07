@@ -10,6 +10,7 @@ return {
 
     telescope.setup({
       defaults = {
+        path_display = { "smart" },
         layout_strategy = "flex",
         sorting_strategy = "ascending",
       },

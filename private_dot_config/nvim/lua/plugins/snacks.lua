@@ -135,6 +135,12 @@ return {
           },
         },
       },
+      formatters = {
+        file = {
+          filename_first = true,
+          truncate = "left",
+        },
+      },
     },
     quickfile = { enabled = true },
     rename = { enabled = true },
