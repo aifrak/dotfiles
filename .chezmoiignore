@@ -2,7 +2,6 @@
 .gitattributes
 .gitignore
 .vscode/
-scripts/
 CHANGELOG.md
 LICENSE
 README.md
