@@ -9,7 +9,7 @@ return {
     "zapling/mason-lock.nvim",
     config = function()
       require("mason-lock").setup({
-        lockfile_path = vim.fn.stdpath("config") .. "/mason-lock.json" -- (default)
+        lockfile_path = vim.fn.stdpath("config") .. "/mason-lock.json", -- (default)
       })
 
       -- Fix issue while synching from "chezmoi apply"
@@ -137,15 +137,57 @@ return {
         callback = function(ev)
           local map = vim.keymap.set
           local opts = { buffer = ev.buf }
-          map("n", "<leader>la", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code Action" }))
-          map("n", "<leader>lr", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename" }))
-          map("n", "<leader>ld", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to Definition" }))
-          map("n", "<leader>lD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to Declaration" }))
-          map("n", "<leader>li", vim.lsp.buf.implementation, vim.tbl_extend("force", opts, { desc = "Go to Implementation" }))
-          map("n", "<leader>lR", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "References" }))
-          map("n", "<leader>lh", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover" }))
-          map("n", "<leader>ls", vim.lsp.buf.signature_help, vim.tbl_extend("force", opts, { desc = "Signature Help" }))
-          map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, vim.tbl_extend("force", opts, { desc = "Format" }))
+          map(
+            "n",
+            "<leader>la",
+            vim.lsp.buf.code_action,
+            vim.tbl_extend("force", opts, { desc = "Code Action" })
+          )
+          map(
+            "n",
+            "<leader>lr",
+            vim.lsp.buf.rename,
+            vim.tbl_extend("force", opts, { desc = "Rename" })
+          )
+          map(
+            "n",
+            "<leader>ld",
+            vim.lsp.buf.definition,
+            vim.tbl_extend("force", opts, { desc = "Go to Definition" })
+          )
+          map(
+            "n",
+            "<leader>lD",
+            vim.lsp.buf.declaration,
+            vim.tbl_extend("force", opts, { desc = "Go to Declaration" })
+          )
+          map(
+            "n",
+            "<leader>li",
+            vim.lsp.buf.implementation,
+            vim.tbl_extend("force", opts, { desc = "Go to Implementation" })
+          )
+          map(
+            "n",
+            "<leader>lR",
+            vim.lsp.buf.references,
+            vim.tbl_extend("force", opts, { desc = "References" })
+          )
+          map(
+            "n",
+            "<leader>lh",
+            vim.lsp.buf.hover,
+            vim.tbl_extend("force", opts, { desc = "Hover" })
+          )
+          map(
+            "n",
+            "<leader>ls",
+            vim.lsp.buf.signature_help,
+            vim.tbl_extend("force", opts, { desc = "Signature Help" })
+          )
+          map("n", "<leader>lf", function()
+            vim.lsp.buf.format({ async = true })
+          end, vim.tbl_extend("force", opts, { desc = "Format" }))
         end,
       })
 
@@ -155,7 +197,7 @@ return {
         settings = {
           Lua = {
             runtime = {
-              version = 'LuaJIT',
+              version = "LuaJIT",
             },
             telemetry = { enable = false },
             diagnostics = { globals = { "vim" } },
@@ -270,5 +312,5 @@ return {
         capabilities = capabilities,
       })
     end,
-  }
+  },
 }

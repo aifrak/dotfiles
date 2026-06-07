@@ -5,7 +5,7 @@ local g = vim.g
 
 -- Disable other providers
 g.loaded_node_provider = 0
-g.loaded_perl_provider  = 0
+g.loaded_perl_provider = 0
 g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 
@@ -27,7 +27,8 @@ opt.relativenumber = true
 opt.cursorline = true
 opt.termguicolors = true
 -- white cursor, enable mode shapes, "Cursor" highlight
-opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:ver25-Cursor,r-cr:hor20-Cursor,o:hor50-Cursor"
+opt.guicursor =
+  "n-v-c:block-Cursor,i-ci-ve:ver25-Cursor,r-cr:hor20-Cursor,o:hor50-Cursor"
 opt.signcolumn = "yes"
 opt.wrap = false
 opt.scrolloff = 8
@@ -60,10 +61,10 @@ vim.diagnostic.config({
   severity_sort = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = '󰅚 ',
-      [vim.diagnostic.severity.WARN] = '󰀪 ',
-      [vim.diagnostic.severity.INFO] = '󰋽 ',
-      [vim.diagnostic.severity.HINT] = '󰌶 ',
+      [vim.diagnostic.severity.ERROR] = "󰅚 ",
+      [vim.diagnostic.severity.WARN] = "󰀪 ",
+      [vim.diagnostic.severity.INFO] = "󰋽 ",
+      [vim.diagnostic.severity.HINT] = "󰌶 ",
     },
   },
 })
@@ -130,22 +131,22 @@ opt.foldlevel = 99
 
 local disabled_builtins = {
   -- Old archive handlers (replaced by external tools)
-  "gzip",            -- Handles .gz files (slow, unnecessary)
-  "zip",             -- Handles .zip files
-  "zipPlugin",       -- Zip plugin support
-  "tar",             -- Handles .tar files
-  "tarPlugin",       -- Tar plugin support
+  "gzip", -- Handles .gz files (slow, unnecessary)
+  "zip", -- Handles .zip files
+  "zipPlugin", -- Zip plugin support
+  "tar", -- Handles .tar files
+  "tarPlugin", -- Tar plugin support
 
   -- Old plugin/package systems (replaced by lazy.nvim)
-  "getscript",       -- Legacy plugin downloader
+  "getscript", -- Legacy plugin downloader
   "getscriptPlugin", -- Legacy plugin downloader
-  "vimball",         -- Old Vim package format
-  "vimballPlugin",   -- Old Vim package format
+  "vimball", -- Old Vim package format
+  "vimballPlugin", -- Old Vim package format
 
   -- Rarely used legacy features
-  "2html_plugin",    -- Converts syntax-highlighted buffers to HTML
-  "logipat",         -- Legacy regex helper
-  "rrhelper",        -- Remote debugging helper (obsolete)
+  "2html_plugin", -- Converts syntax-highlighted buffers to HTML
+  "logipat", -- Legacy regex helper
+  "rrhelper", -- Remote debugging helper (obsolete)
 
   -- Netrw (old file explorer, conflicts with neo-tree/oil.nvim)
   "netrw",

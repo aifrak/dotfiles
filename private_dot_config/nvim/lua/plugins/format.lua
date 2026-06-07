@@ -1,5 +1,5 @@
 return {
-  "stevearc/conform.nvim",
+"stevearc/conform.nvim",
   config = function()
     require("conform").setup({
     formatters_by_ft = {
@@ -33,9 +33,9 @@ return {
       html = { "prettierd" },
       markdown = { "rumdl", "cbfmt" },
       -- Helm, terraform
-      hcl = { "hcl" }, -- "bake" instead of "hclfmt"
-      terraform = { "hcl" }, -- "bake" instead of "hclfmt"
-      tf = { "hcl" },  -- "bake" instead of "hclfmt"
+      hcl = { "hcl" }, -- "hcl" instead of "hclfmt"
+      terraform = { "hcl" }, -- "hcl" instead of "hclfmt"
+      tf = { "hcl" },  -- "hcl" instead of "hclfmt"
     },
     format_on_save = {
       timeout_ms = 500,
