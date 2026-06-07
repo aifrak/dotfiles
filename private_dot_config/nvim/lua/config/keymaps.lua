@@ -33,3 +33,19 @@ vim.keymap.del("n", "grn")
 vim.keymap.del("n", "gri")
 vim.keymap.del("n", "grx")
 vim.keymap.del("n", "grt")
+
+-- Fix for ESC and kitty keyboard to leave Search mode
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- CTRL+BACKSPACE and CTRL+SUPPR remove words
+vim.keymap.set("i", "<C-BS>", "<C-W>", { desc = "Delete word before cursor" })
+vim.keymap.set(
+  "i",
+  "<C-H>",
+  "<C-W>",
+  { desc = "Delete word before cursor (C-H fallback for terminal)" }
+)
+vim.keymap.set("i", "<C-Del>", "<C-O>dw", { desc = "Delete word after cursor" })
+
+-- <Del> does not copy
+vim.keymap.set({ "n", "v" }, "<Del>", '"_x')
