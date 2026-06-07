@@ -1,0 +1,44 @@
+{
+  "lastChangelogVersion": "0.78.1",
+  "enableInstallTelemetry": false,
+  "theme": "gh-dark",
+{{- if and .isPersonal .isWindows }}
+  "shellPath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+{{- else if and .isPersonal .isUnix }}
+  "shellPath": "/usr/bin/zsh",
+{{- else if and .isWork .isUnix }}
+  "shellPath": "/usr/bin/zsh",
+{{- end }}
+  "packages": [
+    "npm:@juanibiapina/pi-extension-settings",
+    "npm:@juanibiapina/pi-powerbar",
+    "npm:cc-safety-net",
+    "npm:pi-subagents",
+    "npm:pi-mcp-adapter",
+    "npm:pi-web-access",
+    "npm:pi-hermes-memory",
+    "npm:pi-simplify",
+    "npm:pi-add-dir",
+    "npm:pi-prompt-template-model",
+    "npm:@plannotator/pi-extension",
+    "npm:pi-slopchop",
+    "npm:@tmustier/pi-usage-extension",
+    "npm:@tmustier/pi-tab-status",
+    "npm:@tintinweb/pi-tasks",
+    "npm:pi-autoresearch",
+    "npm:pi-lifeline",
+    "npm:@tmustier/pi-ralph-wiggum",
+    "npm:pi-model-cycler",
+    "npm:@spences10/pi-redact",
+    "npm:pi-caveman",
+    "npm:pi-command-center",
+    "npm:pi-lens",
+    "npm:pi-boomerang",
+    "npm:@narumitw/pi-btw",
+    "npm:pi-review-loop",
+    "npm:pi-md-export",
+    "npm:pi-smart-compact",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:context-mode"
+  ]
+}

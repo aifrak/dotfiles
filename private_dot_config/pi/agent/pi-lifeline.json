@@ -1,0 +1,15 @@
+{
+  "auto": true,
+  "action": "nudge",
+  "minRunsBetweenCalls": 5,
+  "triggerAfterConsecutiveFailures": 3,
+  "triggerAfterPlateauRuns": 6,
+  "maxCallsPerSession": 10,
+  "advisor": {
+    "provider": "openrouter",
+    "model": "mistralai/mistral-medium-3-5",
+    "thinking": "high",
+    "temperature": 0.7
+  },
+  "includeAutoresearchContext": true
+}

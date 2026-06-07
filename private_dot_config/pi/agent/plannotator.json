@@ -1,0 +1,5 @@
+{
+  "defaults": {
+    "model": { "provider": "anthropic", "id": "claude-sonnet-4-5" }
+  }
+}

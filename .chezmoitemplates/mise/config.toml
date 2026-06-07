@@ -15,6 +15,7 @@ uv = "latest"
 # -- programming languages
 go = "1.26.2"
 node = "lts"
+bun = "latest"
 rust = "1.95.0"
 python = "3.14.4"
 
@@ -37,8 +38,13 @@ lazygit = "latest"
 # snacks.nvim (picker)
 fd = "latest"
 
-# -- AI skills
+# -- pi tools
+"aqua:earendil-works/pi" = "latest"
+
+# -- AI skills / tools
 "npm:skills" = "latest"
+"npm:context-mode" = "latest"
+"npm:ccusage" = "latest"
 
 [env]
 {{ if .isPersonal }}
@@ -46,5 +52,9 @@ MISE_GITHUB_TOKEN = "{{ keepassxcAttribute "GitHub" "PAT_CRAWL_REPOS" }}"
 CONTEXT7_API_KEY = "{{ keepassxcAttribute "Context7" "API key" }}"
 {{ end }}
 XDG_CONFIG_HOME = "{{ .chezmoi.homeDir }}/.config"
+PI_CODING_AGENT_DIR = "{{ .chezmoi.homeDir }}/.config/pi/agent"
+PI_OFFLINE = 1
+CC_SAFETY_NET_STRICT = 1
+CC_SAFETY_NET_WORKTREE = 1
 # keep elixir iex history
 ERL_AFLAGS = "-kernel shell_history enabled"

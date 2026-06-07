@@ -1,0 +1,70 @@
+{
+  "rulebook_version": 1,
+  "name": "user-rules",
+  "version": "1.0.0",
+  "description": "Elixir/Phoenix safety rules",
+  "author": "aifrak",
+  "allowed_commands": ["npm", "mise", "mix"],
+  "rules": [
+    {
+      "name": "block-npm-install-global",
+      "command": "npm",
+      "subcommand": "install",
+      "block_args": ["--global", "-g"],
+      "reason": "Installing npm package requires manual confirmation."
+    },
+    {
+      "name": "block-mise-use-global",
+      "command": "mise",
+      "subcommand": "use",
+      "block_args": ["--global", "-g"],
+      "reason": "Installing mise tool manual confirmation."
+    },
+    {
+      "name": "block-mix-ecto-drop",
+      "command": "mix",
+      "subcommand": "ecto.drop",
+      "block_args": ["--force", "-f", "--force-drop"],
+      "reason": "Dropping database requires manual confirmation."
+    }
+  ],
+  "tests": [
+    {
+      "command": "npm install -g typescript",
+      "expect": "blocked",
+      "rule": "block-npm-install-global"
+    },
+    {
+      "command": "mise use -g fzf",
+      "expect": "blocked",
+      "rule": "block-mise-use-global"
+    },
+    {
+      "command": "mix ecto.drop --force",
+      "expect": "blocked",
+      "rule": "block-mix-ecto-drop"
+    },
+    {
+      "command": "mix ecto.drop -f",
+      "expect": "blocked",
+      "rule": "block-mix-ecto-drop"
+    },
+    {
+      "command": "mix ecto.drop --force-drop",
+      "expect": "blocked",
+      "rule": "block-mix-ecto-drop"
+    },
+    {
+      "command": "npm install typescript",
+      "expect": "allowed"
+    },
+    {
+      "command": "mise use fzf",
+      "expect": "allowed"
+    },
+    {
+      "command": "mix ecto.create",
+      "expect": "allowed"
+    }
+  ]
+}

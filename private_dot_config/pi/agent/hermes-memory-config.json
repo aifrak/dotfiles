@@ -1,0 +1,8 @@
+{
+  "memoryMode": "policy-only",
+  "sessionSearch": { "variant": "legacy" },
+  "memoryDir": "~/.config/pi/agent/pi-hermes-memory",
+  "llmModelOverride": "openrouter/mistralai/mistral-small-2603",
+  "nudgeInterval": 3,
+  "nudgeToolCalls": 10
+}

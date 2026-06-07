@@ -8,6 +8,8 @@ scoop bucket add extras
 
 scoop install main/git
 scoop install main/sed
+scoop install main/file
+scoop install main/grep
 scoop install nerd-fonts/FiraCode-NF
 scoop install main/mise
 scoop install extras/vcredist2022
