@@ -67,6 +67,8 @@ return {
           "markdown_oxide",
           -- Typst
           "tinymist",
+          -- PowerShell
+          "powershell_es",
           -- Github Action
           "gh_actions_ls",
           -- Spell check and Grammar check
@@ -125,6 +127,8 @@ return {
         "rumdl",
         -- Typst
         "tinymist",
+        -- PowerShell
+        "powershell_es",
         -- Github Actions
         "gh_actions_ls",
         -- Spell check and Grammar check
