@@ -9,16 +9,13 @@ config.initial_rows = 30
 config.default_gui_startup_args = { "start", "--position", "600,450"}
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = true
--- Fix SHIFT+ENTER to add new line (necessary for pi.dev)
-config.enable_kitty_keyboard = true
 
--- Fix ESC because of kitty keyboards
--- https://github.com/wezterm/wezterm/discussions/3758#discussioncomment-12096192
 config.keys = {
+  -- Fix SHIFT+ENTER to add new line (necessary for pi.dev)
   {
-    key = "Escape",
-    mods = "NONE",
-    action = wezterm.action.SendString "\x1b[27u",
+    key = "Enter",
+    mods = "SHIFT",
+    action = wezterm.action.SendString "\x1b[13;2u",
   },
 }
 
