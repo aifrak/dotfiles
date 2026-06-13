@@ -2,12 +2,15 @@
   "name": "pi-extensions",
   "private": true,
   "dependencies": {
+    "@gotgenes/pi-permission-system": "^13.1.0",
+    "@gotgenes/pi-subagents": "^15.0.2",
     "@juanibiapina/pi-extension-settings": "^0.8.0",
     "@juanibiapina/pi-powerbar": "^0.12.0",
     "@juicesharp/rpiv-ask-user-question": "^1.18.2",
     "@narumitw/pi-btw": "^0.1.37",
     "@plannotator/pi-extension": "^0.19.27",
     "@spences10/pi-redact": "^0.0.12",
+    "@sting8k/pi-vcc": "^0.3.17",
     "@tintinweb/pi-tasks": "^0.7.0",
     "@tmustier/pi-ralph-wiggum": "^0.2.1",
     "@tmustier/pi-tab-status": "^0.1.4",
@@ -29,8 +32,7 @@
     "pi-review-loop": "^0.4.4",
     "pi-simplify": "^0.2.2",
     "pi-slopchop": "^0.9.1",
-    "pi-smart-compact": "^7.14.0",
-    "pi-subagents": "^0.28.0",
+    "pi-tool-display": "^0.4.2",
     "pi-web-access": "^0.10.7"
   }
 }

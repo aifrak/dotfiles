@@ -24,6 +24,8 @@ oh-my-posh = "latest"
 opencode = "latest"
 fzf = "latest"
 lsd = "latest"
+# AI tool + snacks.nvim (picker)
+ripgrep = "latest"
 
 # -- neovim tools
 neovim = "stable"
@@ -31,8 +33,6 @@ tree-sitter = "latest"
 typstyle = "latest"
 # elixir LSP
 "aqua:expert-lsp/expert" = "latest"
-# snacks.nvim (picker)
-ripgrep = "latest"
 # snacks.nvim (lazygit)
 lazygit = "latest"
 # snacks.nvim (picker)
