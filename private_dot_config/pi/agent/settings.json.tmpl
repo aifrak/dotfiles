@@ -1,7 +1,14 @@
 {
-  "lastChangelogVersion": "0.78.1",
+  "lastChangelogVersion": "0.79.3",
   "enableInstallTelemetry": false,
   "theme": "gh-dark",
+  "terminal": {
+    "showTerminalProgress": true
+  },
+  "autocompleteMaxVisible": 10,
+  "steeringMode": "all",
+  "followUpMode": "all",
+  "defaultProjectTrust": "ask",
 {{- if and .isPersonal .isWindows }}
   "shellPath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
 {{- else if and .isPersonal .isUnix }}
@@ -42,8 +49,5 @@
     "npm:@sting8k/pi-vcc",
     "npm:@gotgenes/pi-subagents",
     "npm:@gotgenes/pi-permission-system"
-  ],
-  "terminal": {
-    "showTerminalProgress": true
-  }
+  ]
 }
