@@ -1,0 +1,6 @@
+[per-file-ignores]
+"**/AGENTS.md" = ["MD013"]
+"**/SKILL.md" = ["MD013"]
+
+[MD029]
+style = "ordered"
