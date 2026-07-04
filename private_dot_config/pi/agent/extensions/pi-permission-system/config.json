@@ -9,14 +9,16 @@
       ".mise*.toml": "deny",
       ".mise/config*.toml": "deny",
       "mise*.toml": "deny",
-      "mise/config*.toml": "deny",
+      "mise/config*.toml": "deny"
     },
     "bash": {
       "rm -rf *": "deny",
       "sudo *": "ask",
       "mise env*": "deny",
       "mix reset*": "deny",
-      "mix setup*": "deny"
+      "mix setup*": "deny",
+      "mix ecto.reset*": "deny",
+      "mix ecto.drop*": "deny"
     },
     "external_directory": "ask"
   }
