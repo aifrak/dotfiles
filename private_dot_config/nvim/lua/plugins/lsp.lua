@@ -65,6 +65,7 @@ return {
           -- Markdown
           "marksman",
           "markdown_oxide",
+          "rumdl",
           -- Typst
           "tinymist",
           -- PowerShell

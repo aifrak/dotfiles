@@ -43,7 +43,6 @@ return {
           -- Markdown
           "markdownlint-cli2",
           "cbfmt",
-          "rumdl",
           -- Spell check and Grammar check
           "typos-lsp",
           "vale",
