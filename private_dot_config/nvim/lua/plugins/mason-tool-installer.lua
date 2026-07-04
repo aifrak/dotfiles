@@ -1,6 +1,6 @@
 return {
   {
-  "WhoIsSethDaniel/mason-tool-installer.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-tool-installer").setup({
@@ -41,7 +41,6 @@ return {
           "checkmake",
           "mbake",
           -- Markdown
-          "markdownlint-cli2",
           "cbfmt",
           -- Spell check and Grammar check
           "typos-lsp",

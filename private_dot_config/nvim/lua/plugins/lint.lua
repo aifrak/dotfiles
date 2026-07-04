@@ -19,7 +19,7 @@ return {
       yaml = { "yamllint", "kube_linter" },
       ["yaml.github"] = { "actionlint" },
       -- Markdown
-      markdown = { "markdownlint-cli2", "cspell" },
+      markdown = { "cspell" },
       -- HTML
       html = { "markuplint" },
       -- SQL
