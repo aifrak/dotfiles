@@ -16,10 +16,11 @@
 {{- else if and .isWork .isUnix }}
   "shellPath": "/usr/bin/zsh",
 {{- end }}
+  "npmCommand": [
+    "npm",
+    "--legacy-peer-deps"
+  ],
   "packages": [
-    "npm:@juanibiapina/pi-extension-settings",
-    "npm:@juanibiapina/pi-powerbar",
-    "npm:cc-safety-net",
     "npm:pi-mcp-adapter",
     "npm:pi-web-access",
     "npm:pi-hermes-memory",
@@ -38,7 +39,6 @@
     "npm:@spences10/pi-redact",
     "npm:pi-caveman",
     "npm:pi-command-center",
-    "npm:pi-lens",
     "npm:pi-boomerang",
     "npm:@narumitw/pi-btw",
     "npm:pi-review-loop",
@@ -48,6 +48,7 @@
     "npm:pi-tool-display",
     "npm:@sting8k/pi-vcc",
     "npm:@gotgenes/pi-subagents",
-    "npm:@gotgenes/pi-permission-system"
+    "npm:@gotgenes/pi-permission-system",
+    "npm:pi-rewind"
   ]
 }
