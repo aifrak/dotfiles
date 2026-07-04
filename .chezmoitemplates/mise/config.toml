@@ -22,6 +22,7 @@ python = "3.14.4"
 # -- terminal tools
 oh-my-posh = "latest"
 opencode = "latest"
+"aqua:earendil-works/pi" = "latest"
 fzf = "latest"
 lsd = "latest"
 # AI tool + snacks.nvim (picker)
@@ -37,9 +38,6 @@ typstyle = "latest"
 lazygit = "latest"
 # snacks.nvim (picker)
 fd = "latest"
-
-# -- pi tools
-"aqua:earendil-works/pi" = "latest"
 
 # -- AI skills / tools
 "npm:skills" = "latest"
