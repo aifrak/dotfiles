@@ -7,7 +7,7 @@ pnpm = "latest"
 # used by mise
 aube = "latest"
 # used by Neovim plugin
-yarn = "latest"
+"npm:@yarnpkg/cli-dist" = "latest"
 
 # -- package managers (python)
 uv = "latest"
