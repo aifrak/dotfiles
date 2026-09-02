@@ -1,6 +1,3 @@
-[settings]
-env_shell_expand = true
-
 [tools]
 # -- package managers (node)
 pnpm = "latest"
@@ -13,11 +10,11 @@ aube = "latest"
 uv = "latest"
 
 # -- programming languages
-go = "1.26.2"
+go = "1"
 node = "lts"
 bun = "latest"
-rust = "1.95.0"
-python = "3.14.4"
+rust = "1"
+python = "3"
 
 # -- terminal tools
 oh-my-posh = "latest"
@@ -38,20 +35,28 @@ typstyle = "latest"
 lazygit = "latest"
 # snacks.nvim (picker)
 fd = "latest"
+"github:chojs23/ec" = "latest"
 
 # -- AI skills / tools
 "npm:skills" = "latest"
 "npm:context-mode" = "latest"
 "npm:ccusage" = "latest"
+"npm:caveman-shrink" = "latest"
+"npm:@everruns/bashkit" = "latest"
+"github:modem-dev/hunk" = "latest"
+delta = "latest"
+"pipx:serena-agent" = { version = "latest", uvx_args = "--python 3.13", postinstall = "serena init" }
 
 [env]
 {{ if .isPersonal }}
 MISE_GITHUB_TOKEN = "{{ keepassxcAttribute "GitHub" "PAT_CRAWL_REPOS" }}"
 CONTEXT7_API_KEY = "{{ keepassxcAttribute "Context7" "API key" }}"
-{{ end }}
+{{- end }}
 XDG_CONFIG_HOME = "{{ .chezmoi.homeDir }}/.config"
 PI_CODING_AGENT_DIR = "{{ .chezmoi.homeDir }}/.config/pi/agent"
+PI_AGENT_DIR = "{{ .chezmoi.homeDir }}/.config/pi/"
 PI_OFFLINE = 1
+CONTEXT_MODE_DIR = "{{ .chezmoi.homeDir }}/.context-mode"
 CC_SAFETY_NET_STRICT = 1
 CC_SAFETY_NET_WORKTREE = 1
 # keep elixir iex history
