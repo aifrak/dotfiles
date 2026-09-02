@@ -21,20 +21,6 @@
       "directTools": true
     },
 {{- end }}
-    "ChromeDevTools": {
-      "command": "npx",
-      "args": [
-        "caveman-shrink",
-        "npx",
-        "-y",
-        "chrome-devtools-mcp@1.1.1",
-        "--no-usage-statistics",
-        "--browser-url=http://127.0.0.1:9222",
-        "--category-performance=false",
-        "--category-extensions=false",
-        "--experimental-page-id-routing"
-      ]
-    },
     "Context-Mode": {
       "command": "context-mode",
       "directTools": true
