@@ -4,39 +4,44 @@
     "Context7": {
       "url": "https://mcp.context7.com/mcp",
       "headers": {
-        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
-      }
+        "CONTEXT7_API_KEY": "$env:CONTEXT7_API_KEY"
+      },
+      "directTools": true
     },
     "DeepWiki": {
-      "url": "https://mcp.deepwiki.com/mcp"
+      "url": "https://mcp.deepwiki.com/mcp",
+      "directTools": true
     },
     "StackOverflow": {
-      "url": "https://mcp.stackoverflow.com"
+      "url": "https://mcp.stackoverflow.com",
+      "directTools": true
     },
     "Tidewave": {
-      "url": "http://localhost:4000/tidewave/mcp"
+      "url": "http://localhost:4000/tidewave/mcp",
+      "directTools": true
     },
 {{- end }}
     "ChromeDevTools": {
       "command": "npx",
       "args": [
-        "-y", "chrome-devtools-mcp@1.1.1",
+        "caveman-shrink",
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@1.1.1",
         "--no-usage-statistics",
-        "--browser-url=http://{{ .chromeDevToolHost }}:9222",
+        "--browser-url=http://127.0.0.1:9222",
         "--category-performance=false",
         "--category-extensions=false",
         "--experimental-page-id-routing"
       ]
     },
-    "context-mode": {
-      "command": "context-mode"
+    "Context-Mode": {
+      "command": "context-mode",
+      "directTools": true
     },
-    "ServerMemory": {
+    "Serena": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory@2026.1.26"],
-      "env": {
-        "MEMORY_FILE_PATH": "{{ .chezmoi.homeDir }}/mcp-server-memory.jsonl"
-      }
+      "args": ["caveman-shrink", "serena", "start-mcp-server", "--context=ide"]
     }
   }
 }
