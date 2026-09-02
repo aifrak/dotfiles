@@ -12,6 +12,8 @@ sudo apt update -y
 sudo apt install -y keepassxc
 {{- end }}
 
+# delta
+sudo apt install -y less
 # snacks.nvim (image) - PDF preview
 sudo apt install -y ghostscript
 # snacks.nvim (image) - Image preview

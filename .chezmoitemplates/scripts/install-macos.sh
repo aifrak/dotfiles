@@ -12,6 +12,8 @@ brew install --cask keepassxc
 {{- end }}
 
 
+# delta
+brew install less
 # snacks.nvim (image) - PDF preview
 brew install ghostscript
 # snacks.nvim (image) - Image preview

@@ -19,6 +19,9 @@ scoop install extras/psfzf
 scoop install extras/keepassxc
 {{- end }}
 
+# -- delta
+scoop install main/less
+
 # -- blink.cmp
 
 # Necessary for Rust to build fuzzy search.
