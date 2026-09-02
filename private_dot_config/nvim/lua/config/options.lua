@@ -22,6 +22,7 @@ opt.timeoutlen = 400
 opt.undofile = true
 
 --  UI
+opt.smoothscroll = false
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
@@ -39,7 +40,7 @@ opt.showmode = false
 opt.laststatus = 3
 opt.cmdheight = 0
 
--- Smooth scrolling
+-- Mouse
 opt.mouse = "a"
 opt.mousemoveevent = true
 
