@@ -19,3 +19,6 @@ sudo apt install -y imagemagick
 # lua
 # cannot be installed with mise without building from source
 sudo apt install -y lua5.1 luarocks
+
+# git-ai
+curl -sSL https://usegitai.com/install.sh | bash

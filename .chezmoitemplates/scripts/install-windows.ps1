@@ -42,3 +42,6 @@ scoop install imagemagick
 
 scoop install versions/lua51
 scoop install main/luarocks
+
+# git-ai
+powershell -NoProfile -ExecutionPolicy Bypass -Command "irm http://usegitai.com/install.ps1 | iex"

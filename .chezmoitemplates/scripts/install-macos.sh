@@ -19,3 +19,6 @@ brew install imagemagick
 # lua
 # cannot be installed with mise without building from source
 brew install lua@5.1 luarocks
+
+# git-ai
+curl -sSL https://usegitai.com/install.sh | bash
