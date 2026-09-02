@@ -40,6 +40,11 @@ brew install chezmoi
 chezmoi init aifrak/dotfiles --apply
 ```
 
+## Post Installation
+
+- To install chrome extension, follow manual steps from [pi-chrome](https://pi.dev/packages/pi-chrome)
+- To install chrome extension, follow manual steps from [pi-annotate](https://pi.dev/packages/pi-annotate)
+
 ## License
 
 [MIT License](https://github.com/aifrak/dotfiles/blob/main/LICENSE)
