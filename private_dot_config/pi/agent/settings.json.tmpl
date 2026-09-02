@@ -1,54 +1,116 @@
 {
-  "lastChangelogVersion": "0.79.3",
+  "lastChangelogVersion": "0.84.2",
   "enableInstallTelemetry": false,
   "theme": "gh-dark",
   "terminal": {
     "showTerminalProgress": true
   },
+  "tuiMode": "fullscreen",
+  "fullscreenScrollbar": "always",
+  "fullscreenExitOutput": "transcript",
+  "showHardwareCursor": true,
+  "showCacheMissNotices": true,
+  "hideThinkingBlock": true,
+  "outputPad": 0,
   "autocompleteMaxVisible": 10,
   "steeringMode": "all",
   "followUpMode": "all",
   "defaultProjectTrust": "ask",
+  "modelThinkingLevels": {
+    "openrouter/mistralai/mistral-small-2603": "high",
+    "openrouter/mistralai/mistral-medium-3-5": "high"
+  },
+  "powerline": {
+    "preset": "default",
+    "welcome": false,
+    "placement": "below"
+  },
+  "tokenSpeed": {
+    "useProviderTokens": true,
+    "display": "full",
+    "endTpsBehavior": "average"
+  },
+  "kendex": {
+    "extensionManager": {
+      "disabledItems": [],
+      "config": {
+        "@vanillagreen/pi-qol": {
+          "statusline.enabled": false
+        },
+        "@vanillagreen/pi-output-policy": {
+          "policyMode": "compact"
+        }
+      }
+    }
+  },
+  "npmCommand": ["npm", "--legacy-peer-deps"],
 {{- if and .isPersonal .isWindows }}
   "shellPath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+  "defaultTools": [
+    "read",
+    "powershell",
+    "edit",
+    "write"
+  ],
 {{- else if and .isPersonal .isUnix }}
   "shellPath": "/usr/bin/zsh",
 {{- else if and .isWork .isUnix }}
   "shellPath": "/usr/bin/zsh",
 {{- end }}
-  "npmCommand": [
-    "npm",
-    "--legacy-peer-deps"
-  ],
   "packages": [
+{{- if eq .chezmoi.os "windows" }}
+    "npm@4fu/pi-pwsh",
+{{- end }}
+    "npm:@4fu/pi-bin-hints",
+    "npm:pi-caveman",
+    "npm:@ff-labs/pi-fff",
     "npm:pi-mcp-adapter",
+    "npm:pi-image-tools",
     "npm:pi-web-access",
-    "npm:pi-hermes-memory",
-    "npm:pi-simplify",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@gotgenes/pi-subagents",
+    "npm:@gotgenes/pi-permission-system",
     "npm:pi-add-dir",
+    "npm:@spences10/pi-redact",
+    "npm:pi-simplify",
+    "npm:pi-hermes-memory",
+    "npm:@sting8k/pi-vcc",
+    "npm:@davecodes/pi-dcp",
+    "npm:pi-continue",
+    "npm:@gotgenes/pi-nocd",
+    "npm:pi-boomerang",
+    "npm:@narumitw/pi-btw",
+    "npm:pi-review-loop",
+    "npm:pi-autoresearch",
+    "npm:pi-rewind",
+    "npm:pi-lifeline",
+    "npm:pi-chrome",
+    "npm:pi-elixir",
+    "npm:visual-explainer",
+    "npm:@tmustier/pi-ralph-wiggum",
+    "npm:@vanillagreen/pi-qol",
+    "npm:@vanillagreen/pi-extension-manager",
+    "npm:@vanillagreen/pi-background-tasks",
+    "npm:@vanillagreen/pi-output-policy",
+    "npm:@vanillagreen/pi-skills-manager",
+    "npm:@vanillagreen/pi-session-manager",
+    "npm:@vanillagreen/pi-prompt-stash",
     "npm:pi-prompt-template-model",
     "npm:@plannotator/pi-extension",
     "npm:pi-slopchop",
     "npm:@tmustier/pi-usage-extension",
     "npm:@tmustier/pi-tab-status",
     "npm:@tintinweb/pi-tasks",
-    "npm:pi-autoresearch",
-    "npm:pi-lifeline",
-    "npm:@tmustier/pi-ralph-wiggum",
-    "npm:pi-model-cycler",
-    "npm:@spences10/pi-redact",
-    "npm:pi-caveman",
     "npm:pi-command-center",
-    "npm:pi-boomerang",
-    "npm:@narumitw/pi-btw",
-    "npm:pi-review-loop",
-    "npm:pi-md-export",
-    "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:context-mode",
-    "npm:pi-tool-display",
-    "npm:@sting8k/pi-vcc",
-    "npm:@gotgenes/pi-subagents",
-    "npm:@gotgenes/pi-permission-system",
-    "npm:pi-rewind"
+    "npm:@zhcsyncer/pi-tool-display-intent",
+    "npm:pi-system-prompt",
+    "npm:@howaboua/pi-auto-trees",
+    "npm:@monotykamary/pi-tps",
+    "npm:pi-anycopy",
+    "npm:pi-token-speed",
+    "npm:pi-annotate",
+    "npm:@bigboss2063/pi-clip",
+    "npm:pi-paster",
+    "npm:pi-zentui"
   ]
 }

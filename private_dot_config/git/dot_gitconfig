@@ -2,19 +2,30 @@
   prune = true
 [diff]
   tool = nvimdiff
-[difftool "nvimdiff"]
-  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+  colorMoved = default
 [difftool]
   prompt = false
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [core]
   editor = nvim --wait
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  dark = true      # or light = true, or omit for auto-detection
+  line-numbers = true
 [merge]
-  tool = nvimdiff
-[mergetool "nvimdiff"]
-  layout = "LOCAL,BASE,REMOTE / MERGED"
+  tool = ec
+  conflictStyle = zdiff3
 [mergetool]
   prompt = false
   keepBackup = false
+[mergetool "ec"]
+  cmd = "ec \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\""
+[mergetool "nvimdiff"]
+  layout = "LOCAL,BASE,REMOTE / MERGED"
 [color "status"]
   added = green bold
   changed = red bold

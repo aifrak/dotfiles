@@ -1,0 +1,5 @@
+{
+  "provider": "auto",
+  "workflow": "auto-summary",
+  "summaryModel": "openrouter/mistralai/mistral-small-2603"
+}

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/robzolkos/pi-slopchop/main/slopchop.schema.json",
+  "version": 1,
+  "globalShortcut": "ctrl+alt+r"
+}

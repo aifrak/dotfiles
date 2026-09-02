@@ -1,0 +1,167 @@
+{
+  "components": {
+    "editor": {
+      "enabled": true,
+      "style": "minimalist",
+      "colorSource": "theme",
+      "borderColorMode": "adaptive",
+      "modelLabel": "name",
+      "viewportIndicators": true,
+      "styles": {
+        "opencode": {
+          "metadataFormat": "$model  $provider(  $thinking)",
+          "completionMenu": "palette"
+        },
+        "opencode-copy-friendly": {
+          "metadataFormat": "$model  $provider(  $thinking)",
+          "completionMenu": "native"
+        },
+        "minimalist": {
+          "pathDisplay": "project",
+          "contextFormat": "percent",
+          "contextGauge": true,
+          "showSessionName": true,
+          "showTimer": true,
+          "showCost": true,
+          "showGit": true,
+          "contextThresholds": {
+            "warning": 70,
+            "error": 90
+          }
+        },
+        "accent-rail": {
+          "rail": "▎",
+          "asciiRail": "|",
+          "transparent": false
+        }
+      }
+    },
+    "userMessages": {
+      "enabled": true,
+      "style": "compact",
+      "colorSource": "theme",
+      "styles": {
+        "framed": {},
+        "framed-copy-friendly": {},
+        "compact": {},
+        "labeled": {}
+      }
+    },
+    "selectorBorders": {
+      "enabled": true,
+      "style": "zentui",
+      "colorSource": "terminal"
+    },
+    "footer": {
+      "style": "starship",
+      "colorSource": "terminal",
+      "modelLabel": "name",
+      "styles": {
+        "starship": {
+          "format": "$os (on $git_branch)( $git_commit)( $git_tag)( $git_status)( $git_metrics)( $git_state) $context$tokens$extensions",
+          "responsive": true,
+          "compactFormat": "$os $wrap(on $git_branch)( $git_commit)( $git_tag)( $git_status)( $git_metrics)( $git_state)$wrap $context$wrap$tokens$wrap$extensions",
+          "compactMaxLines": "unlimited",
+          "separator": "none",
+          "contextStyle": "text",
+          "contextThresholds": {
+            "warning": 70,
+            "error": 90
+          },
+          "pathDisplay": {
+            "mode": "basename",
+            "depth": 2
+          },
+          "segments": {
+            "cwd": false,
+            "sessionName": false,
+            "gitBranch": true,
+            "gitStatus": true,
+            "gitCounts": true,
+            "gitCommit": true,
+            "gitMetrics": true,
+            "runtime": true,
+            "modelInfo": false,
+            "context": true,
+            "tokens": true,
+            "cost": false,
+            "sessionDuration": false,
+            "username": false,
+            "time": false,
+            "os": true,
+            "packageVersion": true
+          },
+          "gitBranch": {
+            "maxLength": "full"
+          },
+          "gitCommit": {
+            "hashLength": 7,
+            "onlyDetached": true,
+            "showTag": true
+          },
+          "gitMetrics": {
+            "onlyNonzero": false,
+            "ignoreSubmodules": false
+          },
+          "extensionStatuses": {
+            "defaultPlacement": "left",
+            "placements": {
+              "caveman": "left",
+              "dcp": "middle",
+              "mcp": "middle",
+              "rewind": "middle",
+              "tokenSpeed": "right"
+            },
+            "colorModes": {
+              "caveman": "original",
+              "dcp": "original",
+              "tokenSpeed": "original",
+              "rewind": "original",
+              "mcp": "original"
+            }
+          }
+        }
+      }
+    },
+    "workingLine": {
+      "enabled": true,
+      "turnSummary": true,
+      "spinner": "pulse",
+      "spinnerIntervalMs": 160,
+      "animateSpinnerColor": false,
+      "textIntervalMs": 40,
+      "textAnimation": "kitt",
+      "colorSource": "terminal",
+      "messages": {
+        "custom": false,
+        "values": [
+          "Sautéing…",
+          "Cooking…",
+          "Ionizing…",
+          "Zigzagging…",
+          "Razzle-dazzling…",
+          "Photosynthesizing…",
+          "Nucleating…",
+          "Brewing…",
+          "Combobulating…",
+          "Boogieing…",
+          "Befuddling…",
+          "Alchemizing…",
+          "Conjuring…",
+          "Baking…",
+          "Simmering…",
+          "Blanching…"
+        ]
+      },
+      "segments": {
+        "tool": true,
+        "elapsed": true,
+        "thought": true,
+        "tokens": true
+      }
+    }
+  },
+  "icons": {
+    "mode": "auto"
+  }
+}

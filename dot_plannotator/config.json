@@ -1,0 +1,18 @@
+{
+  "diffOptions": {
+    "diffStyle": "split",
+    "diffIndicators": "bars",
+    "lineDiffType": "word-alt",
+    "hideWhitespace": false,
+    "expandUnchanged": false,
+    "fontFamily": "Fira Code",
+    "overflow": "scroll",
+    "defaultDiffType": "since-base",
+    "showDiffBackground": true,
+    "lineBgIntensity": "subtle"
+  },
+  "reviewAnalysis": {
+    "semanticDiff": true,
+    "callFlow": true
+  }
+}
