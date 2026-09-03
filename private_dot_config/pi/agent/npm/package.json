@@ -57,7 +57,6 @@
   },
   "allowScripts": {
     "@google/genai@1.52.0": true,
-    "context-mode@1.0.169": true,
     "glimpseui@0.8.1": true,
     "koffi@2.16.2": true,
     "sharp@0.33.5": true,

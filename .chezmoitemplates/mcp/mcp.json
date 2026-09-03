@@ -21,10 +21,6 @@
       "directTools": true
     },
 {{- end }}
-    "Context-Mode": {
-      "command": "context-mode",
-      "directTools": true
-    },
     "Serena": {
       "command": "npx",
       "args": ["caveman-shrink", "serena", "start-mcp-server", "--context=ide"]

@@ -39,7 +39,6 @@ fd = "latest"
 
 # -- AI skills / tools
 "npm:skills" = "latest"
-"npm:context-mode" = "latest"
 "npm:ccusage" = "latest"
 "npm:caveman-shrink" = "latest"
 "npm:@everruns/bashkit" = "latest"
@@ -56,7 +55,6 @@ XDG_CONFIG_HOME = "{{ .chezmoi.homeDir }}/.config"
 PI_CODING_AGENT_DIR = "{{ .chezmoi.homeDir }}/.config/pi/agent"
 PI_AGENT_DIR = "{{ .chezmoi.homeDir }}/.config/pi/"
 PI_OFFLINE = 1
-CONTEXT_MODE_DIR = "{{ .chezmoi.homeDir }}/.context-mode"
 CC_SAFETY_NET_STRICT = 1
 CC_SAFETY_NET_WORKTREE = 1
 # keep elixir iex history
