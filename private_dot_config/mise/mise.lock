@@ -376,65 +376,6 @@ checksum = "sha256:cf5c137d9b391c3988c54af8f5fc490ffbef6f70444651e7d57fdb45ad04c
 url = "https://github.com/junegunn/fzf/releases/download/v0.74.3/fzf-0.74.3-windows_amd64.zip"
 url_api = "https://api.github.com/repos/junegunn/fzf/releases/assets/517537078"
 
-[[tools."github:Hypabolic/Hypa"]]
-version = "0.1.13"
-backend = "github:Hypabolic/Hypa"
-
-[tools."github:Hypabolic/Hypa"."platforms.linux-arm64"]
-checksum = "sha256:9c439c36fa674c5b7918f553c1f2a653fa4ae6b32d3f13fa1b235e91fe5cd9de"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764534"
-
-[tools."github:Hypabolic/Hypa"."platforms.linux-arm64-musl"]
-checksum = "sha256:9c439c36fa674c5b7918f553c1f2a653fa4ae6b32d3f13fa1b235e91fe5cd9de"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764534"
-
-[tools."github:Hypabolic/Hypa"."platforms.linux-x64"]
-checksum = "sha256:728d125746e76122e42735de912e2de4016db43d6f862016b6a61bad1066eaae"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764536"
-
-[tools."github:Hypabolic/Hypa"."platforms.linux-x64-baseline"]
-checksum = "sha256:728d125746e76122e42735de912e2de4016db43d6f862016b6a61bad1066eaae"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764536"
-
-[tools."github:Hypabolic/Hypa"."platforms.linux-x64-musl"]
-checksum = "sha256:728d125746e76122e42735de912e2de4016db43d6f862016b6a61bad1066eaae"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764536"
-
-[tools."github:Hypabolic/Hypa"."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:728d125746e76122e42735de912e2de4016db43d6f862016b6a61bad1066eaae"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764536"
-
-[tools."github:Hypabolic/Hypa"."platforms.macos-arm64"]
-checksum = "sha256:cd67fb5047f57fe9134292971a6438d5d227818a0b1e219e0e806426e439214b"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-osx-arm64.tar.gz"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764532"
-
-[tools."github:Hypabolic/Hypa"."platforms.macos-x64"]
-checksum = "sha256:bb68538e72d393322ff68323d38bcaf32c0c43c4b9cc83386e47c9a30e3e4bbd"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-osx-x64.tar.gz"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764535"
-
-[tools."github:Hypabolic/Hypa"."platforms.macos-x64-baseline"]
-checksum = "sha256:bb68538e72d393322ff68323d38bcaf32c0c43c4b9cc83386e47c9a30e3e4bbd"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-osx-x64.tar.gz"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764535"
-
-[tools."github:Hypabolic/Hypa"."platforms.windows-x64"]
-checksum = "sha256:72724cf1bdb0e30610c6b2a6cfa543535ddc6817afde8110c2ab44656af0bab8"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-win-x64.zip"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764554"
-
-[tools."github:Hypabolic/Hypa"."platforms.windows-x64-baseline"]
-checksum = "sha256:72724cf1bdb0e30610c6b2a6cfa543535ddc6817afde8110c2ab44656af0bab8"
-url = "https://github.com/Hypabolic/Hypa/releases/download/v0.1.13/hypa-win-x64.zip"
-url_api = "https://api.github.com/repos/Hypabolic/Hypa/releases/assets/503764554"
-
 [[tools."github:chojs23/ec"]]
 version = "0.3.3"
 backend = "github:chojs23/ec"
@@ -613,10 +554,6 @@ url = "https://dl.google.com/go/go1.27.0.windows-amd64.zip"
 checksum = "sha256:f0c0a0d33ba94f4d2c5dbc887334ce678b21813504ddb3aafcb06e60a5a667c4"
 url = "https://dl.google.com/go/go1.27.0.windows-amd64.zip"
 
-[[tools."go:meat.dev/cmd/meat"]]
-version = "0.0.0-20260803201634-f39f41dfe7b5"
-backend = "go:meat.dev/cmd/meat"
-
 [[tools.lazygit]]
 version = "0.64.1"
 backend = "aqua:jesseduffield/lazygit"
@@ -683,14 +620,17 @@ backend = "aqua:lsd-rs/lsd"
 [tools.lsd."platforms.linux-arm64"]
 checksum = "sha256:642ecb1a763b9f790a99c83a1445c117a6813ed4edb5d498d4420423c6353eb8"
 url = "https://github.com/lsd-rs/lsd/releases/download/v1.2.0/lsd-v1.2.0-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/lsd-rs/lsd/releases/assets/303319949"
 
 [tools.lsd."platforms.linux-arm64-musl"]
 checksum = "sha256:642ecb1a763b9f790a99c83a1445c117a6813ed4edb5d498d4420423c6353eb8"
 url = "https://github.com/lsd-rs/lsd/releases/download/v1.2.0/lsd-v1.2.0-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/lsd-rs/lsd/releases/assets/303319949"
 
 [tools.lsd."platforms.linux-x64"]
 checksum = "sha256:77849da1210336534258551a581401ba19ae6b8d7b66a2a1feff148ad41e3814"
 url = "https://github.com/lsd-rs/lsd/releases/download/v1.2.0/lsd-v1.2.0-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/lsd-rs/lsd/releases/assets/303319745"
 
 [tools.lsd."platforms.linux-x64-baseline"]
 checksum = "sha256:77849da1210336534258551a581401ba19ae6b8d7b66a2a1feff148ad41e3814"
@@ -700,6 +640,7 @@ url_api = "https://api.github.com/repos/lsd-rs/lsd/releases/assets/303319745"
 [tools.lsd."platforms.linux-x64-musl"]
 checksum = "sha256:77849da1210336534258551a581401ba19ae6b8d7b66a2a1feff148ad41e3814"
 url = "https://github.com/lsd-rs/lsd/releases/download/v1.2.0/lsd-v1.2.0-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/lsd-rs/lsd/releases/assets/303319745"
 
 [tools.lsd."platforms.linux-x64-musl-baseline"]
 checksum = "sha256:77849da1210336534258551a581401ba19ae6b8d7b66a2a1feff148ad41e3814"
@@ -709,10 +650,12 @@ url_api = "https://api.github.com/repos/lsd-rs/lsd/releases/assets/303319745"
 [tools.lsd."platforms.macos-arm64"]
 checksum = "sha256:9e34a5d392ff913302098aad0543dafa1883c531eaf229b82f086c3fca675e3e"
 url = "https://github.com/lsd-rs/lsd/releases/download/v1.2.0/lsd-v1.2.0-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/lsd-rs/lsd/releases/assets/303319340"
 
 [tools.lsd."platforms.macos-x64"]
 checksum = "sha256:00d3c50551b270bbdf7da97816e5ba7f5fd10294cd310165f7f8b5523e738b9c"
 url = "https://github.com/lsd-rs/lsd/releases/download/v1.2.0/lsd-v1.2.0-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/lsd-rs/lsd/releases/assets/303319774"
 
 [tools.lsd."platforms.macos-x64-baseline"]
 checksum = "sha256:00d3c50551b270bbdf7da97816e5ba7f5fd10294cd310165f7f8b5523e738b9c"
@@ -722,6 +665,7 @@ url_api = "https://api.github.com/repos/lsd-rs/lsd/releases/assets/303319774"
 [tools.lsd."platforms.windows-x64"]
 checksum = "sha256:a65b9f457153934a7ce1f7e0fe1c4922a95bb2822222126e4fbaa6ee9c0d78e5"
 url = "https://github.com/lsd-rs/lsd/releases/download/v1.2.0/lsd-v1.2.0-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/lsd-rs/lsd/releases/assets/303320206"
 
 [tools.lsd."platforms.windows-x64-baseline"]
 checksum = "sha256:a65b9f457153934a7ce1f7e0fe1c4922a95bb2822222126e4fbaa6ee9c0d78e5"
@@ -813,21 +757,9 @@ url = "https://nodejs.org/dist/v24.20.0/node-v24.20.0-win-x64.zip"
 checksum = "sha256:6cac9ffbca8f6a47091e4b5c772e0606049c3871cb67d900c0cedde630e545ba"
 url = "https://nodejs.org/dist/v24.20.0/node-v24.20.0-win-x64.zip"
 
-[[tools."npm:@everruns/bashkit"]]
-version = "0.16.0"
-backend = "npm:@everruns/bashkit"
-
 [[tools."npm:@yarnpkg/cli-dist"]]
 version = "4.18.0"
 backend = "npm:@yarnpkg/cli-dist"
-
-[[tools."npm:agent-browser"]]
-version = "0.34.0"
-backend = "npm:agent-browser"
-
-[[tools."npm:bladebro"]]
-version = "3.2.0"
-backend = "npm:bladebro"
 
 [[tools."npm:caveman-shrink"]]
 version = "0.1.0"
@@ -836,14 +768,6 @@ backend = "npm:caveman-shrink"
 [[tools."npm:ccusage"]]
 version = "20.0.20"
 backend = "npm:ccusage"
-
-[[tools."npm:context-mode"]]
-version = "1.0.169"
-backend = "npm:context-mode"
-
-[[tools."npm:pire-browser"]]
-version = "0.2.35"
-backend = "npm:pire-browser"
 
 [[tools."npm:skills"]]
 version = "1.5.23"
@@ -966,10 +890,6 @@ url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/53331
 checksum = "sha256:831e213e5f454d6e8b26f0fb24c7b3d42b40e47d73d154672a9192702eb08416"
 url = "https://github.com/anomalyco/opencode/releases/download/v1.18.25/opencode-windows-x64.zip"
 url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/533315557"
-
-[[tools."pipx:graphifyy"]]
-version = "0.9.48"
-backend = "pipx:graphifyy"
 
 [[tools."pipx:serena-agent"]]
 version = "1.7.0"
@@ -1102,46 +1022,57 @@ backend = "aqua:BurntSushi/ripgrep"
 [tools.ripgrep."platforms.linux-arm64"]
 checksum = "sha256:a740b91c82eaf9914cfedd353572f2791cbe0162c84101ee0951058f4dcbc90d"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478119579"
 
 [tools.ripgrep."platforms.linux-arm64-musl"]
 checksum = "sha256:800b1e7206afe799dfb5a6901f23147cfaabe0e52210538100f61e86e1740915"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478120060"
 
 [tools.ripgrep."platforms.linux-x64"]
 checksum = "sha256:33e15bcf1624b25cdd2a55813a47a2f95dbe126268203e76aa6a585d1e7b149c"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478120097"
 
 [tools.ripgrep."platforms.linux-x64-baseline"]
 checksum = "sha256:33e15bcf1624b25cdd2a55813a47a2f95dbe126268203e76aa6a585d1e7b149c"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478120097"
 
 [tools.ripgrep."platforms.linux-x64-musl"]
 checksum = "sha256:33e15bcf1624b25cdd2a55813a47a2f95dbe126268203e76aa6a585d1e7b149c"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478120097"
 
 [tools.ripgrep."platforms.linux-x64-musl-baseline"]
 checksum = "sha256:33e15bcf1624b25cdd2a55813a47a2f95dbe126268203e76aa6a585d1e7b149c"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478120097"
 
 [tools.ripgrep."platforms.macos-arm64"]
 checksum = "sha256:3750b2e93f37e0c692657da574d7019a101c0084da05a790c83fd335bad973e4"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478118851"
 
 [tools.ripgrep."platforms.macos-x64"]
 checksum = "sha256:af7825fcc69a2afc7a7aea55fc9af90e26421d8f20fe59df32e233c0b8a231c1"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478119585"
 
 [tools.ripgrep."platforms.macos-x64-baseline"]
 checksum = "sha256:af7825fcc69a2afc7a7aea55fc9af90e26421d8f20fe59df32e233c0b8a231c1"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478119585"
 
 [tools.ripgrep."platforms.windows-x64"]
 checksum = "sha256:71b2fef860abe467217a538ff31de02f5258807c0129f771846f87bd029aafc5"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478119643"
 
 [tools.ripgrep."platforms.windows-x64-baseline"]
 checksum = "sha256:71b2fef860abe467217a538ff31de02f5258807c0129f771846f87bd029aafc5"
 url = "https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep-15.2.0-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/478119643"
 
 [[tools.rust]]
 version = "1.98.0"
