@@ -10,7 +10,16 @@ return {
   },
   lazy = false, -- neo-tree will lazily load itself
   keys = {
-    { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle Neotree file explorer" },
+    {
+      "<leader>e",
+      "<cmd>Neotree toggle<cr>",
+      desc = "Toggle Neotree file explorer",
+    },
+    {
+      "<leader>ft",
+      ":Neotree reveal<CR>",
+      desc = "Neotree: reveal current file in tree",
+    },
   },
   config = function()
     local function on_move(data)
