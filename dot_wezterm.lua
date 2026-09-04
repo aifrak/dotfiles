@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
-
+local act = wezterm.action
 local cmdpicker = wezterm.plugin.require("https://github.com/abidibo/wezterm-cmdpicker")
 
 config.color_scheme = "GitHub Dark"
@@ -9,6 +9,7 @@ config.font_size = 10.0
 config.initial_cols = 120
 config.initial_rows = 30
 config.default_gui_startup_args = { "start", "--position", "600,450" }
+config.adjust_window_size_when_changing_font_size = false
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = true
 -- config.enable_csi_u_key_encoding = true
@@ -24,6 +25,11 @@ end
 config.leader = { key = "Space", mods = "CTRL|SHIFT", timeout_milliseconds = 1000 }
 
 config.keys = {
+	{ key = "=", mods = "CTRL", action = act.IncreaseFontSize },
+	{ key = "+", mods = "CTRL", action = act.IncreaseFontSize },
+	{ key = "-", mods = "CTRL", action = act.DecreaseFontSize },
+	{ key = "+", mods = "CTRL|SHIFT", action = act.ResetFontSize },
+	{ key = "0", mods = "CTRL", action = act.ResetFontSize },
 	-- Fix SHIFT+ENTER to add new line (necessary for pi.dev)
 	{
 		key = "Enter",
