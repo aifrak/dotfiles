@@ -5,7 +5,7 @@ local cmdpicker = wezterm.plugin.require("https://github.com/abidibo/wezterm-cmd
 
 config.color_scheme = "GitHub Dark"
 config.font = wezterm.font("FiraCode Nerd Font")
-config.font_size = 12.0
+config.font_size = 10.0
 config.initial_cols = 120
 config.initial_rows = 30
 config.default_gui_startup_args = { "start", "--position", "600,450" }
