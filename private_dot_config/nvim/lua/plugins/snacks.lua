@@ -41,6 +41,7 @@ return {
       end,
       desc = "Notification History",
     },
+    -- Replaced by neo-tree.nvim
     -- { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" }, -- disabled
     -- find
     {
@@ -521,7 +522,15 @@ return {
     indent = { enabled = true },
     input = { enabled = true },
     keymap = { enabled = true },
-    lazygit = { enabled = true },
+    lazygit = {
+      enabled = true,
+      configure = false,
+      config = {
+        os = {
+          edit = 'nvim --server {{nvimServerAddress}} --remote-send ":e {{filename}}<CR>"',
+        },
+      },
+    },
     notifier = { enabled = true },
     picker = {
       enabled = true,
